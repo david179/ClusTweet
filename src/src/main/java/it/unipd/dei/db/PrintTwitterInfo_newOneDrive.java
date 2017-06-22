@@ -20,7 +20,11 @@ public class PrintTwitterInfo_newOneDrive {
    private static final String PASSWORD = "pass"; 
 
   
-   private static final String SQLQUERY = ( "SELECT * FROM tweet_localusa;"); 
+   private static final String SQLQUERY = ( "SELECT * FROM tweet_localusa2;"); 
+   
+   private static Connection newCon = null; 
+   private static Statement newStm = null; 
+  	
    
    public static ArrayList<Twitter> getTweets()
    {
@@ -492,5 +496,133 @@ twitterList.add(new Twitter(tweet_ID, dateT, hour, username, nickname, biography
  	}
 
    }//[m]end main */
+   
+   
+   public static void openConn()
+   {
+	   
+	   //Registration of the driver that must be used 
+	    try{
+	    	Class.forName(DRIVER); 
+	    	System.out.println("Driver " + DRIVER + " has been correctly registered."); 
+	    }catch(ClassNotFoundException e) {
+	    	System.out.println("Driver " + DRIVER + " not found." ); 
+	        System.out.println("Error: " + e.getMessage()); 
+	    	System.exit(-1); 
+
+	    }
+
+	 	
+	 	try{ 
+
+	 		newCon = DriverManager.getConnection(DATABASE, USER, PASSWORD);
+	 		newStm = newCon.createStatement(); 
+	 		
+	 		
+	 	}catch(SQLException e){
+	 		
+	 		//System.out.println("Database access error!"); 
+
+		    while(e != null)
+		    {
+		      System.out.printf("- Message:'%s%n",e.getMessage());
+		      System.out.printf("- SQL status code: %s%n",e.getSQLState());
+		      System.out.printf("-SQL error code: %s%n",e.getErrorCode());
+		      System.out.printf("%n");
+		      e = e.getNextException();
+		    } 
+		    try{
+				if(newCon != null) 
+				{
+					//Release the connection 
+					newCon.close(); 
+				}
+	 		}catch(SQLException ee)
+	 		{
+	 			System.out.println("Error during the release of the resources!"); 
+	      
+			      while(ee != null)
+			      {
+			        System.out.printf("- Message:'%s%n",ee.getMessage());
+			        System.out.printf("- SQL status code: %s%n",ee.getSQLState());
+			        System.out.printf("-SQL error code: %s%n",ee.getErrorCode());
+			        System.out.printf("%n");
+			        ee = ee.getNextException();
+			      } 
+
+	 	}
+	 }
+	   
+   }
+   
+   public static void insertTweet(int cluster, String tweet_id)
+   {
+	    	String query = "insert into clusters values("+cluster+",'"+tweet_id+"');";
+
+	   	
+	 	try{ 
+
+	 		// Create a new instruction to execute 
+	 		newStm.executeUpdate(query); 
+	 		
+
+	 	}catch(SQLException e){
+	 		
+	 		//System.out.println("Database access error!"); 
+
+		    while(e != null)
+		    {
+		      System.out.printf("- Message:'%s%n",e.getMessage());
+		      System.out.printf("- SQL status code: %s%n",e.getSQLState());
+		      System.out.printf("-SQL error code: %s%n",e.getErrorCode());
+		      System.out.printf("%n");
+		      e = e.getNextException();
+		    } 
+
+	 	}
+	   
+   }//[m]getTweets
+   
+   public static void close()
+   {
+	   try{
+
+			if(newStm != null)
+			{
+				//Release the statement 
+				newStm.close(); 
+			} 
+
+			if(newCon != null) 
+			{
+				//Release the connection 
+				newCon.close(); 
+			}
+	   }
+	   catch(SQLException e)
+	   {
+ 		      System.out.println("Error during the release of the resources!"); 
+	      
+		      while(e != null)
+		      {
+		        System.out.printf("- Message:'%s%n",e.getMessage());
+		        System.out.printf("- SQL status code: %s%n",e.getSQLState());
+		        System.out.printf("-SQL error code: %s%n",e.getErrorCode());
+		        System.out.printf("%n");
+		        e = e.getNextException();
+		      } 
+
+	 		} finally
+	 		{
+
+	 			newStm = null; 
+	 			newCon = null; 
+
+	 			System.out.println("The resources have been released to the garbage collector!"); 
+	 		}
+	 	
+	   
+   }
+   
 
 }//[c]end class 

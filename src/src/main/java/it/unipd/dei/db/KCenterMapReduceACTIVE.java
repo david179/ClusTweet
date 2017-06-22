@@ -58,10 +58,13 @@ public class KCenterMapReduceACTIVE
 
   public static void main(String[] args) throws IOException, KcoeffCustomException
   { 
+	  
+		  
+	 
 	//***************************************Preprocessing***************************************
 	//Acquisition of the cluster number "k" and path of dataset as parameters
 	//String dataPath = args[0];
-	int k = 10; //Integer.parseInt(args[1]);
+	int k = 100; //Integer.parseInt(args[1]);
 	int k_coeff = 2;
 	
     //Spark setup
@@ -157,9 +160,9 @@ public class KCenterMapReduceACTIVE
     
     //Fit the word2vec model and save it in memory
     //Run only once and then comment out
-     new Word2Vec()
+     /*new Word2Vec()
     		 .setVectorSize(dim)
-    		 .fit(lemmas).save(sc.sc(), "Models_usamodel43/");
+    		 .fit(lemmas).save(sc.sc(), "Models_usamodel43/");*/
    
     System.out.println("Word2Vec done!!!"); 
 
@@ -307,6 +310,7 @@ public class KCenterMapReduceACTIVE
 	    
 	    //*************************************Diagnostic strings************************************
 	    System.out.println("");
+	    PrintTwitterInfo_newOneDrive.openConn();
 	    for(int f=0; f<k; f++)
 	    {
 	        List<Iterable<Tuple2<Twitter, Vector>>> alist = groupedFinalClusters.lookup(Integer.valueOf(f));
@@ -315,13 +319,17 @@ public class KCenterMapReduceACTIVE
 	        System.out.println(); 
 	        System.out.println("Number of cluster:" + f); 
 	        System.out.println(); 
-
+	        final int clust = f;
 	        alist.forEach((elem1) -> {
 	           elem1.forEach((elem) -> {
 	        	   System.out.println("Twitter text : " + elem._1().getText());
+	        	   
+	        	   // INSERT INTO clusters (cluster_number, tweet_id)
+	        	   PrintTwitterInfo_newOneDrive.insertTweet(clust,elem._1().getID());
 	           });
 	        });
 	    } 
+	    PrintTwitterInfo_newOneDrive.close();
 
 	    System.out.println("***********************************************************************************************"); 
 	    System.out.println("***********************************************************************************************"); 
