@@ -1,62 +1,67 @@
 package it.unipd.dei.db;
+// NEW TWITTER CLASS 
+import org.apache.spark.sql.Encoder;
+import org.apache.spark.sql.Encoders;
 
 import java.io.Serializable;
 
-public class Twitter  implements Serializable
+public class Twitter implements Serializable
 {
-   
-    private String tweet_ID = null; 
-    private String tweet_DATA = null; 
-    private String tweet_URL = null; 
-    private String tweet_text = null; 
 
-    // costruttore della classe
-    public Twitter(){
-    }
-    
-    public Twitter(String tweet_ID, String tweet_DATA, String tweet_url, String tweet_text)
+    public static Encoder<Twitter> getEncoder() {
+    return Encoders.bean(Twitter.class);
+  }
+
+    private  String tweet_ID; 
+    private  String dateT; 
+    private  String hour; 
+    private  String username; 
+    private  String nickname; 
+    private  String biography; 
+    private  String tweet_content; 
+    private  String favs; 
+    private  String rts; 
+    private  String latitude , longitude; 
+    private  String country, place; 
+    private  String profile_picture; 
+    private  int followers, following; 
+    private  int listed;  
+    private  String language, url; 
+
+    // costruttore della classe 
+    public Twitter(String tweet_ID,String dateT,String hour,String username,String nickname, String biography, String tweet_content,String favs, String rts, String latitude, String longitude, String country, String place, String prof, int followers, int following, int listed,  String language, String url)
     { 
        this.tweet_ID = tweet_ID; 
-       this.tweet_DATA = tweet_DATA;
-       this.tweet_URL = tweet_url;
-       this.tweet_text = tweet_text;   
+       this.dateT = dateT; 
+       this.hour = hour; 
+       this.username = username; 
+       this.nickname = nickname; 
+       this.biography = biography; 
+       this.tweet_content = tweet_content;
+       this.favs = favs; 
+       this.rts = rts; 
+       this.latitude = latitude; 
+       this.longitude = longitude; 
+       this.country = country; 
+       this.place = place; 
+       profile_picture = prof; 
+       this.followers = followers; 
+       this.following = following; 
+       this.listed = listed; 
+       this.language = language; 
+       this.url = url;   
     }
 
-    public void setTweet_ID(String str){
-    	tweet_ID = str;
-    }
-    public void setTweet_DATA(String str){
-    	tweet_DATA = str;
-    }
-    public void setTweet_URL(String str){
-    	tweet_URL = str;
-    }
-    public void setTweet_text(String str){
-    	tweet_text = str;
-    }
     
-    public String getTweet_ID(){
-    	return tweet_ID;
-    }
-    public String getTweet_DATA(){
-    	return tweet_DATA;
-    }
-    public String getTweet_URL(){
-    	return tweet_URL;
-    }
-    public String getTweet_text(){
-    	return tweet_text;
-    }
-    
-	public void printTwitterInfo() 
-	{
-	   System.out.println("ID: " + tweet_ID + " , Date : " + tweet_DATA + " , URL : " + tweet_URL + " , text : " + tweet_text); 
-	}
-	
-	public String getText()
-	{
-	   return tweet_text; 
-	}
+public void printTwitterInfo() 
+{
+   System.out.println("ID: " + tweet_ID + " , Date : " + dateT + " , URL : " + url + " , country : " + country ); 
+}
+
+public String getText()
+{
+   return tweet_content; 
+}
 
 
 }//{c}Twitter 
