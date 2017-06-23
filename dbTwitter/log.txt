@@ -1,0 +1,20 @@
+Driver org.postgresql.Driver has been correctly registered.
+Connection to the database established in : 55ms
+New statement created in : 3ms
+Query executed in : 605ms
+The resources have been released to the garbage collector!
+Driver org.postgresql.Driver has been correctly registered.
+Connection to the database established in : 8ms
+New statement created in : 0ms
+Query executed in : 1297ms
+The resources have been released to the garbage collector!
+getTweets andato a buon fine
+*******************************************************************************
+ID: 721318437075685382  , Date : 2016-04-16 , URL : http://www.twitter.com/BillSchulhoff/status/721318437075685382 , country : US
+Numero di tweets: 204820
+*******************************************************************************
+sc.parallelize(tweetsList) andato a buon fine
+***************************************************************************************
+Wind 3.2 mph NNE. Barometer 30.20 in, Rising slowly. Temperature 49.3 °F. Rain today 0.00 in. Humidity 32%
+***************************************************************************************
+map andata a buon fine
