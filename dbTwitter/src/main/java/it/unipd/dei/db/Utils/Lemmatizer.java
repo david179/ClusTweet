@@ -22,9 +22,19 @@ public class Lemmatizer {
    * Some symbols are interpreted as tokens. This regex allows us to exclude them.
    */
   public static Pattern symbols = Pattern.compile("^[',\\.`/-_]+$");
+  
+  /**
+   * Web addresses are interpeted as token. We need to exclude them.
+   */
+  public static Pattern webAddr = Pattern.compile("^((http)|(https)).*$");
+  
+  /**
+   * References to other user are interpeted as token. We need to exclude them.
+   */
+  public static Pattern ref = Pattern.compile("^@(.+)$");
 
   /**
-   * A set of special tokens that are present in the Wikipedia dataset
+   * A set of special tokens that are present in the Twitter dataset
    */
   public static HashSet<String> specialTokens =
     new HashSet<>(Arrays.asList("-lsb-", "-rsb-", "-lrb-", "-rrb-", "'s", "--"));
@@ -46,7 +56,7 @@ public class Lemmatizer {
     for (Sentence sentence : d.sentences()) {
       for (String lemma : sentence.lemmas()) {
         // Remove symbols
-        if (!symbols.matcher(lemma).matches() && !specialTokens.contains(lemma)) {
+        if (!symbols.matcher(lemma).matches() && !specialTokens.contains(lemma) && !webAddr.matcher(lemma).matches()  && !ref.matcher(lemma).matches()) {
           lemmas.add(lemma);
         }
       }
@@ -63,25 +73,9 @@ public class Lemmatizer {
     return docs.map((d) -> lemmatize(d));
   }
 
-  /**
-   * Transform an RDD of WikiPage objects into an RDD of WikiPage
-   * objects with the text replaced by the concatenation of the lemmas
-   * in each page.
-   */
-//  public static JavaRDD<WikiPage> lemmatizeWikiPages(JavaRDD<WikiPage> docs) {
-//    return docs.map((wp) -> {
-//      ArrayList<String> lemmas = lemmatize(wp.getText());
-//      StringBuilder newText = new StringBuilder();
-//      for(String lemma : lemmas) {
-//        newText.append(lemma).append(' ');
-//      }
-//      wp.setText(newText.toString());
-//      return wp;
-//    });
-//  }
 
   public static void main(String[] args) {
-    System.out.println(lemmatize("This is a sentence. This is another. The whole thing is a document made of sentences."));
+    System.out.println(lemmatize("This is a sentence. This is another. The whole thing is a document made of sentences. http://bit.ly @ polli "));
   }
 
 }

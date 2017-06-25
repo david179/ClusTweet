@@ -43,7 +43,7 @@ public class ClusteringTweets {
 		Dataset<Row> jdbcDB = connectionDb(spark);
 		
 		Encoder<Twitter> twitterEncoder = Encoders.bean(Twitter.class);
-		Dataset<Twitter> tweetDb = jdbcDB.as(twitterEncoder);
+		Dataset<Twitter> tweetDb = jdbcDB.filter("country = 'US'").as(twitterEncoder);
 		Dataset<Twitter> tweetDbPartial = tweetDb.limit(10000);
 		
 		tweetDb.show();
