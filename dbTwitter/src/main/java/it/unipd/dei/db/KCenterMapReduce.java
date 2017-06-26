@@ -48,11 +48,11 @@ public class KCenterMapReduce
 {
 	public static Dataset<TwitterClustered> cluster(Dataset<Twitter> args, SparkSession spark) throws IOException, KcoeffCustomException
 	{ 
-		System.setProperty("hadoop.home.dir", "c:\\winutil\\");
+		//System.setProperty("hadoop.home.dir", "c:\\winutil\\");
 	
 		//***************************************Preprocessing***************************************
 		//Acquisition of the cluster number "k" and path of dataset as parameters
-		final int k = 163;
+		final int k = 36;
 		final int k_coeff = 2;
 		//vector space dimension
 		final int dim = 100;
@@ -236,9 +236,19 @@ public class KCenterMapReduce
 		
 		    //In finalFix there's only one element
 		    JavaPairRDD<Integer, Tuple2<Twitter, Vector>> newRDD = sc.parallelizePairs(finalFix.first()._2()); 
-		
+		    
+		    
 		    JavaRDD<TwitterClustered> RDDTwitter = newRDD.map((elem) -> {
-		    	TwitterClustered tmp = new TwitterClustered(elem._2._1.getTweet_ID(), elem._2._1.getDateTweet(), elem._2._1.getHour(), elem._2._1.getUsername(), elem._2._1.getNickname(), elem._2._1.getBiography(), elem._2._1.getTweet_content(), elem._2._1.getFavs(), elem._2._1.getRts(), elem._2._1.getLatitude(), elem._2._1.getLongitude(), elem._2._1.getCountry(), elem._2._1.getPlace(), elem._2._1.getProfile_picture(), elem._2._1.getFollowers(), elem._2._1.getFollowing(), elem._2._1.getListed(), elem._2._1.getLanguage(), elem._2._1.getUrl());
+		    	
+		    	TwitterClustered tmp = new TwitterClustered(elem._2._1.getTweet_ID(), elem._2._1.getDateTweet(), 
+		    			elem._2._1.getHour(), elem._2._1.getUsername(), elem._2._1.getNickname(), 
+		    			elem._2._1.getBiography(), elem._2._1.getTweet_content(), elem._2._1.getFavs(), 
+		    			elem._2._1.getRts(), elem._2._1.getLatitude(), elem._2._1.getLongitude(), 
+		    			elem._2._1.getCountry(), elem._2._1.getPlace(), elem._2._1.getProfile_picture(), elem._2._1.getFollowers(),
+		    			elem._2._1.getFollowing(), 
+		    			elem._2._1.getListed(), 
+		    			elem._2._1.getLanguage(), elem._2._1.getUrl());
+		    	
 		    	tmp.setCluster(elem._1);
 			
 		    	return tmp;
@@ -246,11 +256,17 @@ public class KCenterMapReduce
 		
 		    JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> groupedFinalClusters = newRDD.groupByKey(); 		  
 		
+		    
+		    
 		    Dataset<Row> tweetClusteredRow = spark.createDataFrame(RDDTwitter.rdd(), TwitterClustered.class);
 		
+		    
+		    
 		    Encoder<TwitterClustered> twitterEncoder = Encoders.bean(TwitterClustered.class);
+		    
 		    Dataset<TwitterClustered> tweetClustered = tweetClusteredRow.as(twitterEncoder);
 		 		  
+		    //tweetClustered.collect();
 		    //****************************************end Round 3****************************************
 		
 		    //Calculating the objective function
