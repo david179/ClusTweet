@@ -53,15 +53,15 @@ public class KCenterMapReduce
 	
 		//***************************************Preprocessing***************************************
 		//Acquisition of the cluster number "k" and path of dataset as parameters
-		int k = 15;
+		int k = 150;
 		final int k_coeff = 2;
 		//vector space dimension
-		final int dim = 100;
+		final int dim = 50;
 	
 		System.out.println("Starting clustering routine");
 		//Spark setup
 		JavaSparkContext sc = new JavaSparkContext(spark.sparkContext());
-    
+		sc.setLogLevel("OFF");
 		JavaRDD<Twitter> tweets = args.toJavaRDD();
     
 		System.out.println("\n***************************************************************************************"); 
@@ -295,39 +295,6 @@ public class KCenterMapReduce
 			
 			    JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> groupedFinalClusters = newRDD.groupByKey(); 		  
 			
-			    JavaRDD<Tuple2<Integer,Double>> m = groupedFinalClusters.map((tuple) -> {
-			    	
-			    	
-			        Iterator<Tuple2<Twitter, Vector>> it = tuple._2.iterator();
-			        
-			        int size = n;
-			        
-			        Twitter[] tweet = new Twitter[n];
-			        int i = 0;
-			        size = 0;
-			        while (it.hasNext())
-			        {
-			        	tweet[i++] = it.next()._1();
-			        	size++;
-			        }
-			        
-			        double sum = 0;
-			        for (i = 0; i < size; i++)
-			        {
-			        	for (int j = i+1; j < size; j++)
-			        	{
-			        		sum += Distance2.similarity(tweet[i], tweet[j]);
-			        	}
-			        }
-			        
-			        return new Tuple2<Integer,Double>(tuple._1,(Double)(sum/size));
-			        
-			    });
-			    
-			    m.foreach((tuple) ->{
-			    	System.out.println("Custer "+tuple._1()+", average: "+tuple._2());
-			    });
-			    
 			    
 			    Dataset<Row> tweetClusteredRow = spark.createDataFrame(RDDTwitter.rdd(), TwitterClustered.class);
 			
@@ -360,7 +327,7 @@ public class KCenterMapReduce
 		    
 		    
 		    //*************************************Diagnostic strings************************************
-		    System.out.println("");
+		    /*System.out.println("");
 		    for(int f=0; f<k; f++)
 		    {
 		        List<Iterable<Tuple2<Twitter, Vector>>> alist = groupedFinalClusters.lookup(Integer.valueOf(f));
@@ -383,7 +350,7 @@ public class KCenterMapReduce
 	
 		    System.out.println("Objective function value: "); 
 		    System.out.println("[" + f_obj + "]");
-		    System.out.println();
+		    System.out.println();*/
 		    
 		    return tweetClustered;
 		}
