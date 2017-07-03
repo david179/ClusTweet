@@ -119,7 +119,7 @@ public class ClusteringTweets {
 			jdbcDB = spark.read()
 					.format("jdbc")
 					.option("url", "jdbc:postgresql://localhost/")
-					.option("dbtable", "clusters_150_v50")
+					.option("dbtable", "clusters")
 					.option("user", "postgres")
 					.option("password", "pass")
 					.load();
@@ -211,7 +211,7 @@ public class ClusteringTweets {
 					Map.Entry<TaggedWord,Double> w = it.next();
 					
 					double v = w.getValue()/(double)list.size();
-					if (v >= 0.5)
+					if (v >= 0.25)
 						freq.put(w.getKey(), v);
 					else
 						it.remove();
@@ -228,7 +228,8 @@ public class ClusteringTweets {
 			JavaSparkContext sc = new JavaSparkContext(spark.sparkContext());
 			sc.setLogLevel("OFF");
 			
-			JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> freq_clust = sc.objectFile("freq_nouns");
+			JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> 
+			freq_clust = sc.objectFile("freq_nouns");
 		
 			
 			//JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> freq_clust
@@ -287,18 +288,19 @@ public class ClusteringTweets {
 			ArrayList<Tuple2<TaggedWord,Double>> freq_nouns = tmp.first()._2();
 			
 			
-			//Distribute frequent nouns in broadcast to the workers
-			Broadcast<ArrayList<Tuple2<TaggedWord,Double>>> freq_nouns_br = sc.broadcast(freq_nouns);
-		 
 			// calculate cluster entropy
 			/*
 			 * 
-			 * Sum -Ni/Nc log(Ni/Nc)
+			 * Sum -Nci/Nc log(Nci/Nc)
 			 * 
 			 * where: 
-			 * 		Ni = # of tags i inside cluster C
+			 * 		Nci = # of tags i inside cluster C
 			 * 		Nc = # of tags in cluster C
 			 */
+			
+			//Distribute frequent nouns in broadcast to the workers
+			/*final Broadcast<ArrayList<Tuple2<TaggedWord,Double>>> freq_nouns_br = sc.broadcast(freq_nouns);
+		 
 			JavaRDD<Tuple2<Integer,Double>> entropy_per_cluster = clusters_tagged.map((tuple) ->{
 				
 				ArrayList<Tuple2<TaggedWord,Double>> freq_nouns_total = freq_nouns_br.getValue();
@@ -357,8 +359,197 @@ public class ClusteringTweets {
 			});
 			
 			System.out.println("The max is log2 L: "+Math.log(freq_nouns.size()));
-			//entropy_per_cluster.saveAsTextFile("entropy_per_cluster.txt");
+			entropy_per_cluster.saveAsTextFile("entropy_per_cluster.txt");
 			
+			*/
+			
+			
+			// calculate noun entropy
+			/*
+			 * 
+			 * Sum -Nci/Ni log(Nci/Ni)
+			 * 
+			 * where: 
+			 * 		Nci = # of tags i inside cluster C
+			 * 		Ni = # of tags i
+			 */
+			//Distribute frequent nouns in broadcast to the workers
+			final Broadcast<ArrayList<Tuple2<TaggedWord,Double>>> freq_nouns_br = sc.broadcast(freq_nouns);
+		 
+			Map<TaggedWord,Integer> tags_and_total_count = JavaPairRDD.fromJavaRDD(clusters_tagged.map((tuple) ->{
+				
+				ArrayList<Tuple2<TaggedWord,Double>> freq_nouns_total = freq_nouns_br.getValue();
+				
+				//System.out.print("freq nouns total "+freq_nouns_total.size());
+				ArrayList<List<TaggedWord>> tags_in_cluster = tuple._2();
+				
+				Map<TaggedWord,Integer> noun_tags = new HashMap();
+				// filter tags in order to keep only nouns
+				int total = 0;
+				for (int i = 0; i < tags_in_cluster.size(); i++)
+				{
+					Iterator<TaggedWord> it = tags_in_cluster.get(i).iterator();
+					while(it.hasNext())
+					{
+						TaggedWord w = it.next();
+						
+						String[] tags = {"NN","NNS","NNP","NNPS"};
+						for (int j = 0; j < tags.length; j++)
+						{
+							if (w.tag().compareTo(tags[j]) == 0)
+							{
+								if (!noun_tags.containsKey(w))
+								{
+									noun_tags.put(w,1);
+								}
+								else
+								{
+									int v = noun_tags.get(w);
+									noun_tags.put(w, v+1);
+								}
+								total++;
+							}
+						}
+					}
+				}
+				
+				return new Tuple2<Integer,Map<TaggedWord,Integer>>(0,noun_tags);
+				
+			})).reduceByKey((tuple1,tuple2) ->{
+				
+				Map<TaggedWord,Integer> a1 = tuple1;
+				Map<TaggedWord,Integer> a2 = tuple2;
+				
+				Map<TaggedWord,Integer> tot = new HashMap();
+				for (TaggedWord w : a1.keySet())
+				{
+					tot.put(w, a1.get(w));
+				}
+				for (TaggedWord w : a2.keySet())
+				{
+					if (tot.containsKey(w))
+					{
+						tot.put(w, tot.get(w)+a2.get(w));
+					}
+					else
+					{
+						tot.put(w, a2.get(w));
+					}
+				}
+				
+				return tot;
+			}).first()._2;
+			
+			
+			//Distribute frequent nouns in broadcast to the workers
+			//freq_nouns_br = sc.broadcast(freq_nouns);
+			Broadcast<Map<TaggedWord,Integer>> tags_tot_count = sc.broadcast(tags_and_total_count);
+			
+			System.out.println("size: "+tags_and_total_count.size());
+			
+			//JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> clusters_tagged = 
+			Map<TaggedWord,Double> entropy_per_noun = JavaPairRDD.fromJavaRDD(clusters_tagged.map((tuple) ->{
+				
+				ArrayList<Tuple2<TaggedWord,Double>> freq_nouns_total = freq_nouns_br.getValue();
+				Map<TaggedWord,Integer> tags_tot_count2 = tags_tot_count.value();
+				
+				ArrayList<List<TaggedWord>> tags_in_cluster = tuple._2();
+				
+				Map<TaggedWord,Integer> noun_tags = new HashMap();
+				// filter tags in order to keep only nouns
+				//int total = 0;
+				for (int i = 0; i < tags_in_cluster.size(); i++)
+				{
+					Iterator<TaggedWord> it = tags_in_cluster.get(i).iterator();
+					while(it.hasNext())
+					{
+						TaggedWord w = it.next();
+						
+						String[] tags = {"NN","NNS","NNP","NNPS"};
+						for (int j = 0; j < tags.length; j++)
+						{
+							if (w.tag().compareTo(tags[j]) == 0)
+							{
+								if (!noun_tags.containsKey(w))
+								{
+									noun_tags.put(w,1);
+								}
+								else
+								{
+									int v = noun_tags.get(w);
+									noun_tags.put(w, v+1);
+								}
+								//total++;
+							}
+						}
+					}
+				}
+				
+				//System.out.println("TOTAL is: "+total);
+				
+				Map<TaggedWord,Double> cluster_entropy = new HashMap();
+				//calculate entropy
+				Map<TaggedWord,Double> out = new HashMap();
+				for (Tuple2<TaggedWord,Double> t : freq_nouns_total)
+				{
+					double entropy = 0;
+					// calculate number of occurences of this tag inside the cluster
+					Integer occurences = noun_tags.get(t._1());
+					double total = tags_tot_count2.get(t._1);
+					if (occurences != null)
+					{
+						double o = occurences.intValue();
+						if (o > 0)
+							entropy = (o/total) * Math.log(o/total)*(-1);
+						//System.out.println(entropy+" occ: "+o+", total: "+total);
+					}
+					cluster_entropy.put(t._1, entropy);
+				}
+				
+				
+				return new Tuple2<Integer,Map<TaggedWord,Double> >(0,cluster_entropy);
+			})).reduceByKey((tuple1,tuple2)->{
+				
+				Map<TaggedWord,Double> a1 = tuple1;
+				Map<TaggedWord,Double> a2 = tuple2;
+				
+				Map<TaggedWord,Double> tot = new HashMap();
+				for (TaggedWord w : a1.keySet())
+				{
+					if (tot.containsKey(w))
+					{
+						tot.put(w, tot.get(w)+a1.get(w));
+					}
+					else
+					{
+						tot.put(w, a1.get(w));
+					}
+				}
+				for (TaggedWord w : a2.keySet())
+				{
+					if (tot.containsKey(w))
+					{
+						tot.put(w, tot.get(w)+a2.get(w));
+					}
+					else
+					{
+						tot.put(w, a2.get(w));
+					}
+				}
+				
+				return tot;
+			}).first()._2();
+			
+			System.out.print("final size "+entropy_per_noun.size());
+			
+			for(TaggedWord w : entropy_per_noun.keySet())
+			{
+				System.out.println("Word: "+w.value()+", entropy: "+entropy_per_noun.get(w));
+			}
+			//JavaRDD<Tuple2<Integer,Map<TaggedWord,Double> >> entropy_per_noun_per_cluster
+			
+			System.out.println("The max is log2 L: "+Math.log(150));
+			//entropy_per_cluster.saveAsTextFile("entropy_per_cluster.txt");
 			
 		}
 		catch(Exception e){
