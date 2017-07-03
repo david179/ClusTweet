@@ -146,7 +146,7 @@ public class ClusteringTweets {
 			// for each cluster tag all the words in its tweet. In other words to each tweet's word a tag is assigned
 			// indicating whether the word is a noun, adjective, verb, ...
 			JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> clusters_tagged = Clustering_evaluation_functions.tag_tweets(clusters);	
-			
+			/*
 			
 			
 			// For each cluster keep only the words tagged as nouns as they are supposed to carry most of the information in the tweet
@@ -154,7 +154,7 @@ public class ClusteringTweets {
 			// TaggedWord is a word tagged as noun
 			// Double is the number of occurrences of that word in the current cluster
 			// Integer is the total number of tags in this cluster
-			JavaRDD<Tuple2<Integer,Tuple2<Map<TaggedWord,Double>,Integer>>> tags_per_cluster_and_total_count = Clustering_evaluation_functions.filter_nouns(clusters_tagged);
+			JavaRDD<Tuple2<Integer,Tuple2<Map<TaggedWord,Integer>,Integer>>> tags_per_cluster_and_total_count = Clustering_evaluation_functions.filter_nouns(clusters_tagged);
 				
 			
 			
@@ -168,12 +168,12 @@ public class ClusteringTweets {
 			// save the frequent nouns object so it can be loaded without being recomputed every time
 			freq_clust.saveAsTextFile("freq_text_nouns.txt");
 			freq_clust.saveAsObjectFile("freq_nouns");
-			
+			*/
 			JavaSparkContext sc = new JavaSparkContext(spark.sparkContext());
 			sc.setLogLevel("OFF");
 			
 			// load the saved model from memory
-			freq_clust = sc.objectFile("freq_nouns");
+			JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> freq_clust = sc.objectFile("freq_nouns");
 		
 			
 			// Only a subset of the most frequent nouns per cluster will appear in the final list of most frequent nouns
@@ -210,7 +210,7 @@ public class ClusteringTweets {
 			 * 		Ni = # of tags i
 			 */
 			//Distribute frequent nouns in broadcast to the workers
-			Map<TaggedWord,Double> entropy_per_noun = Clustering_evaluation_functions.frequent_nouns_entropy(sc, clusters_tagged, freq_nouns);
+			/*Map<TaggedWord,Double> entropy_per_noun = Clustering_evaluation_functions.frequent_nouns_entropy(sc, clusters_tagged, freq_nouns);
 			
 			
 			System.out.print("final size "+entropy_per_noun.size());
@@ -220,7 +220,7 @@ public class ClusteringTweets {
 				System.out.println("Word: "+w.value()+", entropy: "+entropy_per_noun.get(w));
 			}
 			
-			System.out.println("The max is log2 L: "+Math.log(150));
+			System.out.println("The max is log2 L: "+Math.log(150));*/
 			
 		}
 		catch(Exception e){

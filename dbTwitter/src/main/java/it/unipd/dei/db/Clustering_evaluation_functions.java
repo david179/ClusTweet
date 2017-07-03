@@ -61,18 +61,18 @@ public class Clustering_evaluation_functions {
 	}
 	
 	
-	public static JavaRDD<Tuple2<Integer,Tuple2<Map<TaggedWord,Double>,Integer>>> filter_nouns(JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> clusters_tagged)
+	public static JavaRDD<Tuple2<Integer,Tuple2<Map<TaggedWord,Integer>,Integer>>> filter_nouns(JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> clusters_tagged)
 	{
 		// For each cluster keep only the words tagged as nouns as the are supposed to carry most of the information in the tweet
 		// Integer is the cluster number
 		// TaggedWord is a word tagged as noun
 		// Double is the number of occurences of that word in the current cluster
 		// Integer is the total number of tags in this cluster
-		JavaRDD<Tuple2<Integer,Tuple2<Map<TaggedWord,Double>,Integer>>> tags_per_cluster_and_total_count = clusters_tagged.map((tuple) -> {
+		JavaRDD<Tuple2<Integer,Tuple2<Map<TaggedWord,Integer>,Integer>>> tags_per_cluster_and_total_count = clusters_tagged.map((tuple) -> {
 			
 			ArrayList<List<TaggedWord>> list = tuple._2();
 			
-			Map<TaggedWord,Double> freq = new HashMap();
+			Map<TaggedWord,Integer> freq = new HashMap();
 			for (int i = 0; i < list.size(); i++)
 			{
 				Iterator<TaggedWord> it = list.get(i).iterator();
@@ -87,11 +87,11 @@ public class Clustering_evaluation_functions {
 						{
 							if (!freq.containsKey(w))
 							{
-								freq.put(w,(double)1);
+								freq.put(w,1);
 							}
 							else
 							{
-								double v = freq.get(w);
+								int v = freq.get(w);
 								freq.put(w, v+1);
 							}
 						}
@@ -99,13 +99,13 @@ public class Clustering_evaluation_functions {
 				}
 			}
 			
-			return new Tuple2<Integer,Tuple2<Map<TaggedWord,Double>,Integer>>(tuple._1(),new Tuple2(freq,list.size()));
+			return new Tuple2<Integer,Tuple2<Map<TaggedWord,Integer>,Integer>>(tuple._1(),new Tuple2(freq,list.size()));
 		});
 		
 		return tags_per_cluster_and_total_count;
 	}
 	
-	public static JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> frequent_nouns(JavaRDD<Tuple2<Integer,Tuple2<Map<TaggedWord,Double>,Integer>>> tags_per_cluster_and_total_count, double threshold)
+	public static JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> frequent_nouns(JavaRDD<Tuple2<Integer,Tuple2<Map<TaggedWord,Integer>,Integer>>> tags_per_cluster_and_total_count, double threshold)
 	{
 		// Find the most frequent nouns inside each cluster.
 		// Integer is the cluster number
@@ -113,22 +113,21 @@ public class Clustering_evaluation_functions {
 		// Double is the frequency of the tagged word in the Integer cluster
 		JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> freq_clust  = tags_per_cluster_and_total_count.map((tuple) -> {
 			
-			Map<TaggedWord,Double> freq = tuple._2()._1();
+			Map<TaggedWord,Integer> freq = tuple._2()._1();
 			int size = tuple._2()._2();
 			
-			Iterator<Map.Entry<TaggedWord,Double>> it = freq.entrySet().iterator();
+			Iterator<Map.Entry<TaggedWord,Integer>> it = freq.entrySet().iterator();
+			Map<TaggedWord,Double> out = new HashMap();
 			while(it.hasNext())
 			{
-				Map.Entry<TaggedWord,Double> w = it.next();
+				Map.Entry<TaggedWord,Integer> w = it.next();
 				
 				double v = w.getValue()/(double)size;
 				if (v >= threshold)
-					freq.put(w.getKey(), v);
-				else
-					it.remove();
+					out.put(w.getKey(), v);
 			}
 			
-			return new Tuple2<Integer,Map<TaggedWord,Double>>(tuple._1(),freq);
+			return new Tuple2<Integer,Map<TaggedWord,Double>>(tuple._1(),out);
 		});
 		
 		return freq_clust;
@@ -219,14 +218,14 @@ public class Clustering_evaluation_functions {
 			
 			ArrayList<Tuple2<TaggedWord,Double>> freq_nouns_total = freq_nouns_br.getValue();
 			
-			ArrayList<List<TaggedWord>> tags_in_cluster = tuple._2();
+			ArrayList<List<TaggedWord>> tags_in_current_cluster = tuple._2();
 			
 			Map<TaggedWord,Integer> noun_tags = new HashMap();
 			// filter tags in order to keep only nouns
 			int total = 0;
-			for (int i = 0; i < tags_in_cluster.size(); i++)
+			for (int i = 0; i < tags_in_current_cluster.size(); i++)
 			{
-				Iterator<TaggedWord> it = tags_in_cluster.get(i).iterator();
+				Iterator<TaggedWord> it = tags_in_current_cluster.get(i).iterator();
 				while(it.hasNext())
 				{
 					TaggedWord w = it.next();
@@ -251,9 +250,8 @@ public class Clustering_evaluation_functions {
 				}
 			}
 			
-			System.out.println("TOTAL is: "+total);
+			System.out.println("TOTAL is: "+total+", cluster #: "+tuple._1());
 			
-			Map<TaggedWord,Double> cluster_entropy = new HashMap();
 			double entropy = 0;
 			//calculate entropy
 			for (Tuple2<TaggedWord,Double> t : freq_nouns_total)
@@ -288,76 +286,42 @@ public class Clustering_evaluation_functions {
 		 * 		Nci = # of tags i inside cluster C
 		 * 		Ni = # of tags i
 		 */
-		//Distribute frequent nouns in broadcast to the workers
-		final Broadcast<ArrayList<Tuple2<TaggedWord,Double>>> freq_nouns_br2 = sc.broadcast(freq_nouns);
-	 
-		Map<TaggedWord,Integer> tags_and_total_count = JavaPairRDD.fromJavaRDD(clusters_tagged.map((tuple) ->{
-			
-			ArrayList<Tuple2<TaggedWord,Double>> freq_nouns_total = freq_nouns_br2.getValue();
-			
-			//System.out.print("freq nouns total "+freq_nouns_total.size());
-			ArrayList<List<TaggedWord>> tags_in_cluster = tuple._2();
-			
-			Map<TaggedWord,Integer> noun_tags = new HashMap();
-			// filter tags in order to keep only nouns
-			for (int i = 0; i < tags_in_cluster.size(); i++)
-			{
-				Iterator<TaggedWord> it = tags_in_cluster.get(i).iterator();
-				while(it.hasNext())
+		
+				
+		Tuple2<Integer,Tuple2<Map<TaggedWord,Integer>,Integer>> tmp = JavaPairRDD.fromJavaRDD(filter_nouns(clusters_tagged).map((tuple) ->{
+				return new Tuple2<Integer,Tuple2<Map<TaggedWord,Integer>,Integer>>(0,tuple._2());
+			})).reduceByKey((tuple1,tuple2) ->{
+				
+				Map<TaggedWord,Integer> a1 = tuple1._1;
+				Map<TaggedWord,Integer> a2 = tuple2._1;
+				
+				Map<TaggedWord,Integer> tot = new HashMap();
+				for (TaggedWord w : a1.keySet())
 				{
-					TaggedWord w = it.next();
-					
-					String[] tags = {"NN","NNS","NNP","NNPS"};
-					for (int j = 0; j < tags.length; j++)
+					tot.put(w, a1.get(w));
+				}
+				for (TaggedWord w : a2.keySet())
+				{
+					if (tot.containsKey(w))
 					{
-						if (w.tag().compareTo(tags[j]) == 0)
-						{
-							if (!noun_tags.containsKey(w))
-							{
-								noun_tags.put(w,1);
-							}
-							else
-							{
-								int v = noun_tags.get(w);
-								noun_tags.put(w, v+1);
-							}
-						}
+						tot.put(w, tot.get(w)+a2.get(w));
+					}
+					else
+					{
+						tot.put(w, a2.get(w));
 					}
 				}
-			}
+				
+				return new Tuple2(tot,0);
+				
+			}).first();
 			
-			return new Tuple2<Integer,Map<TaggedWord,Integer>>(0,noun_tags);
-			
-		})).reduceByKey((tuple1,tuple2) ->{
-			
-			Map<TaggedWord,Integer> a1 = tuple1;
-			Map<TaggedWord,Integer> a2 = tuple2;
-			
-			Map<TaggedWord,Integer> tot = new HashMap();
-			for (TaggedWord w : a1.keySet())
-			{
-				tot.put(w, a1.get(w));
-			}
-			for (TaggedWord w : a2.keySet())
-			{
-				if (tot.containsKey(w))
-				{
-					tot.put(w, tot.get(w)+a2.get(w));
-				}
-				else
-				{
-					tot.put(w, a2.get(w));
-				}
-			}
-			
-			return tot;
-		}).first()._2;
 		
+		Map<TaggedWord,Integer> tags_and_total_count= tmp._2._1;
 		
 		//Distribute frequent nouns in broadcast to the workers
-		//freq_nouns_br = sc.broadcast(freq_nouns);
 		Broadcast<Map<TaggedWord,Integer>> tags_tot_count = sc.broadcast(tags_and_total_count);
-		final Broadcast<ArrayList<Tuple2<TaggedWord,Double>>> freq_nouns_br = sc.broadcast(freq_nouns);
+		Broadcast<ArrayList<Tuple2<TaggedWord,Double>>> freq_nouns_br = sc.broadcast(freq_nouns);
 		 
 		System.out.println("size: "+tags_and_total_count.size());
 		
