@@ -210,7 +210,7 @@ public class ClusteringTweets {
 			 * 		Ni = # of tags i
 			 */
 			//Distribute frequent nouns in broadcast to the workers
-			/*Map<TaggedWord,Double> entropy_per_noun = Clustering_evaluation_functions.frequent_nouns_entropy(sc, clusters_tagged, freq_nouns);
+			Map<TaggedWord,Double> entropy_per_noun = Clustering_evaluation_functions.frequent_nouns_entropy(sc, clusters_tagged, freq_nouns);
 			
 			
 			System.out.print("final size "+entropy_per_noun.size());
@@ -220,7 +220,7 @@ public class ClusteringTweets {
 				System.out.println("Word: "+w.value()+", entropy: "+entropy_per_noun.get(w));
 			}
 			
-			System.out.println("The max is log2 L: "+Math.log(150));*/
+			System.out.println("The max is log2 L: "+Math.log(150));
 			
 		}
 		catch(Exception e){
