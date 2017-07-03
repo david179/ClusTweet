@@ -116,6 +116,8 @@ public class ClusteringTweets {
 			DbFunctions.close();
 			*/
 			
+			
+			// Read the tweets and their cluster from the SQL clusters table
 			jdbcDB = spark.read()
 					.format("jdbc")
 					.option("url", "jdbc:postgresql://localhost/")
@@ -129,165 +131,57 @@ public class ClusteringTweets {
 			
 			JavaRDD<Twitter_cluster> tweets = tweetDb2.toJavaRDD();
 			
-			System.out.println(tweets.count());
+			System.out.println("The total number of tweets is: "+tweets.count());
 			
+			// Map each tweet into a tuple where the Integer is the cluster number and the String is the tweet content
 			JavaRDD<Tuple2<Integer,String>> c = tweets.map((tweet) -> {
-				
 				return new Tuple2<Integer,String>(tweet.getcluster(),tweet.getTweet_content());
-				
 			});
 			
+			// convert to javaPair
 			JavaPairRDD<Integer,String> c2 = JavaPairRDD.fromJavaRDD(c);
 			
 			JavaPairRDD<Integer,Iterable<String>> clusters = c2.groupByKey();
 			
+			// for each cluster tag all the words in its tweet. In other words to each tweet's word a tag is assigned
+			// indicating whether the word is a noun, adjective, verb, ...
+			JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> clusters_tagged = Clustering_evaluation_functions.tag_tweets(clusters);	
 			
-			JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> clusters_tagged = clusters.map((tuple) -> {
-		    	
-		    	Iterator<String> it = tuple._2.iterator();
-		        
-		    	Scanner s;
-				List<List<Word>> sentences = new ArrayList();
-				while (it.hasNext())
-				{
-					s = new Scanner(it.next());
-					s.useDelimiter(" ");
-					List<Word> l = new ArrayList<Word>();
-					
-					while (s.hasNext())
-					{
-						l.add(new Word(s.next()));
-					}
-					sentences.add(l);
-				}
+			
+			
+			// For each cluster keep only the words tagged as nouns as they are supposed to carry most of the information in the tweet
+			// Integer is the cluster number
+			// TaggedWord is a word tagged as noun
+			// Double is the number of occurrences of that word in the current cluster
+			// Integer is the total number of tags in this cluster
+			JavaRDD<Tuple2<Integer,Tuple2<Map<TaggedWord,Double>,Integer>>> tags_per_cluster_and_total_count = Clustering_evaluation_functions.filter_nouns(clusters_tagged);
 				
-				MaxentTagger tagger = new MaxentTagger("models/english-left3words-distsim.tagger");
-			    ArrayList<List<TaggedWord>> list = new ArrayList();
-			    for (List<Word> sentence : sentences) {
-			      List<TaggedWord> tSentence = tagger.tagSentence(sentence);
-			      //System.out.println(SentenceUtils.listToString(tSentence, false));
-			      list.add(tSentence);
-			    }
-			    
-		        
-		        return new Tuple2<Integer,ArrayList<List<TaggedWord>>>(tuple._1,list);
-		    });
 			
 			
-			/*JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> freq_clust  = clusters_tagged.map((tuple) -> {
-				
-				ArrayList<List<TaggedWord>> list = tuple._2();
-				Map<TaggedWord,Double> freq = new HashMap();
-				
-				for (int i = 0; i < list.size(); i++)
-				{
-					Iterator<TaggedWord> it = list.get(i).iterator();
-					while(it.hasNext())
-					{
-						TaggedWord w = it.next();
-						
-						String[] tags = {"NN","NNS","NNP","NNPS"};
-						for (int j = 0; j < tags.length; j++)
-						{
-							if (w.tag().compareTo(tags[j]) == 0)
-							{
-								if (!freq.containsKey(w))
-								{
-									freq.put(w,(double)1);
-								}
-								else
-								{
-									double v = freq.get(w);
-									freq.put(w, v+1);
-								}
-							}
-						}
-					}
-				}
-				
-				Iterator<Map.Entry<TaggedWord,Double>> it = freq.entrySet().iterator();
-				while(it.hasNext())
-				{
-					Map.Entry<TaggedWord,Double> w = it.next();
-					
-					double v = w.getValue()/(double)list.size();
-					if (v >= 0.25)
-						freq.put(w.getKey(), v);
-					else
-						it.remove();
-				}
-				
-				return new Tuple2<Integer,Map<TaggedWord,Double>>(tuple._1(),freq);
-			});
+			// Find the most frequent nouns inside each cluster.
+			// Integer is the cluster number
+			// TaggedWord is the tagged word
+			// Double is the frequency of the tagged word in the Integer cluster
+			JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> freq_clust  = Clustering_evaluation_functions.frequent_nouns(tags_per_cluster_and_total_count, 0.25);
 			
 			
-			
-			//freq_clust.saveAsTextFile("freq_300_050.txt");
+			// save the frequent nouns object so it can be loaded without being recomputed every time
+			freq_clust.saveAsTextFile("freq_text_nouns.txt");
 			freq_clust.saveAsObjectFile("freq_nouns");
-			*/
+			
 			JavaSparkContext sc = new JavaSparkContext(spark.sparkContext());
 			sc.setLogLevel("OFF");
 			
-			JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> 
+			// load the saved model from memory
 			freq_clust = sc.objectFile("freq_nouns");
 		
 			
-			//JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> freq_clust
-			JavaRDD<Tuple2<Integer,ArrayList<Tuple2<TaggedWord,Double>>>> top_nouns_per_cluster = freq_clust.map((tuple) -> {
-				
-				Map<TaggedWord,Double> freq_nouns = tuple._2;
-				
-				ArrayList<Tuple2<TaggedWord,Double>> most_freq_nouns = new ArrayList();
-				TaggedWord one = null;
-				TaggedWord two = null;
-				for (TaggedWord w : freq_nouns.keySet())
-				{
-					if (one == null)
-					{
-						one = w;
-					}
-					else if (two == null)
-					{
-						two = w;
-					}
-					else if (freq_nouns.get(w) > freq_nouns.get(one))
-					{
-						one = w;
-					}
-					else if (freq_nouns.get(w) > freq_nouns.get(two))
-					{
-						two = w;
-					}
-				}
-				if (one != null)
-					most_freq_nouns.add(new Tuple2(one,freq_nouns.get(one)));
-				//if (two != null)
-					//most_freq_nouns.add(new Tuple2(two,freq_nouns.get(two)));
-				
-				return new Tuple2(0,most_freq_nouns);
-			});
+			// Only a subset of the most frequent nouns per cluster will appear in the final list of most frequent nouns
+			// In this case only the most frequent noun per cluster is kept
+			// Arraylist with the most frequent nouns
+			ArrayList<Tuple2<TaggedWord,Double>> freq_nouns  = Clustering_evaluation_functions.filtered_frequent_nouns(freq_clust);
 			
-			JavaPairRDD<Integer,ArrayList<Tuple2<TaggedWord,Double>>>  tmp = JavaPairRDD.fromJavaRDD(top_nouns_per_cluster).reduceByKey((tuple1,tuple2)->{
-				
-				ArrayList<Tuple2<TaggedWord,Double>> a1 = tuple1;
-				ArrayList<Tuple2<TaggedWord,Double>> a2 = tuple2;
-				
-				ArrayList<Tuple2<TaggedWord,Double>> tot = new ArrayList();
-				for (int i = 0; i < a1.size(); i++)
-				{
-					tot.add(a1.get(i));
-				}
-				for (int i = 0; i < a2.size(); i++)
-				{
-					tot.add(a2.get(i));
-				}
-				
-				return tot;
-			});
-			
-			ArrayList<Tuple2<TaggedWord,Double>> freq_nouns = tmp.first()._2();
-			
-			
+		
 			// calculate cluster entropy
 			/*
 			 * 
@@ -297,71 +191,13 @@ public class ClusteringTweets {
 			 * 		Nci = # of tags i inside cluster C
 			 * 		Nc = # of tags in cluster C
 			 */
-			
-			//Distribute frequent nouns in broadcast to the workers
-			/*final Broadcast<ArrayList<Tuple2<TaggedWord,Double>>> freq_nouns_br = sc.broadcast(freq_nouns);
-		 
-			JavaRDD<Tuple2<Integer,Double>> entropy_per_cluster = clusters_tagged.map((tuple) ->{
-				
-				ArrayList<Tuple2<TaggedWord,Double>> freq_nouns_total = freq_nouns_br.getValue();
-				
-				ArrayList<List<TaggedWord>> tags_in_cluster = tuple._2();
-				
-				Map<TaggedWord,Integer> noun_tags = new HashMap();
-				// filter tags in order to keep only nouns
-				int total = 0;
-				for (int i = 0; i < tags_in_cluster.size(); i++)
-				{
-					Iterator<TaggedWord> it = tags_in_cluster.get(i).iterator();
-					while(it.hasNext())
-					{
-						TaggedWord w = it.next();
-						
-						String[] tags = {"NN","NNS","NNP","NNPS"};
-						for (int j = 0; j < tags.length; j++)
-						{
-							if (w.tag().compareTo(tags[j]) == 0)
-							{
-								if (!noun_tags.containsKey(w))
-								{
-									noun_tags.put(w,1);
-								}
-								else
-								{
-									int v = noun_tags.get(w);
-									noun_tags.put(w, v+1);
-								}
-								total++;
-							}
-						}
-					}
-				}
-				
-				System.out.println("TOTAL is: "+total);
-				
-				Map<TaggedWord,Double> cluster_entropy = new HashMap();
-				double entropy = 0;
-				//calculate entropy
-				for (Tuple2<TaggedWord,Double> t : freq_nouns_total)
-				{
-					// calculate number of occurences of this tag inside the cluster
-					Integer occurences = noun_tags.get(t._1());
-					if (occurences != null)
-					{
-						double o = occurences.intValue();
-						if (o > 0)
-							entropy += (o/total) * Math.log(o/total)*(-1);
-						//System.out.println(entropy+" occ: "+o+", total: "+total);
-					}
-				}
-				
-				return new Tuple2<Integer,Double>(tuple._1(),entropy);
-			});
+			JavaRDD<Tuple2<Integer,Double>> entropy_per_cluster = Clustering_evaluation_functions.cluster_entropy(sc, clusters_tagged, freq_nouns);
 			
 			System.out.println("The max is log2 L: "+Math.log(freq_nouns.size()));
+			// save on disk to see the results
 			entropy_per_cluster.saveAsTextFile("entropy_per_cluster.txt");
 			
-			*/
+			
 			
 			
 			// calculate noun entropy
@@ -374,171 +210,8 @@ public class ClusteringTweets {
 			 * 		Ni = # of tags i
 			 */
 			//Distribute frequent nouns in broadcast to the workers
-			final Broadcast<ArrayList<Tuple2<TaggedWord,Double>>> freq_nouns_br = sc.broadcast(freq_nouns);
-		 
-			Map<TaggedWord,Integer> tags_and_total_count = JavaPairRDD.fromJavaRDD(clusters_tagged.map((tuple) ->{
-				
-				ArrayList<Tuple2<TaggedWord,Double>> freq_nouns_total = freq_nouns_br.getValue();
-				
-				//System.out.print("freq nouns total "+freq_nouns_total.size());
-				ArrayList<List<TaggedWord>> tags_in_cluster = tuple._2();
-				
-				Map<TaggedWord,Integer> noun_tags = new HashMap();
-				// filter tags in order to keep only nouns
-				int total = 0;
-				for (int i = 0; i < tags_in_cluster.size(); i++)
-				{
-					Iterator<TaggedWord> it = tags_in_cluster.get(i).iterator();
-					while(it.hasNext())
-					{
-						TaggedWord w = it.next();
-						
-						String[] tags = {"NN","NNS","NNP","NNPS"};
-						for (int j = 0; j < tags.length; j++)
-						{
-							if (w.tag().compareTo(tags[j]) == 0)
-							{
-								if (!noun_tags.containsKey(w))
-								{
-									noun_tags.put(w,1);
-								}
-								else
-								{
-									int v = noun_tags.get(w);
-									noun_tags.put(w, v+1);
-								}
-								total++;
-							}
-						}
-					}
-				}
-				
-				return new Tuple2<Integer,Map<TaggedWord,Integer>>(0,noun_tags);
-				
-			})).reduceByKey((tuple1,tuple2) ->{
-				
-				Map<TaggedWord,Integer> a1 = tuple1;
-				Map<TaggedWord,Integer> a2 = tuple2;
-				
-				Map<TaggedWord,Integer> tot = new HashMap();
-				for (TaggedWord w : a1.keySet())
-				{
-					tot.put(w, a1.get(w));
-				}
-				for (TaggedWord w : a2.keySet())
-				{
-					if (tot.containsKey(w))
-					{
-						tot.put(w, tot.get(w)+a2.get(w));
-					}
-					else
-					{
-						tot.put(w, a2.get(w));
-					}
-				}
-				
-				return tot;
-			}).first()._2;
+			Map<TaggedWord,Double> entropy_per_noun = Clustering_evaluation_functions.frequent_nouns_entropy(sc, clusters_tagged, freq_nouns);
 			
-			
-			//Distribute frequent nouns in broadcast to the workers
-			//freq_nouns_br = sc.broadcast(freq_nouns);
-			Broadcast<Map<TaggedWord,Integer>> tags_tot_count = sc.broadcast(tags_and_total_count);
-			
-			System.out.println("size: "+tags_and_total_count.size());
-			
-			//JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> clusters_tagged = 
-			Map<TaggedWord,Double> entropy_per_noun = JavaPairRDD.fromJavaRDD(clusters_tagged.map((tuple) ->{
-				
-				ArrayList<Tuple2<TaggedWord,Double>> freq_nouns_total = freq_nouns_br.getValue();
-				Map<TaggedWord,Integer> tags_tot_count2 = tags_tot_count.value();
-				
-				ArrayList<List<TaggedWord>> tags_in_cluster = tuple._2();
-				
-				Map<TaggedWord,Integer> noun_tags = new HashMap();
-				// filter tags in order to keep only nouns
-				//int total = 0;
-				for (int i = 0; i < tags_in_cluster.size(); i++)
-				{
-					Iterator<TaggedWord> it = tags_in_cluster.get(i).iterator();
-					while(it.hasNext())
-					{
-						TaggedWord w = it.next();
-						
-						String[] tags = {"NN","NNS","NNP","NNPS"};
-						for (int j = 0; j < tags.length; j++)
-						{
-							if (w.tag().compareTo(tags[j]) == 0)
-							{
-								if (!noun_tags.containsKey(w))
-								{
-									noun_tags.put(w,1);
-								}
-								else
-								{
-									int v = noun_tags.get(w);
-									noun_tags.put(w, v+1);
-								}
-								//total++;
-							}
-						}
-					}
-				}
-				
-				//System.out.println("TOTAL is: "+total);
-				
-				Map<TaggedWord,Double> cluster_entropy = new HashMap();
-				//calculate entropy
-				Map<TaggedWord,Double> out = new HashMap();
-				for (Tuple2<TaggedWord,Double> t : freq_nouns_total)
-				{
-					double entropy = 0;
-					// calculate number of occurences of this tag inside the cluster
-					Integer occurences = noun_tags.get(t._1());
-					double total = tags_tot_count2.get(t._1);
-					if (occurences != null)
-					{
-						double o = occurences.intValue();
-						if (o > 0)
-							entropy = (o/total) * Math.log(o/total)*(-1);
-						//System.out.println(entropy+" occ: "+o+", total: "+total);
-					}
-					cluster_entropy.put(t._1, entropy);
-				}
-				
-				
-				return new Tuple2<Integer,Map<TaggedWord,Double> >(0,cluster_entropy);
-			})).reduceByKey((tuple1,tuple2)->{
-				
-				Map<TaggedWord,Double> a1 = tuple1;
-				Map<TaggedWord,Double> a2 = tuple2;
-				
-				Map<TaggedWord,Double> tot = new HashMap();
-				for (TaggedWord w : a1.keySet())
-				{
-					if (tot.containsKey(w))
-					{
-						tot.put(w, tot.get(w)+a1.get(w));
-					}
-					else
-					{
-						tot.put(w, a1.get(w));
-					}
-				}
-				for (TaggedWord w : a2.keySet())
-				{
-					if (tot.containsKey(w))
-					{
-						tot.put(w, tot.get(w)+a2.get(w));
-					}
-					else
-					{
-						tot.put(w, a2.get(w));
-					}
-				}
-				
-				return tot;
-			}).first()._2();
 			
 			System.out.print("final size "+entropy_per_noun.size());
 			
@@ -546,10 +219,8 @@ public class ClusteringTweets {
 			{
 				System.out.println("Word: "+w.value()+", entropy: "+entropy_per_noun.get(w));
 			}
-			//JavaRDD<Tuple2<Integer,Map<TaggedWord,Double> >> entropy_per_noun_per_cluster
 			
 			System.out.println("The max is log2 L: "+Math.log(150));
-			//entropy_per_cluster.saveAsTextFile("entropy_per_cluster.txt");
 			
 		}
 		catch(Exception e){
