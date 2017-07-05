@@ -5,7 +5,7 @@ import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.linalg.Vector;
 
 public class Distance {
-
+	
   /**
    * Cosine distance between vectors where all the elements are positive.
    */

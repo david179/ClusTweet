@@ -32,57 +32,58 @@ import it.unipd.dei.db.Clustering_functions;
 import scala.Tuple2;
 
 
-/**
- * @brief Map-Reduce implementation of K-center algorithm
- *
- * @authors T.Agnolazza, A.Ciresola, D.Lucchi, F.Paganin 
- * @version 5.0 
- *
- * Round 3 optimized
- * Substitution of Partition(P,S) with Partition(Pj, S) in parallel for all subsets Pj 
- *
- * @date 14/05/2017 
- * last review 03/06/2017 
- */
-
 public class KCenterMapReduce
 {
 	public static Dataset<TwitterClustered> cluster(Dataset<Twitter> args, SparkSession spark) throws IOException, KcoeffCustomException
 	{ 
 		//System.setProperty("hadoop.home.dir", "c:\\winutil\\");
 	
-		//***************************************Preprocessing***************************************
-		//Acquisition of the cluster number "k" and path of dataset as parameters
-		int k = 150;
+               //***************************************Preprocessing_Phase***************************************
+		
+        //Number of desired clusters 
+		int k = 50;
+        //The number of centers choosen for each bucket is equal to k_coeff*k = 2*k 
 		final int k_coeff = 2;
 		//vector space dimension
 		final int dim = 50;
 	
-		System.out.println("Starting clustering routine");
+		System.out.println("Starting clustering routine"); 
 		//Spark setup
 		JavaSparkContext sc = new JavaSparkContext(spark.sparkContext());
 		sc.setLogLevel("OFF");
 		JavaRDD<Twitter> tweets = args.toJavaRDD();
     
+                /*
+                 ****************************** Debug sequence **************************
+
 		System.out.println("\n***************************************************************************************"); 
 		System.out.println("Essential information in the first tweet");
 		tweets.first().printTwitterInfo(); 
 		System.out.println("Number of tweets: "+ tweets.count() );
 		System.out.println("***************************************************************************************"); 
-    
+                
+                */
+
+
 		//Getting only the content of a tweet
 		JavaRDD<String> texts = tweets.map((p) -> p.getTweet_content());  
  
+                
+                // Debugging sequence  
+                /*
 		System.out.println("\n***************************************************************************************"); 
 		System.out.println(texts.first()); 
 		System.out.println("***************************************************************************************"); 
-
+                */ 
 
 		System.out.println("Tweet content mapping finished");        
 
 		//Lemmatization
 		JavaRDD<ArrayList<String>> lemmas = Lemmatizer.lemmatize(texts).cache();  
 
+                
+                // Debug for lemmatization 
+                /* 
 		System.out.println("\n***************************************************************************************"); 
 		System.out.println("Debug for lemmatization ");
 		ArrayList<String> aa = lemmas.first(); 
@@ -91,8 +92,9 @@ public class KCenterMapReduce
 			System.out.println(elem); 
 		});
 		System.out.println("***************************************************************************************");
-		
 		System.out.println("Lemmatization finished");
+                */ 
+
     
 		//Fit the word2vec model and save it in memory
 		Word2VecModel model = null;
@@ -113,17 +115,21 @@ public class KCenterMapReduce
     
 		//Map documents to vectors
 		JavaPairRDD<Twitter,Vector> pagesAndVectors =  Clustering_functions.documentToVector(sc, model, pagesAndLemma, dim);
-
+                
+                
+                // Dubugging sequence for document to vector 
+                /* 
 		System.out.println("\n*******************************************************************************");  
 		System.out.println( pagesAndVectors.first()._1().getTweet_content() ); 
 		System.out.println("*******************************************************************************");    
+                */
 
 		// Open a file where all the gathered information is going to be written to
-	    //PrintWriter output = new PrintWriter(new File("Analysis_results.csv"));
-	    // the output file is a csv with the following columns
-	    //output.println("Iteration,k,k_coeff,k_first,R1_time,R2_time,R3_time,f_obj,notes,");
-	    //output.flush();
-	    //int iteration_count = 0;
+	        // PrintWriter output = new PrintWriter(new File("Analysis_results.csv"));
+	        // the output file is a csv with the following columns
+	        // output.println("Iteration,k,k_coeff,k_first,R1_time,R2_time,R3_time,f_obj,notes,");
+	        // output.flush();
+	        // int iteration_count = 0;
 	    
 	    	
 		try
@@ -132,198 +138,171 @@ public class KCenterMapReduce
 		    //n = number of elements in the set 
 		    int n = (int)pagesAndVectors.count();  
 		    
-		    // the values of k are: 10, 15, 23, 34, 51, 77, 115, 172, 258, 387
-		   // for (k = 150; k < 151; k = (int)(1.25d*k))
-		    //{
-		    	System.out.println("\n\nWorking on k = "+k+"\n\n");
-		    	// monitoring for the ROUND1 execution time 
-			    long startRoundOneTime = System.currentTimeMillis();
-			    
-			    
-			    //l = number of subsets of pagesAndVectors 
-			    double l = Math.sqrt(n/k);
-			    
-			    //appl = int number of subsets 
-			    int appl = (int)Math.floor(l);
+		    // l = number of subsets of pagesAndVectors 
+		    double l = Math.sqrt(n/k);
 		    
-			    //*************************************end Preprocessing*************************************
-			    
-			    
-			 
-			   
-			    //******************************************Round 1******************************************
-			    
-			    //Map each element <Wi, Vi> into <<Wi, Vi> , i>
-			    JavaPairRDD<Tuple2<Twitter,Vector> , Long> pagesAndVectorsWithIndex = pagesAndVectors.zipWithIndex(); 
-			
-			    //New indexes assigned at each pair with index that points to the bucket index from 0 to sqrt(n/k)-1
-			    JavaPairRDD<Integer , Tuple2<Twitter,Vector>> newpagesAndVectors = pagesAndVectorsWithIndex.mapToPair((tuple) -> { 
-	            		int tmp = (int) (long) (tuple._2()); 
-	            		int index = (tmp%appl); 
-	 
-	            		return new Tuple2< Integer , Tuple2<Twitter, Vector> >(index , tuple._1()); 
-	        		}
-			    ); 
+		    //appl = int number of subsets 
+		    int appl = (int)Math.floor(l);
+	    
+		    //*************************************end Preprocessing*************************************
+		    
+		    
+		 
+		   
+		    //******************************************Round 1******************************************
+		    
+		    //Map each element <Tweet, Vector> into <<Tweet, Vector> , i>
+		    JavaPairRDD<Tuple2<Twitter,Vector> , Long> pagesAndVectorsWithIndex = pagesAndVectors.zipWithIndex(); 
+		
+		    //New indexes assigned at each pair with index that points to the bucket index from 0 to sqrt(n/k)-1
+		    JavaPairRDD<Integer , Tuple2<Twitter,Vector>> newpagesAndVectors = pagesAndVectorsWithIndex.mapToPair((tuple) -> { 
+            		int tmp = (int) (long) (tuple._2()); 
+            		int index = (tmp%appl); 
+ 
+            		return new Tuple2< Integer , Tuple2<Twitter, Vector> >(index , tuple._1()); 
+        		}
+		    ); 
+
+		    // Each element of the following RDD is a subset Pj of the initial set of points P 
+		    JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> pagesGroupedByKey = newpagesAndVectors.groupByKey(); 
+	     
+		    /* Now we have to run the Farthest-First Traversal algorithm on each element of the previous RDD
+		     * 
+		     * JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> 
+		     * will be converted into 
+		     * JavaPairRDD <Integer, ArrayList<Tuple2<Twitter, Vector>>> 
+		     * because the last one is easier to manage
+		     */ 
+		    JavaPairRDD<Integer, ArrayList<Tuple2<Twitter, Vector>>> pagesGroupedByKeyArrayList = pagesGroupedByKey
+                         .mapToPair
+                        ( 
+                            (tuple) ->
+                            { 
+	            	 ArrayList<Tuple2<Twitter, Vector>> tempArray = new ArrayList<Tuple2<Twitter, Vector>>(); 
+	            	 Iterator<Tuple2<Twitter, Vector>> newIterator = tuple._2().iterator(); 
+	            
+	            	 while(newIterator.hasNext()) 
+	            	   tempArray.add(newIterator.next()); 
+	            
+	            	  return new Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>>(tuple._1() , tempArray); 
+	          	}
+		    );
+		
+		    // We need to check if the value of k' is compatible with the number of elements inside each subset
+		    int elements_per_subset = n/appl;
+		    int k_first = (int)(k_coeff*k);
+		    if (k_first > elements_per_subset)
+		    {	
+                      // We must stop because we were trying to take from each subset a number of 
+                          // centers greater than the number of elements in the subset
+		      throw new KcoeffCustomException("k'= "+k_first+ " is bigger than the number of elements for each subset("+elements_per_subset+")");	    
+		    }
 	
-			    //Each element of the following RDD is a subset Pj of the initial set of points P 
-			    JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> pagesGroupedByKey = newpagesAndVectors.groupByKey(); 
+		    JavaPairRDD<Integer, ArrayList<Tuple2<Twitter, Vector>>> centersForEachSubset = pagesGroupedByKeyArrayList.mapToPair((tuple) ->{   
+	             	//Invoke the Farthest-First Traversal with parameter k'> k, in this specific case k' = 2k 
+	             	return Clustering_functions.farthestFirstTraversal(tuple ,k_first); 
+	         	}
+		    ).cache();
+		    
+		    //****************************************end Round 1****************************************
+
+		    
+		    
+		    //******************************************Round 2******************************************
+	    
+		    JavaPairRDD<Integer, ArrayList<Tuple2<Twitter,Vector>>> tuplesToJoin = centersForEachSubset.mapToPair((tuple) ->{
+		    	return new Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>>(0, tuple._2()); 
+		    });
+
+		    JavaPairRDD<Integer, ArrayList<Tuple2<Twitter,Vector>>> tuplesToJoin2 = tuplesToJoin.reduceByKey(
+                        (value1, value2) -> 
+                        {
+				              //Union of two ArrayList 
+				              value2.forEach((elem) -> 
+			                          {
+			                        	  value1.add(elem); 
+			                          }
+                          );
+				              return value1; 
+					    }).cache();
+	
+		    //TuplesToJoin2 contains only one tuple (k,V) [K=0, V = set of choosen centers]
+		    Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> tuplesToJoin3 = tuplesToJoin2.first(); 
+	    
+		    //Farthest-First Traversal to find k centers 
+		    Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> finalCenters = Clustering_functions.farthestFirstTraversal(tuplesToJoin3, k); 
+	
+		    //extractedCenters = S = {c1, c2, ..., ck} = k centers 
+		    ArrayList<Tuple2<Twitter, Vector>> extractedCenters = finalCenters._2();
+		    //****************************************end Round 2****************************************
+		
+		    
+		       
 		     
-			    /* Now we have to run the Farthest-First Traversal algorithm on each element of the previous RDD
-			     * 
-			     * JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> 
-			     * will be converted into 
-			     * JavaPairRDD <Integer, ArrayList<Tuple2<Twitter, Vector>>> 
-			     * because the last one is easier to manage
-			     */ 
-			    JavaPairRDD<Integer, ArrayList<Tuple2<Twitter, Vector>>> pagesGroupedByKeyArrayList = pagesGroupedByKey.mapToPair((tuple) ->{ 
-		            	ArrayList<Tuple2<Twitter, Vector>> tempArray = new ArrayList<Tuple2<Twitter, Vector>>(); 
-		            	Iterator<Tuple2<Twitter, Vector>> newIterator = tuple._2().iterator(); 
-		            
-		            	while(newIterator.hasNext()) 
-		            		tempArray.add(newIterator.next()); 
-		            
-		            	return new Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>>(tuple._1() , tempArray); 
-		          	}
-			    );
-			
-			    //We need to check if the value of k' is compatible with the number of elements inside each subsets
-			    int elements_per_subset = n/appl;
-			    int k_first = (int)(k_coeff*k);
-			    if (k_first > elements_per_subset)
-			    {	
-			    	//We must stop because we were trying to take from each subset a number of centers greater than the number of elements in the subset
-			    	throw new KcoeffCustomException("k'= "+k_first+ " is bigger than the number of elements for each subset ("+elements_per_subset+")");	    
-			    }
+		    //******************************************Round 3******************************************	    
+		    ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>> clusters = new ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>>(); 
 		
-			    JavaPairRDD<Integer, ArrayList<Tuple2<Twitter, Vector>>> centersForEachSubset = pagesGroupedByKeyArrayList.mapToPair((tuple) ->{   
-		             	//Invoke the Farthest-First Traversal with parameter k'> k, in this specific case k' = 2k 
-		             	return Clustering_functions.farthestFirstTraversal(tuple ,k_first); 
-		         	}
-			    ).cache();
-			    
-			    //****************************************end Round 1****************************************
-	
-			    centersForEachSubset.count();
-			    // stop monitoring for the ROUND1 execution time
-			    long stopRoundOneTime = System.currentTimeMillis();
-			    long elapsedRoundOneTime = stopRoundOneTime - startRoundOneTime;
-			   
-			    
-			    // monitoring for the ROUND2 execution time 
-			    long startRoundTwoTime = System.currentTimeMillis();
-			     
-			    
-			    //******************************************Round 2******************************************
+		    for(int j=0; j<extractedCenters.size(); j++) 
+		    	clusters.add(new Tuple2<Integer, Tuple2<Twitter, Vector>>(Integer.valueOf(j), extractedCenters.get(j)) );   
+		
+		    //clusters contains all pairs (0, c0), (1,c1),...,(k-1, c(k-1))
+		    //pagesGroupedByKeyArrayList = set of all subsets Pj
+
+		    //Now invoke the partition method on all subsets Pj
+		    JavaRDD<ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>>> clustersRound3 = pagesGroupedByKeyArrayList.map((tuple) -> {
+			     return Clustering_functions.partition(tuple, clusters);
+			}); 
+ 
+		    JavaPairRDD<Integer,  ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>>> fix = clustersRound3.mapToPair((tuple) -> { 
+		    	return new Tuple2<Integer, ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>>> (Integer.valueOf(0), tuple);
+		    });
+		
+		    JavaPairRDD<Integer, ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>>> finalFix = fix.reduceByKey((value1, value2) -> {
+		    	value2.forEach((elem) -> {
+		    		value1.add(elem); 
+		    	});
+		    	return value1; 
+		    }).cache();
+		
+		    //In finalFix there's only one element
+		    JavaPairRDD<Integer, Tuple2<Twitter, Vector>> newRDD = sc.parallelizePairs(finalFix.first()._2()); 
 		    
-			    JavaPairRDD<Integer, ArrayList<Tuple2<Twitter,Vector>>> tuplesToJoin = centersForEachSubset.mapToPair((tuple) ->{
-			    	return new Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>>(0, tuple._2()); 
-			    });
-	
-			    JavaPairRDD<Integer, ArrayList<Tuple2<Twitter,Vector>>> tuplesToJoin2 = tuplesToJoin.reduceByKey((value1, value2) -> {
-		           	//Union of two ArrayList 
-		            value2.forEach((elem) -> {
-		                value1.add(elem); 
-		            });
-		
-		            return value1; 
-			    }).cache();
-		
-			    //TuplesToJoin2 contains only one tuple (k,V) [K=0, value = all centers]
-	
-			    Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> tuplesToJoin3 = tuplesToJoin2.first(); 
 		    
-			    //Farthest-First Traversal to find k centers 
-			    Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> finalCenters = Clustering_functions.farthestFirstTraversal(tuplesToJoin3, k); 
+		    JavaRDD<TwitterClustered> RDDTwitter = newRDD.map((elem) -> {
+		    	
+		    	TwitterClustered tmp = new TwitterClustered(elem._2._1.getTweet_ID(), elem._2._1.getDateTweet(), 
+		    			elem._2._1.getHour(), elem._2._1.getUsername(), elem._2._1.getNickname(), 
+		    			elem._2._1.getBiography(), elem._2._1.getTweet_content(), elem._2._1.getFavs(), 
+		    			elem._2._1.getRts(), elem._2._1.getLatitude(), elem._2._1.getLongitude(), 
+		    			elem._2._1.getCountry(), elem._2._1.getPlace(), elem._2._1.getProfile_picture(), elem._2._1.getFollowers(),
+		    			elem._2._1.getFollowing(), 
+		    			elem._2._1.getListed(), 
+		    			elem._2._1.getLanguage(), elem._2._1.getUrl());
+		    	
+		    	tmp.setCluster(elem._1);
+			
+		    	return tmp;
+		    });
 		
-			    //extractedCenters = S = {c1, c2, ..., ck} = k centers 
-			    ArrayList<Tuple2<Twitter, Vector>> extractedCenters = finalCenters._2();
-			    //****************************************end Round 2****************************************
-			
-			    
-			    // stop monitoring for the ROUND2 execution time
-			     long stopRoundTwoTime = System.currentTimeMillis();
-			     long elapsedRoundTwoTime = stopRoundTwoTime - startRoundTwoTime;  
-			   
-			  // monitoring for the ROUND2 execution time 
-				    long startRoundThreeTime = System.currentTimeMillis(); 
-				   
-			     
-			    //******************************************Round 3******************************************	    
-			    ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>> clusters = new ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>>(); 
-			
-			    for(int j=0; j<extractedCenters.size(); j++) 
-			    	clusters.add(new Tuple2<Integer, Tuple2<Twitter, Vector>>(Integer.valueOf(j), extractedCenters.get(j)) );   
-			
-			    //clusters contains all pairs (0, c0), (1,c1),...,(k-1, c(k-1))
-			    //pagesGroupedByKeyArrayList = set of all subsets Pj
-	
-			    //Now invoke the partition method on all subsets Pj
-			    JavaRDD<ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>>> clustersRound3 = pagesGroupedByKeyArrayList.map((tuple) -> {
-				     return Clustering_functions.partition(tuple, clusters);
-				}); 
-	 
-			    JavaPairRDD<Integer,  ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>>> fix = clustersRound3.mapToPair((tuple) -> { 
-			    	return new Tuple2<Integer, ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>>> (Integer.valueOf(0), tuple);
-			    });
-			
-			    JavaPairRDD<Integer, ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>>> finalFix = fix.reduceByKey((value1, value2) -> {
-			    	value2.forEach((elem) -> {
-			    		value1.add(elem); 
-			    	});
-			    	return value1; 
-			    }).cache();
-			
-			    //In finalFix there's only one element
-			    JavaPairRDD<Integer, Tuple2<Twitter, Vector>> newRDD = sc.parallelizePairs(finalFix.first()._2()); 
-			    
-			    
-			    JavaRDD<TwitterClustered> RDDTwitter = newRDD.map((elem) -> {
-			    	
-			    	TwitterClustered tmp = new TwitterClustered(elem._2._1.getTweet_ID(), elem._2._1.getDateTweet(), 
-			    			elem._2._1.getHour(), elem._2._1.getUsername(), elem._2._1.getNickname(), 
-			    			elem._2._1.getBiography(), elem._2._1.getTweet_content(), elem._2._1.getFavs(), 
-			    			elem._2._1.getRts(), elem._2._1.getLatitude(), elem._2._1.getLongitude(), 
-			    			elem._2._1.getCountry(), elem._2._1.getPlace(), elem._2._1.getProfile_picture(), elem._2._1.getFollowers(),
-			    			elem._2._1.getFollowing(), 
-			    			elem._2._1.getListed(), 
-			    			elem._2._1.getLanguage(), elem._2._1.getUrl());
-			    	
-			    	tmp.setCluster(elem._1);
-				
-			    	return tmp;
-			    });
-			
-			    JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> groupedFinalClusters = newRDD.groupByKey(); 		  
-			
-			    
-			    Dataset<Row> tweetClusteredRow = spark.createDataFrame(RDDTwitter.rdd(), TwitterClustered.class);
-			
-			    
-			    
-			    Encoder<TwitterClustered> twitterEncoder = Encoders.bean(TwitterClustered.class);
-			    
-			    Dataset<TwitterClustered> tweetClustered = tweetClusteredRow.as(twitterEncoder);
-			 		  
-			    tweetClustered.collect();
-			    //****************************************end Round 3****************************************
-			    
-			 // stop monitoring for the ROUND3 execution time
-			    long stopRoundThreeTime = System.currentTimeMillis();
-			    long elapsedRoundThreeTime = stopRoundThreeTime - startRoundThreeTime;
-			    // monitoring for the TOTAL execution time
-			    long elapsedTime = stopRoundThreeTime - startRoundOneTime;
-				
-			    
-			    //Calculating the objective function
-			    double f_obj = Clustering_functions.objectiveFunction(groupedFinalClusters, clusters, sc);
+		    JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> groupedFinalClusters = newRDD.groupByKey(); 		  
+		
 		    
-			 // print data to result file
-			    // format: Iteration,k,k_coeff,k_first,R1_time,R2_time,R3_time,f_obj,notes
-			   // output.println(iteration_count+","+k+","+k_coeff+","+k_first+","+elapsedRoundOneTime+","+elapsedRoundTwoTime+","+elapsedRoundThreeTime+","+f_obj+",,");
-			    // Force the writing to the output file so if things go wrong we know everything up to the last iteration
-		    	//output.flush();
-				//iteration_count++;
-		   // }
+		    Dataset<Row> tweetClusteredRow = spark.createDataFrame(RDDTwitter.rdd(), TwitterClustered.class);
+		
+		    
+		    
+		    Encoder<TwitterClustered> twitterEncoder = Encoders.bean(TwitterClustered.class);
+		    
+		    Dataset<TwitterClustered> tweetClustered = tweetClusteredRow.as(twitterEncoder);
+		 		  
+		    tweetClustered.collect();
+		    //****************************************end Round 3****************************************
+		    
+		    
+		    //Calculating the objective function
+		    double f_obj = Clustering_functions.objectiveFunction(groupedFinalClusters, clusters, sc);
+	    
+		
 		    
 		    
 		    //*************************************Diagnostic strings************************************
@@ -356,7 +335,6 @@ public class KCenterMapReduce
 		}
 		catch(Exception e){
 			System.out.println("A fatal error occured");
-			//output.println("A fatal error occured");
 			e.printStackTrace();
 		}
 		return null;

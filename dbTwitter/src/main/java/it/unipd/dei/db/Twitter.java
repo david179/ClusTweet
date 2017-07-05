@@ -1,8 +1,5 @@
 package it.unipd.dei.db;
 
-import org.apache.spark.mllib.linalg.Vector;
-import org.apache.spark.sql.Encoder;
-import org.apache.spark.sql.Encoders;
 
 import java.io.Serializable;
 

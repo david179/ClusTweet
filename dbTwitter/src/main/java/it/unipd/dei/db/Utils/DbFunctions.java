@@ -1,16 +1,11 @@
 package it.unipd.dei.db.Utils;
 
-import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import it.unipd.dei.db.Twitter;
 import it.unipd.dei.db.TwitterClustered;
-import it.unipd.dei.db.Clustering_functions;
 
 
 public class DbFunctions {
@@ -43,12 +38,8 @@ public class DbFunctions {
 		 		newCon = DriverManager.getConnection(DATABASE, USER, PASSWORD);
 		 		newStm = newCon.createStatement(); 
 		 		
-		 		
-		 		
 		 	}catch(SQLException e){
 		 		
-		 		//System.out.println("Database access error!"); 
-
 			    while(e != null)
 			    {
 			      System.out.printf("- Message:'%s%n",e.getMessage());
@@ -108,16 +99,12 @@ public class DbFunctions {
 			   	newPStm.setInt(18, tweet.getListed());
 			   	newPStm.setString(19, tweet.getLanguage());
 			   	newPStm.setString(20, tweet.getUrl());
-			 	
-		 		// Create a new instruction to execute 
-		 		//newStm.executeUpdate(query); 
+			 
 		 		newPStm.execute();
 
 		 	}catch(SQLException e){
 		 		
-		 		//System.out.println("Database access error!"); 
-
-			    while(e != null)
+		 	    while(e != null)
 			    {
 			      System.out.printf("- Message:'%s%n",e.getMessage());
 			      System.out.printf("- SQL status code: %s%n",e.getSQLState());
@@ -128,7 +115,7 @@ public class DbFunctions {
 
 		 	}
 		   
-	   }//[m]getTweets
+	   }
 	   
 	   public static void close()
 	   {
@@ -167,8 +154,6 @@ public class DbFunctions {
 
 		 			System.out.println("The resources have been released to the garbage collector!"); 
 		 		}
-		 	
-		   
 	   }
 	   
 

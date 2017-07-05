@@ -22,7 +22,6 @@ public class Clustering_functions {
   /* 
    * Distribute the model in broadcast to the workers and calculate for each document the corresponding vector
    * 
-   * @author D.Lucchi
    * @version 0.1
    * 
    * @param JavaSparkContext sc, Word2VecModel model,  
@@ -69,7 +68,6 @@ public class Clustering_functions {
   /* 
    * Compute the Farthest-First Traversal on the inputSubset = subset of elements for which we have to calculate k_param centers
    * 
-   * @author T.Agnolazza, D.Lucchi 
    * @version 0.1
    * 
    * @param Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> inputSubset, int number of centers to find
@@ -134,7 +132,6 @@ public class Clustering_functions {
   }
   
   /* 
-   * @author T.Agnolazza, D.Lucchi 
    * @version 0.1
    * 
    * @param int minVal, int maxVal
@@ -148,7 +145,6 @@ public class Clustering_functions {
 
   /*
    *  Assign documents to their closest center
-   *  @author D.Lucchi
    *  @version 0.1
    *  
    *  @param Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> pJ, ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>> s
@@ -187,7 +183,6 @@ public class Clustering_functions {
   /*
    * Function to calculate the objective function
    * 
-   * @author T.Agnolazza
    * @version 0.0
    * 
    * @param JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> cluster, ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>> centers

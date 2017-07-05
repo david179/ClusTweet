@@ -1,0 +1,887 @@
+
+Cluster number: 19
+	New - 1.1189710610932475
+	York - 0.43569131832797425
+	York, - 0.5530546623794212
+	NY - 0.297427652733119
+	I'm - 0.2765273311897106
+
+
+Cluster number: 39
+
+
+Cluster number: 34
+	Cantina - 1.0
+	https://t.co/ct8hBxtYS1 - 0.5
+	https://t.co/ZEsEnbPDLM - 0.5
+	Pappasito's - 0.5
+	selfies - 0.5
+	Más - 0.5
+	Mexicali - 0.5
+
+
+Cluster number: 101
+
+
+Cluster number: 4
+
+
+Cluster number: 71
+
+
+Cluster number: 134
+	Health - 0.3960573476702509
+	#Healthcare - 0.2616487455197133
+	#Jobs - 0.5591397849462365
+	#Job - 0.4014336917562724
+
+
+Cluster number: 130
+
+
+Cluster number: 66
+
+
+Cluster number: 80
+	#Job: - 0.2570951585976628
+	#Jobs - 0.7813021702838063
+	#Job - 0.6252086811352254
+
+
+Cluster number: 105
+	#dc - 0.25
+	#team - 0.25
+	#ZombieOutbreak - 0.25
+	https://t.co/KV0KBwJ8PE - 0.25
+	zombies, - 0.25
+	Wrecklezz - 0.25
+	https://t.co/YEPaML3sF9 - 0.25
+	Credit: - 0.25
+	#hudson - 0.25
+	Zombies, - 0.25
+	#MortonGrove… - 0.25
+	@PostPrettyPussy - 0.25
+	Hudson… - 0.25
+	#river - 0.25
+	zill_ratanji - 0.25
+	zombies - 0.25
+	chocolate - 0.25
+	https://t.co/iFgAFmIwdd - 0.25
+
+
+Cluster number: 125
+	baths - 0.33876221498371334
+	TX - 0.498371335504886
+	beds, - 0.34201954397394135
+
+
+Cluster number: 138
+
+
+Cluster number: 65
+
+
+Cluster number: 35
+
+
+Cluster number: 11
+	#Hiring - 0.7873070325900514
+	you're - 0.3567753001715266
+	#job - 0.5849056603773585
+	#job: - 0.37564322469982847
+	professional - 0.34991423670668953
+
+
+Cluster number: 14
+	#color - 1.0
+	Ink - 1.0
+	https://t.co/MOMaCbsIah - 1.0
+	#tattoo - 1.0
+	Evolution - 1.0
+	Tattoo - 1.0
+	Custom - 1.0
+	#fkirons - 1.0
+
+
+Cluster number: 104
+	#LaurelTavern - 0.25
+	chicken - 0.25
+	Simone's - 0.25
+	https://t.co/G7u1C7KHCz - 0.25
+	Laurel - 0.25
+	Donuts - 0.25
+	🙏 - 0.25
+	
+
+#boysareback - 0.25
+	Minnesota - 0.5
+	sandwiches - 0.25
+	https://t.co/KqJNKOAxmi - 0.25
+	P.S - 0.25
+	https://t.co/KkY8EuRh6d - 0.25
+	https://t.co/zVofD531eY - 0.25
+	andrewwk - 0.25
+	XHot - 0.25
+	Tavern - 0.25
+	Minneapolis, - 0.5
+
+
+Cluster number: 24
+	#LetsGoOakland - 0.5
+	Yoshi's - 0.5
+	https://t.co/OOVImKAut5 - 0.5
+	#JackieRobinsonDay - 0.5
+	#blues - 0.5
+	Coliseum - 0.5
+	Oakland - 1.0
+	#christoferlundandersen - 0.5
+	https://t.co/To3UedvgcV - 0.5
+
+
+Cluster number: 111
+	wen - 0.3333333333333333
+	Bac - 0.3333333333333333
+	@BasuP - 0.3333333333333333
+	oh...
+
+good - 0.3333333333333333
+	kids - 0.3333333333333333
+
+
+Cluster number: 37
+
+
+Cluster number: 146
+
+
+Cluster number: 140
+	biene - 0.3333333333333333
+	sandals❥ - 0.3333333333333333
+	💚 - 0.3333333333333333
+	https://t.co/kABWQAPVLh - 0.3333333333333333
+	#vintagechanel - 0.3333333333333333
+	South - 0.3333333333333333
+	Angeles - 0.3333333333333333
+	k - 0.3333333333333333
+	https://t.co/UfVoqYOnEO - 0.3333333333333333
+	Downtown - 0.3333333333333333
+	P - 0.3333333333333333
+	Los - 0.3333333333333333
+	Details. - 0.3333333333333333
+	https://t.co/VHbjyneysN - 0.3333333333333333
+	University - 0.3333333333333333
+	#DimeRapido - 0.3333333333333333
+	&amp; - 0.3333333333333333
+	Arizona - 0.3333333333333333
+
+
+Cluster number: 1
+	CA? - 0.34782608695652173
+	opening: - 0.34782608695652173
+	#Job - 0.30434782608695654
+	View - 0.5652173913043478
+
+
+Cluster number: 74
+	view - 0.2916666666666667
+	View - 0.2916666666666667
+
+
+Cluster number: 63
+	Tiny - 0.4897959183673469
+	House - 0.3877551020408163
+
+
+Cluster number: 89
+
+
+Cluster number: 17
+
+
+Cluster number: 20
+
+
+Cluster number: 18
+
+
+Cluster number: 12
+
+
+Cluster number: 38
+
+
+Cluster number: 90
+	#boatlife - 0.3333333333333333
+
+
+Cluster number: 103
+
+
+Cluster number: 94
+
+
+Cluster number: 145
+	Stadium - 0.2850467289719626
+
+
+Cluster number: 99
+	https://t.co/vgznMEjonY - 1.0
+	Re: - 1.0
+	https://t.co/AEobH0Z4mz - 1.0
+
+
+Cluster number: 100
+
+
+Cluster number: 41
+
+
+Cluster number: 21
+	#newyork - 0.3333333333333333
+
+
+Cluster number: 139
+	Los - 0.6610169491525424
+	Angeles, - 0.423728813559322
+	California - 0.5338983050847458
+
+
+Cluster number: 112
+
+
+Cluster number: 120
+	Los - 0.45871559633027525
+	California - 0.5504587155963303
+
+
+Cluster number: 77
+
+
+Cluster number: 53
+	holder. - 0.5
+	Stadium - 0.5
+	knows... - 0.5
+	Candle - 0.5
+	Flames - 0.5
+	Mo - 0.5
+	https://t.co/JvGxp8OcBw - 0.5
+	#blues - 0.5
+	Pottery - 0.5
+	Dowdy–Ficklen - 0.5
+	https://t.co/X6CviGVBg8 - 0.5
+
+
+Cluster number: 22
+	#Job: - 0.4148471615720524
+	#CareerArc - 0.25327510917030566
+	#Jobs - 0.8253275109170306
+	CA) - 0.2925764192139738
+	#Job - 0.49344978165938863
+	#Hospitality - 0.2794759825327511
+
+
+Cluster number: 25
+
+
+Cluster number: 131
+
+
+Cluster number: 46
+
+
+Cluster number: 59
+	#grillnchill - 0.3333333333333333
+
+
+Cluster number: 142
+
+
+Cluster number: 62
+
+
+Cluster number: 93
+
+
+Cluster number: 33
+
+
+Cluster number: 126
+
+
+Cluster number: 23
+	Brewing - 0.631578947368421
+	Tavern - 0.3157894736842105
+
+
+Cluster number: 113
+
+
+Cluster number: 118
+	Polo - 0.7894736842105263
+	Empire - 0.8947368421052632
+	#coachella - 0.2894736842105263
+
+
+Cluster number: 40
+	Center - 0.33620689655172414
+
+
+Cluster number: 6
+
+
+Cluster number: 67
+	Great - 0.2727272727272727
+
+
+Cluster number: 69
+	#Hiring - 0.42857142857142855
+	time. - 0.2857142857142857
+	Details: - 0.2857142857142857
+	you're - 0.2857142857142857
+	check - 0.2857142857142857
+	Boston) - 0.2857142857142857
+	Av., - 0.2857142857142857
+	Atlantic - 0.2857142857142857
+	professional - 0.2857142857142857
+	#job: - 0.2857142857142857
+
+
+Cluster number: 3
+	#Hiring - 0.3888888888888889
+	anyone - 0.9
+	#job? - 0.7222222222222222
+	CA - 0.3888888888888889
+
+
+Cluster number: 135
+
+
+Cluster number: 85
+	High - 0.6721311475409836
+	School - 0.6639344262295082
+
+
+Cluster number: 58
+
+
+Cluster number: 123
+	team! - 0.28028933092224234
+	opening: - 0.32368896925858953
+	#hiring! - 0.33815551537070526
+	#Jobs - 0.2938517179023508
+	#job - 0.29475587703435807
+	#Job - 0.3074141048824593
+	opening - 0.33634719710669075
+	View - 0.325497287522604
+
+
+Cluster number: 136
+
+
+Cluster number: 60
+	inches - 0.2833333333333333
+	Rain - 0.2833333333333333
+	|Temp: - 0.2833333333333333
+	|Dew - 0.2833333333333333
+	today: - 0.26666666666666666
+	mph - 0.2833333333333333
+	NE, - 0.25
+	Wind: - 0.38333333333333336
+	Point - 0.3
+	Gusting - 0.2833333333333333
+
+
+Cluster number: 91
+	TERMINAL - 0.2727272727272727
+	Philadelphia, - 0.45454545454545453
+	Pennsylvania - 0.45454545454545453
+
+
+Cluster number: 86
+	#dogoftheday - 0.3333333333333333
+	https://t.co/ageNltB4vT - 0.3333333333333333
+	#dogstagram… - 0.3333333333333333
+	"Maya"
+#instadog - 0.3333333333333333
+	💥DESTINY - 0.3333333333333333
+	CHRISTIAN… - 0.3333333333333333
+	Photography - 0.3333333333333333
+	#goldenretriever - 0.3333333333333333
+	https://t.co/miTRlF6Nuu - 0.3333333333333333
+	https://t.co/YLKj6flLi6 - 0.3333333333333333
+	feliz - 0.3333333333333333
+	está - 0.3333333333333333
+	#nikon - 0.3333333333333333
+	#dogsofinstagram - 0.3333333333333333
+	#nh - 0.3333333333333333
+	Ella - 0.3333333333333333
+	Tjsouza - 0.3333333333333333
+
+
+Cluster number: 31
+	#socialmedia - 0.28
+	Ho - 0.56
+	#promotion - 0.28
+	Chinese… - 0.28
+	#losangeles - 0.36
+	Choy - 0.28
+
+
+Cluster number: 87
+	Arena - 0.25
+
+
+Cluster number: 26
+	Parma - 0.3333333333333333
+	Pickerington, - 0.3333333333333333
+	Heights, - 0.3333333333333333
+	https://t.co/CR1DqYZDap - 0.3333333333333333
+	Ohio - 1.0
+	https://t.co/Nsj6IZUNGE - 0.3333333333333333
+	#mitsubishi - 0.3333333333333333
+	https://t.co/mM6QZquLci - 0.3333333333333333
+	beachin' - 0.3333333333333333
+	Geneva, - 0.3333333333333333
+
+
+Cluster number: 5
+
+
+Cluster number: 2
+	Wind - 0.4944356120826709
+	Rain - 0.6232114467408585
+	Temperature - 0.4149443561208267
+	mph - 0.6232114467408585
+	in, - 0.4356120826709062
+	Humidity - 0.44038155802861684
+	today - 0.45310015898251194
+	°F. - 0.4149443561208267
+	Barometer - 0.4149443561208267
+
+
+Cluster number: 114
+
+
+Cluster number: 119
+	photo - 0.727447216890595
+
+
+Cluster number: 13
+
+
+Cluster number: 96
+
+
+Cluster number: 52
+	Vegas - 0.27647058823529413
+	Las - 0.38235294117647056
+
+
+Cluster number: 81
+	 - 0.9032258064516129
+	Tide - 0.4
+	@ebbtideapp - 0.4
+
+
+Cluster number: 137
+	San - 0.3
+	Francisco, - 0.3
+	CA) - 0.6
+	(at - 0.5
+	NY) - 0.3
+
+
+Cluster number: 16
+	High - 0.42424242424242425
+	School - 0.30303030303030304
+
+
+Cluster number: 55
+	https://t.co/nZnHYfcxdl - 0.5
+	James - 0.5
+	#shots - 1.0
+	#milehighcity - 0.5
+	https://t.co/QTfdtVI2Tr - 0.5
+	Dean - 0.5
+	zshanna - 0.5
+	Casa - 0.5
+	@patron - 0.5
+	#colorado… - 0.5
+	@jamesdeantattoo - 0.5
+	#denvertattoo - 0.5
+	Zshanna's - 0.5
+	#Denver - 0.5
+
+
+Cluster number: 82
+
+
+Cluster number: 28
+
+
+Cluster number: 54
+	Construction - 0.34944237918215615
+	Incident - 0.2620817843866171
+	Cleared: - 0.2843866171003718
+	Exit - 0.2955390334572491
+
+
+Cluster number: 107
+	I'm - 0.8883553421368547
+
+
+Cluster number: 121
+
+
+Cluster number: 98
+	De - 0.3902439024390244
+	Merveilleux… - 0.3902439024390244
+	Merveilleux - 0.3902439024390244
+	Bienfaits - 0.3902439024390244
+	Digital - 0.3902439024390244
+	World - 0.7804878048780488
+	Domination - 0.7804878048780488
+	Bicarbonate - 0.3902439024390244
+	Du - 0.3902439024390244
+	Dvd - 0.3902439024390244
+	Soude: - 0.3902439024390244
+	#t1d - 0.3902439024390244
+	Gardening - 0.7804878048780488
+	Les - 0.8292682926829268
+	Set: - 0.3902439024390244
+	#type1diabetes - 0.6829268292682927
+	#diabetes - 0.7804878048780488
+
+
+Cluster number: 79
+	gorilla - 0.3333333333333333
+	https://t.co/Jul9kz7KeZ - 0.3333333333333333
+	https://t.co/fRFDz8UK91 - 0.3333333333333333
+	#sedonaaz - 0.3333333333333333
+	#Snowing - 0.3333333333333333
+	Flagstaff, - 0.3333333333333333
+	https://t.co/HD8cARiYLz - 0.3333333333333333
+	zoe🙃 - 0.3333333333333333
+	Phi - 0.3333333333333333
+	Gamma - 0.3333333333333333
+	#arizona - 0.3333333333333333
+	#SpringSnow - 0.3333333333333333
+	Delta - 0.3333333333333333
+	#Stranded... - 0.3333333333333333
+	antigravitybatteries - 0.3333333333333333
+	#Arizona - 0.3333333333333333
+	#crossingstatelines… - 0.3333333333333333
+	Arizona - 0.3333333333333333
+
+
+Cluster number: 30
+
+
+Cluster number: 50
+
+
+Cluster number: 127
+
+
+Cluster number: 36
+
+
+Cluster number: 92
+
+
+Cluster number: 64
+	La - 0.3684210526315789
+
+
+Cluster number: 110
+	CA - 0.29194630872483224
+	I'm - 0.28523489932885904
+
+
+Cluster number: 51
+	San - 1.065217391304348
+	Francisco - 0.30434782608695654
+	Francisco, - 0.2608695652173913
+	California - 0.3695652173913043
+
+
+Cluster number: 149
+
+
+Cluster number: 57
+	Los - 0.3870967741935484
+
+
+Cluster number: 133
+	I'm - 0.41767068273092367
+
+
+Cluster number: 75
+	#sale… - 0.38461538461538464
+	#blm - 0.46153846153846156
+	#tshirt - 0.38461538461538464
+	#hellaklassy - 0.46153846153846156
+	#ph@ness - 0.46153846153846156
+	#customization - 0.46153846153846156
+	#BFC - 0.46153846153846156
+	#Murklenburgcounty - 0.46153846153846156
+
+
+Cluster number: 106
+	A$AP - 0.260989010989011
+
+
+Cluster number: 45
+
+
+Cluster number: 132
+	 - 0.5
+	#sacramento - 0.5
+	https://t.co/YrXQoqgaye - 0.5
+	https://t.co/nTqdwy7wlQ - 0.5
+	#kcra - 0.5
+	#baseball - 0.5
+	#rivercats - 1.0
+
+
+Cluster number: 83
+
+
+Cluster number: 72
+
+
+Cluster number: 70
+	CA? - 0.25757575757575757
+	opening: - 0.6363636363636364
+	#CareerArc - 0.6666666666666666
+	#Jobs - 0.696969696969697
+	#Job - 0.6515151515151515
+	View - 0.6363636363636364
+
+
+Cluster number: 9
+	Bernie - 0.2727272727272727
+
+
+Cluster number: 49
+	#carlsbad - 1.0
+	#sanmarcos - 1.0
+	https://t.co/QQCwCEeD62 - 1.0
+	#realtor - 1.0
+	#sell - 1.0
+	https://t.co/Dr0941DKr6 - 1.0
+
+
+Cluster number: 108
+	#Free - 0.5
+	USA - 0.5
+	#Mineshaft - 0.5
+	Cliffs - 0.5
+	E - 0.5
+	Broadway - 0.5
+	#LiquidInkRecords - 0.5
+	tubbing - 0.5
+	Sunset - 0.5
+	#celebrationweekend - 0.5
+	#Sha - 0.5
+	https://t.co/OGRVf15HW2 - 0.5
+	https://t.co/Iz0WEaCu58 - 0.5
+	#LongBeach - 0.5
+	admission… - 0.5
+	Midnight - 0.5
+	SD. - 0.5
+	CA - 0.5
+	#escrow - 0.5
+
+
+Cluster number: 78
+
+
+Cluster number: 144
+	#orlpol - 0.4649006622516556
+
+
+Cluster number: 109
+
+
+Cluster number: 10
+
+
+Cluster number: 148
+	CA) - 0.34615384615384615
+
+
+Cluster number: 84
+
+
+Cluster number: 122
+	#Hiring - 0.6162510056315366
+	fit - 0.3169750603378922
+	you: - 0.2574416733708769
+	anyone - 0.5695897023330652
+	#job? - 0.5309734513274337
+	#job - 0.34352373290426386
+
+
+Cluster number: 115
+	I'm - 0.30360205831903947
+
+
+Cluster number: 61
+
+
+Cluster number: 56
+	fit - 0.5
+	you: - 0.34375
+	#job - 0.46875
+
+
+Cluster number: 15
+
+
+Cluster number: 76
+
+
+Cluster number: 47
+
+
+Cluster number: 29
+	#noway - 1.0
+	😵😖👎🔫❌⁉️#disgustingpeople - 1.0
+	#amc30… - 1.0
+	seriously? - 1.0
+	https://t.co/xhROchiz0P - 1.0
+	#peoplearegross - 1.0
+
+
+Cluster number: 43
+	Amaginzness - 1.0
+	IHOP - 1.0
+	https://t.co/nR5NNKfKjD - 1.0
+	#sisterdatenight - 1.0
+
+
+Cluster number: 97
+
+
+Cluster number: 95
+
+
+Cluster number: 116
+
+
+Cluster number: 48
+	Shadows - 1.0
+	#daywithbae - 1.0
+	https://t.co/OMtfP5DqL1 - 1.0
+	Couple - 1.0
+	#cincinnati - 1.0
+
+
+Cluster number: 128
+
+
+Cluster number: 117
+
+
+Cluster number: 73
+	Kingdom - 0.25
+	Disney's - 0.25
+
+
+Cluster number: 32
+	We're - 0.3118942731277533
+	#hiring! - 0.3162995594713656
+	#Jobs - 0.36475770925110135
+	#job - 0.35770925110132157
+	#Job - 0.4713656387665198
+
+
+Cluster number: 27
+	Design - 0.6538461538461539
+	#t1d - 0.6153846153846154
+	Lifestyle - 1.2307692307692308
+	Design: - 0.6153846153846154
+	#type1diabetes - 0.6153846153846154
+	#diabetes - 0.6153846153846154
+
+
+Cluster number: 0
+
+
+Cluster number: 42
+	Los - 1.0277777777777777
+	Angeles, - 0.9722222222222222
+	CA) - 0.5833333333333334
+	CA - 0.25
+
+
+Cluster number: 102
+
+
+Cluster number: 124
+
+
+Cluster number: 141
+	Coachella - 0.4105263157894737
+
+
+Cluster number: 143
+
+
+Cluster number: 7
+	California - 0.82
+
+
+Cluster number: 8
+
+
+Cluster number: 44
+	I) - 0.3333333333333333
+	https://t.co/QiS9w5aFEC - 0.3333333333333333
+	Front - 0.3333333333333333
+	Lucile - 0.3333333333333333
+	#Healthcare - 0.3333333333333333
+	https://t.co/4pYXO50Oqj - 0.3333333333333333
+	County - 0.3333333333333333
+	Courtyard - 0.3333333333333333
+	#hoteljobs - 0.3333333333333333
+	#Pinnacle - 0.3333333333333333
+	Register, - 0.3333333333333333
+	Children... - 0.3333333333333333
+	Resident - 0.3333333333333333
+	Desk - 0.3333333333333333
+	GA - 0.3333333333333333
+	CA: - 0.3333333333333333
+	CA - 0.3333333333333333
+	#PaloAlto, - 0.3333333333333333
+	#SolanaBeach, - 0.3333333333333333
+	Supervisor - 0.3333333333333333
+	Packard - 0.3333333333333333
+	Bulloch - 0.3333333333333333
+	https://t.co/mLJ7lEj5oI - 0.3333333333333333
+	Marriott - 0.3333333333333333
+	I'm - 0.3333333333333333
+	Stanford - 0.3333333333333333
+	Pharmacy - 0.3333333333333333
+	General - 0.3333333333333333
+	#BusinessMgmt - 0.3333333333333333
+
+
+Cluster number: 88
+
+
+Cluster number: 68
+	work - 0.4943820224719101
+
+
+Cluster number: 129
+	Moreno - 0.25
+	TX) - 0.375
+	Dallas, - 0.25
+
+
+Cluster number: 147
+	CA - 0.3570759137769447
+	I'm - 0.5370196813495782
+
