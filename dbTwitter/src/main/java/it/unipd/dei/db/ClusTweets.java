@@ -28,7 +28,7 @@ public class ClusTweets {
 		Dataset<Row> jdbcDF = spark.read()
 				.format("jdbc")
 				.option("url", "jdbc:postgresql://localhost/")
-				.option("dbtable", "tweet_localusa2")
+				.option("dbtable", "tweets_localusa")
 				.option("user", "postgres")
 				.option("password", "pass")
 				.load();
@@ -63,11 +63,11 @@ public class ClusTweets {
 		//tweetDb.show();
 		try{
 	
-			/*Dataset<TwitterClustered> tweetClustered = KCenterMapReduce.cluster(tweetDbPartial, spark);
+			Dataset<TwitterClustered> tweetClustered = KCenterMapReduce.cluster(tweetDbPartial, spark);
 			tweetClustered.show();
 			
 			
-			DbFunctions.openConn();*/
+			DbFunctions.openConn();
 			// insert the data into the output table
 			/*
 			 * 
@@ -94,20 +94,20 @@ public class ClusTweets {
 				    url varchar(200),
 				    primary key (tweet_ID) );
 			 */
-			/*tweetClustered.foreach( (tweet) -> {
+			tweetClustered.foreach( (tweet) -> {
 					DbFunctions.insertTweet(tweet);
 				}
 			);
 			
 			DbFunctions.close();
-			*/
+			
 			
 			
 			// Read the tweets and their cluster from the SQL clusters table
 			jdbcDB = spark.read()
 					.format("jdbc")
 					.option("url", "jdbc:postgresql://localhost/")
-					.option("dbtable", "clusters")
+					.option("dbtable", "clusters_out")
 					.option("user", "postgres")
 					.option("password", "pass")
 					.load();

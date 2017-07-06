@@ -41,11 +41,11 @@ public class KCenterMapReduce
                //***************************************Preprocessing_Phase***************************************
 		
         //Number of desired clusters 
-		int k = 50;
+		int k = 150;
         //The number of centers choosen for each bucket is equal to k_coeff*k = 2*k 
 		final int k_coeff = 2;
 		//vector space dimension
-		final int dim = 50;
+		final int dim = 100;
 	
 		System.out.println("Starting clustering routine"); 
 		//Spark setup

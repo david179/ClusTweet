@@ -75,7 +75,7 @@ public class DbFunctions {
 	   public static void insertTweet(TwitterClustered tweet)
 	   {
 		    	
-		    String prepared_query = "INSERT INTO clusters VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		    String prepared_query = "INSERT INTO clusters_out VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 		   
 		   try{ 
 			   	PreparedStatement newPStm = newCon.prepareStatement(prepared_query);

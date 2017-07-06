@@ -8,14 +8,11 @@ CREATE EXTENSION file_fdw;
 CREATE SERVER server_file_fdw 
 FOREIGN DATA WRAPPER file_fdw; 
 
-CREATE USER MAPPING FOR 
-SERVER server_file_fdw; 
-
 
 --CREATE THE FOREIGN TABLE 
-DROP FOREIGN TABLE IF EXISTS tweet_localusa2; 
+DROP FOREIGN TABLE IF EXISTS tweet_usa; 
 
-CREATE FOREIGN TABLE tweet_localusa2(
+CREATE FOREIGN TABLE tweet_usa(
 
     tweet_ID varchar(150) ,
     datetweet varchar(50),  
@@ -41,12 +38,12 @@ OPTIONS (format 'csv', header 'true' , filename '/tmp/lista_tweets_USA.csv' , de
 
 
 --Creation of the local table, in which we save all the data contained inside the foreign table 
-CREATE TABLE tweets_localusa3
-AS SELECT * FROM tweet_localusa2 ; 
+CREATE TABLE tweets_localusa
+AS SELECT * FROM tweet_usa ; 
 
 --Remove the rows of the local table with followers, following or listed equal to NULL 
 DELETE 
-FROM tweets_localusa3 AS T 
+FROM tweets_localusa AS T 
 WHERE T.followers IS NULL OR T.following IS NULL OR T.listed IS NULL; 
 
 
