@@ -5,15 +5,22 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import it.unipd.dei.db.TwitterClustered;
 
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
+
+import it.unipd.dei.db.TwitterClustered;
+import edu.stanford.nlp.ling.TaggedWord;
+import edu.stanford.nlp.ling.Word;
+import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 public class DbFunctions {
 
-	   private static final String DRIVER = "org.postgresql.Driver";
+	   public static final String DRIVER = "org.postgresql.Driver";
 	   private static final String DATABASE = "jdbc:postgresql://localhost/"; 
 	   private static final String USER = "postgres"; 
-	   private static final String PASSWORD = "pass"; 
+	   private static final String PASSWORD = "43286"; 
  
 	   private static Connection newCon = null; 
 	   private static Statement newStm = null; 
@@ -74,11 +81,10 @@ public class DbFunctions {
 	   
 	   public static void insertTweet(TwitterClustered tweet)
 	   {
-		    	
-		    String prepared_query = "INSERT INTO clusters_out VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-		   
-		   try{ 
-			   	PreparedStatement newPStm = newCon.prepareStatement(prepared_query);
+		   try{
+		    	String prepared_query = "INSERT INTO clusters VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		    
+		    	PreparedStatement newPStm = newCon.prepareStatement(prepared_query);
 			   	newPStm.setString(1, tweet.getTweet_ID());
 			   	newPStm.setInt(2, tweet.getCluster());
 			   	newPStm.setString(3, tweet.getDateTweet());
@@ -156,5 +162,25 @@ public class DbFunctions {
 		 		}
 	   }
 	   
+	   public static Dataset<Row> connectionDb(SparkSession spark, String table){
+		   //Registration of the driver that must be used 
+		    try{
+		    	Class.forName(DRIVER); 
+		    	System.out.println("Driver " + DRIVER + " has been correctly registered."); 
+		    }catch(ClassNotFoundException e) {
+		    	System.out.println("Driver " + DRIVER + " not found." ); 
+		        System.out.println("Error: " + e.getMessage()); 
+		    	System.exit(-1); 
+		    }
+		    
+			Dataset<Row> jdbcDF = spark.read()
+					.format("jdbc")
+					.option("url", DATABASE)
+					.option("dbtable", table)
+					.option("user", USER)
+					.option("password", PASSWORD)
+					.load();
+			return jdbcDF;
+		}
 
 	}//[c]end class 

@@ -174,17 +174,15 @@ public class KCenterMapReduce
 		     * because the last one is easier to manage
 		     */ 
 		    JavaPairRDD<Integer, ArrayList<Tuple2<Twitter, Vector>>> pagesGroupedByKeyArrayList = pagesGroupedByKey
-                         .mapToPair
-                        ( 
-                            (tuple) ->
-                            { 
+                         .mapToPair((tuple) ->
+                { 
 	            	 ArrayList<Tuple2<Twitter, Vector>> tempArray = new ArrayList<Tuple2<Twitter, Vector>>(); 
 	            	 Iterator<Tuple2<Twitter, Vector>> newIterator = tuple._2().iterator(); 
 	            
 	            	 while(newIterator.hasNext()) 
-	            	   tempArray.add(newIterator.next()); 
+	            		 tempArray.add(newIterator.next()); 
 	            
-	            	  return new Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>>(tuple._1() , tempArray); 
+	            	 return new Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>>(tuple._1() , tempArray); 
 	          	}
 		    );
 		
@@ -306,7 +304,7 @@ public class KCenterMapReduce
 		    
 		    
 		    //*************************************Diagnostic strings************************************
-		    /*System.out.println("");
+		    System.out.println("");
 		    for(int f=0; f<k; f++)
 		    {
 		        List<Iterable<Tuple2<Twitter, Vector>>> alist = groupedFinalClusters.lookup(Integer.valueOf(f));
@@ -329,7 +327,7 @@ public class KCenterMapReduce
 	
 		    System.out.println("Objective function value: "); 
 		    System.out.println("[" + f_obj + "]");
-		    System.out.println();*/
+		    System.out.println();
 		    
 		    return tweetClustered;
 		}

@@ -11,6 +11,7 @@ import org.apache.spark.mllib.feature.Word2VecModel;
 import org.apache.spark.mllib.linalg.BLAS;
 import org.apache.spark.mllib.linalg.Vector;
 import org.apache.spark.mllib.linalg.Vectors;
+import org.apache.spark.util.DoubleAccumulator;
 
 import it.unipd.dei.db.Utils.Distance;
 import it.unipd.dei.db.Twitter;
@@ -87,30 +88,45 @@ public class Clustering_functions {
 	   //Number of clusters for each subset Pj 
 	   final int K = k_param;
 	   
+	   //temporary structure to memorize distances
+	   double[] minPerPoint = new double[numberOfTuples];
+	   for(int i = 0; i<numberOfTuples; i++){
+		   minPerPoint[i] = 2;
+	   }
+	   
 	   //Select a random element as the first center and remove it from the subsetElements
 	   int index = randVal(0, numberOfTuples-1); 
 	   Tuple2<Twitter,Vector> center = subsetElements.get(index);  
 	   centers.add(center); 
 	   subsetElements.remove(index);
-	      
+	   
 	   while(centers.size() != K) 
 	   {
 	       ArrayList<Tuple2<Tuple2<Twitter, Vector>, Double>> finalDistances = new ArrayList<Tuple2<Tuple2<Twitter, Vector>, Double>>(); 
-	       
 	       //for every point the distance from the set of centers
-	       subsetElements.forEach((point) ->{
-	    	   double minDistance = Distance.cosineDistance(point._2(), centers.get(0)._2());
-
-	    	   for(int r=1; r<centers.size(); r++)
-	    	   {
-	    		   double dist = Distance.cosineDistance(point._2(), centers.get(r)._2()); 
-	    		   if(dist < minDistance) 
-	    		   {
-	    			   minDistance = dist; 
-	    		   }
-	    	   } 
-	    	   finalDistances.add(new Tuple2<Tuple2<Twitter, Vector>, Double>(point, minDistance)); 
-	       }); 
+//	       subsetElements.forEach((point) ->{
+//	    	   double minDistance = Distance.cosineDistance(point._2(), centers.get(0)._2());
+//
+//	    	   for(int r=1; r<centers.size(); r++)
+//	    	   {
+//	    		   double dist = Distance.cosineDistance(point._2(), centers.get(r)._2()); 
+//	    		   if(dist < minDistance) 
+//	    		   {
+//	    			   minDistance = dist; 
+//	    		   }
+//	    	   } 
+//	    	   finalDistances.add(new Tuple2<Tuple2<Twitter, Vector>, Double>(point, minDistance)); 
+//	       }); 
+	       
+	       int i = 0;
+	       for(Tuple2<Twitter, Vector> point: subsetElements){
+	    	   double tmp = Distance.cosineDistance(point._2(), centers.get(centers.size()-1)._2());
+	    	   if(tmp < minPerPoint[i]){
+	    		   minPerPoint[i] = tmp;
+	    	   }
+  	    	   finalDistances.add(new Tuple2<Tuple2<Twitter, Vector>, Double>(point, minPerPoint[i]));
+  	    	   i++;
+	       }
 
 	       //Select the maximum distance from finalDistances 
 	       Tuple2<Tuple2<Twitter, Vector>, Double> newTuple = finalDistances.get(0); 
