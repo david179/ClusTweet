@@ -1,6 +1,7 @@
 package it.unipd.dei.db;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import org.apache.spark.api.java.JavaPairRDD;
@@ -78,72 +79,67 @@ public class Clustering_functions {
 		  																			 int k_param) {
 	   
 	   Integer subsetID = inputSubset._1(); 
-	   ArrayList<Tuple2<Twitter, Vector>> subsetElements = inputSubset._2(); 
-
+	   Tuple2<Twitter, Vector>[] subsetElements = (Tuple2<Twitter, Vector>[]) new Tuple2[inputSubset._2().size()];
+	   
+	   for(int i = 0; i < inputSubset._2().size(); i++)
+		   subsetElements[i] = inputSubset._2().get(i); 
+	   
 	   ArrayList<Tuple2<Twitter,Vector>> centers = new ArrayList<Tuple2<Twitter,Vector>>();
 	   
 	   //Number of points of the subset Pj
-       int numberOfTuples = subsetElements.size(); 
+       int numberOfTuples = subsetElements.length; 
 	    
 	   //Number of clusters for each subset Pj 
 	   final int K = k_param;
 	   
 	   //temporary structure to memorize distances
-	   double[] minPerPoint = new double[numberOfTuples];
+	   Double[] minPerPoint = new Double[numberOfTuples];
 	   for(int i = 0; i<numberOfTuples; i++){
-		   minPerPoint[i] = 2;
+		   minPerPoint[i] = (Double) 2.0;
 	   }
 	   
 	   //Select a random element as the first center and remove it from the subsetElements
 	   int index = randVal(0, numberOfTuples-1); 
-	   Tuple2<Twitter,Vector> center = subsetElements.get(index);  
+	   Tuple2<Twitter,Vector> center = subsetElements[index];  
 	   centers.add(center); 
-	   subsetElements.remove(index);
+	   subsetElements[index] = null;
+	   minPerPoint[index] = null;
 	   
-	   while(centers.size() != K) 
+	   while(centers.size() < K) 
 	   {
-	       ArrayList<Tuple2<Tuple2<Twitter, Vector>, Double>> finalDistances = new ArrayList<Tuple2<Tuple2<Twitter, Vector>, Double>>(); 
+	       ArrayList<Tuple2<Integer, Double>> finalDistances = new ArrayList<Tuple2<Integer, Double>>(); 
 	       //for every point the distance from the set of centers
-//	       subsetElements.forEach((point) ->{
-//	    	   double minDistance = Distance.cosineDistance(point._2(), centers.get(0)._2());
-//
-//	    	   for(int r=1; r<centers.size(); r++)
-//	    	   {
-//	    		   double dist = Distance.cosineDistance(point._2(), centers.get(r)._2()); 
-//	    		   if(dist < minDistance) 
-//	    		   {
-//	    			   minDistance = dist; 
-//	    		   }
-//	    	   } 
-//	    	   finalDistances.add(new Tuple2<Tuple2<Twitter, Vector>, Double>(point, minDistance)); 
-//	       }); 
 	       
-	       int i = 0;
-	       for(Tuple2<Twitter, Vector> point: subsetElements){
-	    	   double tmp = Distance.cosineDistance(point._2(), centers.get(centers.size()-1)._2());
-	    	   if(tmp < minPerPoint[i]){
+	       Tuple2<Twitter, Vector> point = null;
+	       for(int i = 0; i < numberOfTuples; i++){
+	    	   if(subsetElements[i] == null)
+	    		   continue;
+	    	   point = subsetElements[i];
+	    	   Double tmp = Distance.cosineDistance(point._2(), centers.get(centers.size()-1)._2());
+	    	   if(tmp.compareTo(minPerPoint[i]) < 0){
 	    		   minPerPoint[i] = tmp;
 	    	   }
-  	    	   finalDistances.add(new Tuple2<Tuple2<Twitter, Vector>, Double>(point, minPerPoint[i]));
-  	    	   i++;
+  	    	   finalDistances.add(new Tuple2<Integer, Double>(i, minPerPoint[i]));
 	       }
 
 	       //Select the maximum distance from finalDistances 
-	       Tuple2<Tuple2<Twitter, Vector>, Double> newTuple = finalDistances.get(0); 
-	       Tuple2<Tuple2<Twitter, Vector>, Double> max = newTuple; 
-
+	       Tuple2<Integer, Double> max = finalDistances.get(0); 
+	       
 	       for(int r=1; r<finalDistances.size(); r++)
 	       {
-	    	   if(finalDistances.get(r)._2() > max._2())
+	    	   if(finalDistances.get(r)._2().compareTo(max._2()) > 0)
 	    	   {
-	    		   max = finalDistances.get(r); 
+	    		   max = finalDistances.get(r);
 	    	   }
 	       }
-
-	       centers.add(max._1()); 
-	       subsetElements.remove(max._1()); 
+	       System.out.println("Centro selezionato "+ max._1);
+	       centers.add(subsetElements[max._1]); 
+	       subsetElements[max._1]=null; 
+	       minPerPoint[max._1]=null;
 	   } 
 
+       System.out.println("number of elements "+ numberOfTuples);
+       System.out.println("centres required "+ K);
 	   return new Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>>(subsetID, centers); 
   }
   
