@@ -1,6 +1,6 @@
 ### SQL
 Check java version. 
-If it is previous than java8 change postresql driver for java (jdbc) inside /build/libs/
+If it is previous than java8 change postresql driver for java (jdbc) inside /libs/
 
 The sql queries for creating the database and importing the cav files are inside /script/sql.
 TODO: changing the path for the csv file which is inside the same folder.
@@ -8,7 +8,7 @@ TODO: changing the path for the csv file which is inside the same folder.
 ### Compiling and executing with eclipse
 1) Import the project as gradle project (it will handle all the external packages)
 2) Modify the database information (database, username and password) inside the java class DbFunctions
-3) Link the external library jdbs in /build/libs to the execution of the project
+3) Link the external library jdbs in /libs to the execution of the project
 4) Executing
 
 On default the program uses 8 core.
