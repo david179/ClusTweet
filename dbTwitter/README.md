@@ -14,7 +14,7 @@ TODO: changing the path for the csv file which is inside the same folder.
 On default the program uses 8 core.
 To modify this setting change the parametre .master on line 44 of file ClusTweets.java.
 
-In order to execute again the code, please remove directory freq_nouns in the main directory and drop the entropy table in postgre database.
+In order to execute again the code, please remove directory freq_nouns in the main directory and drop the "clusters" table in postgre database.
 
 The output are three text files which will be written in the main directory.
 
