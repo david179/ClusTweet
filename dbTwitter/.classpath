@@ -7,10 +7,10 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
-	<classpathentry kind="lib" path="/home/davide/Documents/postgresql-42.1.1.jar"/>
 	<classpathentry kind="lib" path="/home/davide/Documents/currentsqlspark/dbTwitter/stanford-postagger.jar"/>
 	<classpathentry kind="lib" path="/home/davide/Documents/currentsqlspark/dbTwitter/stanford-postagger-3.8.0.jar"/>
 	<classpathentry kind="lib" path="/home/davide/Documents/currentsqlspark/dbTwitter/stanford-postagger-3.8.0-javadoc.jar"/>
 	<classpathentry kind="lib" path="/home/davide/Documents/currentsqlspark/dbTwitter/stanford-postagger-3.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="/home/davide/Documents/currentsqlspark/src/postgresql-42.1.1.jre6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

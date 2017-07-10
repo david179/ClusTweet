@@ -20,7 +20,7 @@ public class DbFunctions {
 	   public static final String DRIVER = "org.postgresql.Driver";
 	   private static final String DATABASE = "jdbc:postgresql://localhost/"; 
 	   private static final String USER = "postgres"; 
-	   private static final String PASSWORD = "43286"; 
+	   private static final String PASSWORD = "pass"; 
  
 	   private static Connection newCon = null; 
 	   private static Statement newStm = null; 

@@ -1,7 +1,6 @@
 package it.unipd.dei.db;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
 import org.apache.spark.api.java.JavaPairRDD;
@@ -12,26 +11,34 @@ import org.apache.spark.mllib.feature.Word2VecModel;
 import org.apache.spark.mllib.linalg.BLAS;
 import org.apache.spark.mllib.linalg.Vector;
 import org.apache.spark.mllib.linalg.Vectors;
-import org.apache.spark.util.DoubleAccumulator;
 
 import it.unipd.dei.db.Utils.Distance;
 import it.unipd.dei.db.Twitter;
 
 import scala.Tuple2;
 
+/**
+ * Class of methods used to calculate the k-center clustering
+ * 
+ * @author Tommaso Agnolazza
+ * @author Alessandro Ciresola
+ * @author Davide Lucchi
+ * 
+ **/
 public class Clustering_functions {
 	
-  /* 
-   * Distribute the model in broadcast to the workers and calculate for each document the corresponding vector
+/**
+   * Static method to map each tweet with its corresponding Word2Vec vector
    * 
-   * @version 0.1
    * 
-   * @param JavaSparkContext sc, Word2VecModel model,  
-   * @param	JavaPairRDD<Twitter, ArrayList<String>> documents, int vector space dimension
+   * @param sc Java Spark context
+   * @param model Word2Vec model
+   * @param	documents JavaPair of tweets to map
+   * @param dim space dimension
    * 
    * @returns JavaRDD<Tuple2<Twitter,Vector>>
   */
-  static JavaPairRDD<Twitter,Vector> documentToVector(JavaSparkContext sc, Word2VecModel model,JavaPairRDD<Twitter, ArrayList<String>> documents, int dim) {
+  public static JavaPairRDD<Twitter,Vector> documentToVector(JavaSparkContext sc, Word2VecModel model,JavaPairRDD<Twitter, ArrayList<String>> documents, int dim) {
 	  
 		Broadcast<Word2VecModel> bStopWords = sc.broadcast(model);
 		
@@ -67,102 +74,92 @@ public class Clustering_functions {
 		});
   }
 
-  /* 
-   * Compute the Farthest-First Traversal on the inputSubset = subset of elements for which we have to calculate k_param centers
+  /**
+   * Method to compute the Farthest-First Traversal on the inputSubset = subset of elements for which we have to calculate k_param centers
    * 
-   * @version 0.1
-   * 
-   * @param Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> inputSubset, int number of centers to find
-   * @returns Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> k_param centers of the inputSubset
+   *
+   * @param inputSubset subset of tweets
+   * @param k_param number of centers to find
+   * @returns k_param centers of the inputSubset
   */
-  static Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> farthestFirstTraversal(Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> inputSubset, 
+  public static Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> farthestFirstTraversal(Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> inputSubset, 
 		  																			 int k_param) {
 	   
 	   Integer subsetID = inputSubset._1(); 
-	   Tuple2<Twitter, Vector>[] subsetElements = (Tuple2<Twitter, Vector>[]) new Tuple2[inputSubset._2().size()];
-	   
-	   for(int i = 0; i < inputSubset._2().size(); i++)
-		   subsetElements[i] = inputSubset._2().get(i); 
-	   
+	   ArrayList<Tuple2<Twitter, Vector>> subsetElements = inputSubset._2(); 
+
 	   ArrayList<Tuple2<Twitter,Vector>> centers = new ArrayList<Tuple2<Twitter,Vector>>();
 	   
 	   //Number of points of the subset Pj
-       int numberOfTuples = subsetElements.length; 
+       int numberOfTuples = subsetElements.size(); 
 	    
 	   //Number of clusters for each subset Pj 
 	   final int K = k_param;
 	   
-	   //temporary structure to memorize distances
-	   Double[] minPerPoint = new Double[numberOfTuples];
-	   for(int i = 0; i<numberOfTuples; i++){
-		   minPerPoint[i] = (Double) 2.0;
-	   }
-	   
 	   //Select a random element as the first center and remove it from the subsetElements
 	   int index = randVal(0, numberOfTuples-1); 
-	   Tuple2<Twitter,Vector> center = subsetElements[index];  
+	   Tuple2<Twitter,Vector> center = subsetElements.get(index);  
 	   centers.add(center); 
-	   subsetElements[index] = null;
-	   minPerPoint[index] = null;
-	   
-	   while(centers.size() < K) 
+	   subsetElements.remove(index);
+	      
+	   while(centers.size() != K) 
 	   {
-	       ArrayList<Tuple2<Integer, Double>> finalDistances = new ArrayList<Tuple2<Integer, Double>>(); 
-	       //for every point the distance from the set of centers
+	       ArrayList<Tuple2<Tuple2<Twitter, Vector>, Double>> finalDistances = new ArrayList<Tuple2<Tuple2<Twitter, Vector>, Double>>(); 
 	       
-	       Tuple2<Twitter, Vector> point = null;
-	       for(int i = 0; i < numberOfTuples; i++){
-	    	   if(subsetElements[i] == null)
-	    		   continue;
-	    	   point = subsetElements[i];
-	    	   Double tmp = Distance.cosineDistance(point._2(), centers.get(centers.size()-1)._2());
-	    	   if(tmp.compareTo(minPerPoint[i]) < 0){
-	    		   minPerPoint[i] = tmp;
-	    	   }
-  	    	   finalDistances.add(new Tuple2<Integer, Double>(i, minPerPoint[i]));
-	       }
+	       //for every point the distance from the set of centers
+	       subsetElements.forEach((point) ->{
+	    	   double minDistance = Distance.cosineDistance(point._2(), centers.get(0)._2());
+
+	    	   for(int r=1; r<centers.size(); r++)
+	    	   {
+	    		   double dist = Distance.cosineDistance(point._2(), centers.get(r)._2()); 
+	    		   if(dist < minDistance) 
+	    		   {
+	    			   minDistance = dist; 
+	    		   }
+	    	   } 
+	    	   finalDistances.add(new Tuple2<Tuple2<Twitter, Vector>, Double>(point, minDistance)); 
+	       }); 
 
 	       //Select the maximum distance from finalDistances 
-	       Tuple2<Integer, Double> max = finalDistances.get(0); 
-	       
+	       Tuple2<Tuple2<Twitter, Vector>, Double> newTuple = finalDistances.get(0); 
+	       Tuple2<Tuple2<Twitter, Vector>, Double> max = newTuple; 
+
 	       for(int r=1; r<finalDistances.size(); r++)
 	       {
-	    	   if(finalDistances.get(r)._2().compareTo(max._2()) > 0)
+	    	   if(finalDistances.get(r)._2() > max._2())
 	    	   {
-	    		   max = finalDistances.get(r);
+	    		   max = finalDistances.get(r); 
 	    	   }
 	       }
-	       System.out.println("Centro selezionato "+ max._1);
-	       centers.add(subsetElements[max._1]); 
-	       subsetElements[max._1]=null; 
-	       minPerPoint[max._1]=null;
+
+	       centers.add(max._1()); 
+	       subsetElements.remove(max._1()); 
 	   } 
 
-       System.out.println("number of elements "+ numberOfTuples);
-       System.out.println("centres required "+ K);
 	   return new Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>>(subsetID, centers); 
   }
-  
-  /* 
-   * @version 0.1
+  /** 
+   * Method to generate a random value between minVal and maxVal
    * 
-   * @param int minVal, int maxVal
-   * @returns int between minVal and maxVal 
+   * @param minVal lower bound
+   * @param maxVal upper bound
+   * @returns integer between minVal and maxVal 
   */
-  static int randVal(int minVal, int maxVal)
+  public static int randVal(int minVal, int maxVal)
   { 
       int diff = maxVal-minVal;
       return (int)(Math.random()*((double)diff+1.0d))+minVal;
   }
 
-  /*
-   *  Assign documents to their closest center
-   *  @version 0.1
+  /**
+   *  Method to assign documents to their closest center
    *  
-   *  @param Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> pJ, ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>> s
-   *  @returns ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>>: <cluster number, document>
+   *  @param pJ The list of tweets with their subset number to partition
+   *  @param s The ArrayList of centers
+   *  @returns An ArrayList of tweets with their corresponding cluster index
    */
-  static ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>> partition(Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> pJ,
+  public static ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>> partition(Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>> pJ,
 		  ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>> s) 
   {
 
@@ -192,15 +189,15 @@ public class Clustering_functions {
 	 return clusterIndexPlusElement; 
   }
  
-  /*
-   * Function to calculate the objective function
+  /**
+   * Method to calculate the objective function
    * 
-   * @version 0.0
    * 
-   * @param JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> cluster, ArrayList<Tuple2<Integer, Tuple2<Twitter, Vector>>> centers
-   * @returns Double obj_funct
+   * @param cluster The list of tweets with teir cluster index
+   * @param centers The ArrayList of centers
+   * @returns the value of the objective function
    */
-  static Double objectiveFunction (JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> cluster,
+  public static Double objectiveFunction (JavaPairRDD<Integer, Iterable<Tuple2<Twitter, Vector>>> cluster,
 		  ArrayList< Tuple2 <Integer, Tuple2<Twitter, Vector>>> centers,
 		  JavaSparkContext sc){
 	  

@@ -31,9 +31,24 @@ import it.unipd.dei.db.Clustering_functions;
 
 import scala.Tuple2;
 
-
+/**
+ * This class calculates the K-Center Clustering
+ * 
+ * @author Tommaso Agnolazza
+ * @author Alessandro Ciresola
+ * @author Davide Lucchi
+ */
 public class KCenterMapReduce
 {
+	
+	/**
+	 * Static method to calculate the K-Center Clustering
+	 * @param args The dataset with the tweets to cluster
+	 * @param spark The spark context object
+	 * 
+	 * @throws IOException
+	 * @throws KcoeffCustomException
+	 **/
 	public static Dataset<TwitterClustered> cluster(Dataset<Twitter> args, SparkSession spark) throws IOException, KcoeffCustomException
 	{ 
 		//System.setProperty("hadoop.home.dir", "c:\\winutil\\");
@@ -174,15 +189,17 @@ public class KCenterMapReduce
 		     * because the last one is easier to manage
 		     */ 
 		    JavaPairRDD<Integer, ArrayList<Tuple2<Twitter, Vector>>> pagesGroupedByKeyArrayList = pagesGroupedByKey
-                         .mapToPair((tuple) ->
-                { 
+                         .mapToPair
+                        ( 
+                            (tuple) ->
+                            { 
 	            	 ArrayList<Tuple2<Twitter, Vector>> tempArray = new ArrayList<Tuple2<Twitter, Vector>>(); 
 	            	 Iterator<Tuple2<Twitter, Vector>> newIterator = tuple._2().iterator(); 
 	            
 	            	 while(newIterator.hasNext()) 
-	            		 tempArray.add(newIterator.next()); 
+	            	   tempArray.add(newIterator.next()); 
 	            
-	            	 return new Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>>(tuple._1() , tempArray); 
+	            	  return new Tuple2<Integer, ArrayList<Tuple2<Twitter, Vector>>>(tuple._1() , tempArray); 
 	          	}
 		    );
 		
@@ -304,7 +321,7 @@ public class KCenterMapReduce
 		    
 		    
 		    //*************************************Diagnostic strings************************************
-		    System.out.println("");
+		    /*System.out.println("");
 		    for(int f=0; f<k; f++)
 		    {
 		        List<Iterable<Tuple2<Twitter, Vector>>> alist = groupedFinalClusters.lookup(Integer.valueOf(f));
@@ -327,7 +344,7 @@ public class KCenterMapReduce
 	
 		    System.out.println("Objective function value: "); 
 		    System.out.println("[" + f_obj + "]");
-		    System.out.println();
+		    System.out.println();*/
 		    
 		    return tweetClustered;
 		}

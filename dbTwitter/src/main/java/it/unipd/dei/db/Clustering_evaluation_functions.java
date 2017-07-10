@@ -24,8 +24,22 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import it.unipd.dei.db.Utils.Lemmatizer;
 import scala.Tuple2;
 
+/**
+ * This class contains methods to evaluate the quality of the clustering
+ * 
+ * @author Tommaso Agnolazza
+ * @author Alessandro Ciresola
+ * @author Davide Lucchi
+ */
 public class Clustering_evaluation_functions {
 	
+	
+	/**
+	 * This method contains all the calls to the function to calculate the frequent nouns, the cluster entropy and the nouns entropy
+	 * 
+	 * @param tweets The list of tweets with their cluster number
+	 * @param spark The spark session object
+	 */
 	public static void start(JavaRDD<TwitterClustered> tweets, SparkSession spark){
 		try{	
 			// Map each tweet into a tuple where the Integer is the cluster number and the String is the tweet content
@@ -103,7 +117,6 @@ public class Clustering_evaluation_functions {
 			 * 		Nc = # of tags in cluster C
 			 */
 			JavaRDD<Tuple2<Integer,Double>> entropy_per_cluster = cluster_entropy(sc, clusters_tagged, freq_nouns);
-			entropy_per_cluster.saveAsTextFile("entropy_cluster.txt");
 			// save on disk to see the results
 			print = new PrintWriter(new File("Entropy_per_cluster.txt"));
 			Iterator<Tuple2<Integer,Double>> it = entropy_per_cluster.collect().iterator();
@@ -142,32 +155,19 @@ public class Clustering_evaluation_functions {
 		{	System.out.println("***Unexpected error!!");}
 	}
 	
+	
+	/**
+	 *  This method assigns to each word of a tweet a Part-Of-Speech tag
+	 *  
+	 *  @param clusters the list of clusters with their tweets
+	 *  @return  The list of clusters with their tweets tagged
+	 */
 	private static JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> tag_tweets(JavaPairRDD<Integer,Iterable<String>> clusters)
 	{
 		// for each cluster tag all the words in its tweet. In other words to each tweet word a tag is assigned
 		// indicating whether the word is a noun, adjective, verb, ...
 		JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> clusters_tagged = clusters.map((tuple) -> {
-	    	
-//	    	Iterator<String> it = tuple._2.iterator();
-	        
-	    	// break the tweet String into word and save each tweet as a List<Word>
-	    	// save all the tweets as a List of Lists
-//	    	Scanner s;
-//			List<List<Word>> sentences = new ArrayList();
-//			
-//
-//			while (it.hasNext())
-//			{
-//				s = new Scanner(it.next());
-//				s.useDelimiter(" ");
-//				List<Word> l = new ArrayList<Word>();
-//				
-//				while (s.hasNext())
-//				{
-//					l.add(new Word(s.next().toLowerCase()));
-//				}
-//				sentences.add(l);
-//			}
+
 			
 	    	List<List<Word>> sentences = Lemmatizer.lemmatize2(tuple._2);
 	    	
@@ -186,7 +186,12 @@ public class Clustering_evaluation_functions {
 		return clusters_tagged;
 	}
 	
-	
+	/**
+	 * This method filters the tags of each tweet and keeps only the tags referring to a noun
+	 * 
+	 * @param clusters_tagged The list of clusters with all their tweets tagged
+	 * @return The list of clusters with only noun tags
+	 */
 	private static JavaRDD<Tuple2<Integer,Tuple2<Map<TaggedWord,Integer>,Integer>>> filter_nouns(JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> clusters_tagged)
 	{
 		// For each cluster keep only the words tagged as nouns as the are supposed to carry most of the information in the tweet
@@ -231,6 +236,15 @@ public class Clustering_evaluation_functions {
 		return tags_per_cluster_and_total_count;
 	}
 	
+	/**
+	 * 
+	 * This method calculates the frequuent nouns inside each cluster
+	 * 
+	 * @param tags_per_cluster_and_total_count The list of tags in each cluster and the total number of occurences 
+	 * of that tag
+	 * @param threshold The minimum frequency of a tag in order to consider it frequent
+	 * @return The list of clusters with their most frequent tags
+	 */
 	private static JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> frequent_nouns(JavaRDD<Tuple2<Integer,Tuple2<Map<TaggedWord,Integer>,Integer>>> tags_per_cluster_and_total_count, double threshold)
 	{
 		// Find the most frequent nouns inside each cluster.
@@ -260,6 +274,12 @@ public class Clustering_evaluation_functions {
 		
 	}
 	
+	/**
+	 * This method saves for each cluster only the most frequent noun. Each of this nouns is returned as output
+	 * 
+	 * @param freq_clust The list of clusters with their most frequent tags
+	 * @return The list containing the single most frequent tag for each cluster
+	 */
 	private static ArrayList<Tuple2<TaggedWord,Double>> filtered_frequent_nouns(JavaRDD<Tuple2<Integer,Map<TaggedWord,Double>>> freq_clust)
 	{
 		// Only a subset of the most frequent nouns per cluster will apper in the final list of most frequent nouns
@@ -270,32 +290,19 @@ public class Clustering_evaluation_functions {
 			
 			ArrayList<Tuple2<TaggedWord,Double>> most_freq_nouns = new ArrayList();
 			TaggedWord one = null;
-			TaggedWord two = null;
 			for (TaggedWord w : freq_nouns.keySet())
 			{
 				if (one == null)
 				{
 					one = w;
 				}
-				/*else if (two == null)
-				{
-					two = w;
-				}*/
 				else if (freq_nouns.get(w) > freq_nouns.get(one))
 				{
 					one = w;
 				}
-				/*else if (freq_nouns.get(w) > freq_nouns.get(two))
-				{
-					two = w;
-				}*/
-				//most_freq_nouns.add(new Tuple2(w,freq_nouns.get(w)));
 			}
 			if (one != null)
 				most_freq_nouns.add(new Tuple2(one,freq_nouns.get(one)));
-			//if (two != null)
-				//most_freq_nouns.add(new Tuple2(two,freq_nouns.get(two)));
-			
 			return new Tuple2(0,most_freq_nouns);
 		});
 		
@@ -326,6 +333,14 @@ public class Clustering_evaluation_functions {
 	}
 	
 	
+	/**
+	 * This method calculates the entropy for each cluster
+	 * 
+	 * @param sc Java Spark Context
+	 * @param clusters_tagged The list of clusters with all of their tags
+	 * @param freq_nouns The list with the most frequent nouns, one for each cluster
+	 * @return A list of clusters with their corresponding entropy
+	 */
 	private static JavaRDD<Tuple2<Integer,Double>>  cluster_entropy(JavaSparkContext sc, JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> clusters_tagged,ArrayList<Tuple2<TaggedWord,Double>> freq_nouns)
 	{
 		// calculate cluster entropy
@@ -405,7 +420,13 @@ public class Clustering_evaluation_functions {
 	}
 	
 	
-	
+	/**
+	 *  This method calculates the entropy of each frequent noun
+	 * @param sc Java Spark Context
+	 * @param clusters_tagged The list of clusters with all of their tags
+	 * @param freq_nouns The list with the most frequent nouns, one for each cluster
+	 * @return The list of frequent nouns with their entropy
+	 */
 	private static Map<TaggedWord,Double> frequent_nouns_entropy(JavaSparkContext sc, JavaRDD<Tuple2<Integer,ArrayList<List<TaggedWord>>>> clusters_tagged,ArrayList<Tuple2<TaggedWord,Double>> freq_nouns)
 	{
 		// calculate noun entropy

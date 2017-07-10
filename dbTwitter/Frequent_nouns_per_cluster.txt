@@ -9,257 +9,381 @@ Cluster number: 34
 
 
 Cluster number: 101
-	#hiring! - 0.2676056338028169
-	#job - 0.6338028169014085
 
 
 Cluster number: 4
-	#photo - 0.27298850574712646
 
 
 Cluster number: 71
-	#photo - 0.344019728729963
+	Brewing - 0.25157232704402516
 
 
 Cluster number: 134
+	San - 0.32620320855614976
 
 
 Cluster number: 130
 
 
 Cluster number: 66
+	Angeles, - 0.3333333333333333
+	#vsco - 0.3333333333333333
+	caption - 0.3333333333333333
+	Angeles - 0.6666666666666666
+	California - 0.3333333333333333
+	https://t.co/XQtascHiuu - 0.3333333333333333
+	@ilannumhauser - 0.3333333333333333
+	Downtown - 0.3333333333333333
+	Los - 1.0
+	view - 0.3333333333333333
+	Here. - 0.3333333333333333
+	#vscoedit - 0.3333333333333333
+	Silverlake, - 0.3333333333333333
+	https://t.co/w1VsjHcPG4 - 0.3333333333333333
+	#vscofilm - 0.3333333333333333
+	https://t.co/9rhxzW6yA1 - 0.3333333333333333
 
 
 Cluster number: 80
-	fellowship - 0.2857142857142857
-	momentum - 0.2857142857142857
-	#momen16 - 0.2857142857142857
+	#Jobs - 0.32242990654205606
+	#Job - 0.4568655643421999
 
 
 Cluster number: 105
-	music - 0.41397849462365593
-	festival - 0.3709677419354839
-	coachella - 0.7526881720430108
 
 
 Cluster number: 125
 
 
 Cluster number: 138
-	� - 0.2604166666666667
-	#photo - 0.2604166666666667
+	Summit, - 0.5
+	Lees - 0.5
+	https://t.co/gTpv6hYot7 - 0.5
+	Missouri - 0.5
+	Today's - 0.5
+	🎈RADTIMES - 0.5
+	https://t.co/8YwD2YMwdL - 0.5
 
 
 Cluster number: 65
 
 
-Cluster number: 104
-	ca? - 0.2857142857142857
-	view - 0.9732142857142857
-	#careerarc - 0.48214285714285715
-	#jobs - 0.9464285714285714
-	opening: - 0.5267857142857143
-	#job - 0.7410714285714286
+Cluster number: 11
+	Wind - 0.4560791157649796
+	Temperature - 0.38219895287958117
+	Rain - 0.5648632926119838
+	mph - 0.5794066317626527
+	in, - 0.3961605584642234
+	Humidity - 0.40372309482257124
+	today - 0.4147760325770797
+	°F. - 0.38219895287958117
+	Barometer - 0.38219895287958117
 
 
 Cluster number: 14
-	photo - 0.7587268993839835
+	Philadelphia, - 0.5555555555555556
+	Pennsylvania - 0.5555555555555556
 
 
-Cluster number: 11
-	shop - 0.2830188679245283
+Cluster number: 104
 
 
 Cluster number: 24
+	Los - 0.25
+	California - 0.3
 
 
 Cluster number: 111
-	pressure: - 0.2949640287769784
-	mph - 0.5251798561151079
-	weather - 0.33093525179856115
-	wind: - 0.28776978417266186
 
 
 Cluster number: 35
+	New - 0.26881720430107525
 
 
 Cluster number: 37
 
 
 Cluster number: 146
-	world - 0.26666666666666666
-	disney - 0.2814814814814815
 
 
 Cluster number: 140
-	#jobs - 0.5782312925170068
-	health - 0.2857142857142857
-	#hiring - 0.272108843537415
-	#job - 0.6394557823129252
+
+
+Cluster number: 1
+	#Hiring - 0.679265091863517
+	anyone - 0.9228346456692913
+	#CareerArc - 0.899737532808399
+	#job? - 0.8645669291338582
 
 
 Cluster number: 74
-
-
-Cluster number: 63
+	Strip - 0.27941176470588236
+	Vegas - 0.7205882352941176
+	Vegas, - 0.27941176470588236
+	Las - 0.9852941176470589
 
 
 Cluster number: 90
-	station - 0.29545454545454547
+
+
+Cluster number: 89
 
 
 Cluster number: 17
-	#sanfrancisco - 0.25
-
-
-Cluster number: 20
-	anyone - 0.9818181818181818
-	#job? - 0.9232323232323232
-
-
-Cluster number: 12
-
-
-Cluster number: 38
+	Domination - 0.3620689655172414
+	#t1d - 0.3620689655172414
+	Tiny - 0.5431034482758621
+	Gardening - 0.3620689655172414
+	House - 0.3706896551724138
+	Les - 0.375
+	World - 0.3620689655172414
+	#type1diabetes - 0.4698275862068966
+	#diabetes - 0.5431034482758621
 
 
 Cluster number: 18
 
 
+Cluster number: 63
+	Los - 0.5061728395061729
+	Angeles, - 0.39197530864197533
+	California - 0.595679012345679
+
+
+Cluster number: 38
+
+
+Cluster number: 20
+	@frankiepaiges - 0.3333333333333333
+	Henna - 0.3333333333333333
+	BFF - 0.3333333333333333
+	#njhenna - 0.3333333333333333
+	https://t.co/OrccqLtvs6 - 0.3333333333333333
+	Shooting - 0.3333333333333333
+	https://t.co/sTMPIOyYff - 0.3333333333333333
+	skin - 0.3333333333333333
+	appointment - 0.3333333333333333
+	Wednesday. - 0.3333333333333333
+	#hennanj - 0.3333333333333333
+	design - 0.3333333333333333
+	today - 0.6666666666666666
+	repeat - 0.3333333333333333
+	Friday's - 0.3333333333333333
+	Window - 0.3333333333333333
+	product - 0.3333333333333333
+	https://t.co/pNbd096TTw - 0.3333333333333333
+	
+
+#Hennafly - 0.3333333333333333
+	Class-A-Sounds - 0.3333333333333333
+	today… - 0.3333333333333333
+	#nyhenna… - 0.3333333333333333
+	Tint - 0.3333333333333333
+	customer - 0.3333333333333333
+	care - 0.3333333333333333
+
+
+Cluster number: 12
+	#Nursing - 0.2765957446808511
+	RN - 0.2553191489361702
+	Registered - 0.3829787234042553
+	Nurse - 0.3829787234042553
+
+
 Cluster number: 103
+	#Job - 0.27986348122866894
+	| - 0.28896473265073946
 
 
 Cluster number: 94
+	Shortcake - 0.5
+	https://t.co/D6EAubPyi5 - 0.5
+	#f4f - 0.5
+	#haironpoint… - 0.5
+	#haircut - 0.5
+	https://t.co/W2UXvnw7Dd - 0.5
+	#hairspiration - 0.5
+	#followforfollow - 0.5
+	#followme - 0.5
+	Strawberry - 1.0
+	#hair - 0.5
+	#haircolor - 0.5
+	#follow4follow… - 0.5
+	#shortcake - 0.5
 
 
 Cluster number: 99
-	view - 0.9813432835820896
-	#jobs - 0.9701492537313433
-	opening: - 0.44776119402985076
-	#job - 0.8097014925373134
+	[Engross] - 0.27906976744186046
 
 
 Cluster number: 145
-	i'm - 0.47668393782383417
+	Center - 0.2770700636942675
 
 
 Cluster number: 100
 
 
 Cluster number: 41
+	Empire - 0.2710843373493976
+	Coachella - 0.5662650602409639
 
 
 Cluster number: 21
 
 
-Cluster number: 112
-	#job - 0.7443946188340808
-
-
 Cluster number: 139
-	&amp; - 0.35467980295566504
+	week - 0.3333333333333333
+	#nocoachellaforme - 0.3333333333333333
+	biene - 0.3333333333333333
+	💻 - 0.3333333333333333
+	sandals❥ - 0.3333333333333333
+	South - 0.3333333333333333
+	#vintagechanel - 0.3333333333333333
+	Angeles - 0.3333333333333333
+	k - 0.3333333333333333
+	https://t.co/UfVoqYOnEO - 0.3333333333333333
+	Downtown - 0.3333333333333333
+	https://t.co/PBpw8Mk9oj - 0.3333333333333333
+	P - 0.3333333333333333
+	#tb - 0.3333333333333333
+	Los - 0.6666666666666666
+	Finals - 0.3333333333333333
+	Details. - 0.3333333333333333
+	https://t.co/VHbjyneysN - 0.3333333333333333
+	#DimeRapido - 0.3333333333333333
+	Angeles,… - 0.3333333333333333
+	#LA - 0.3333333333333333
+	&amp; - 0.3333333333333333
+
+
+Cluster number: 112
+	Drawing - 1.0
+	Summer - 1.0
+	Workshop - 1.0
+	https://t.co/JTyS5htpbQ - 1.0
 
 
 Cluster number: 120
 
 
 Cluster number: 77
-	school - 0.7082066869300911
 
 
 Cluster number: 53
-	#jobs - 0.8358585858585859
-	#job - 0.47895622895622897
+
+
+Cluster number: 22
+	work - 0.3827751196172249
+
+
+Cluster number: 25
 
 
 Cluster number: 131
-	night - 0.5160349854227405
-	friday - 0.2857142857142857
 
 
 Cluster number: 59
-	coachella - 0.6766169154228856
-	#coachella - 0.373134328358209
+	view - 0.32142857142857145
+	View - 0.2767857142857143
 
 
 Cluster number: 46
-	elite - 0.264
-	pool - 0.264
 
 
 Cluster number: 142
+	📸 - 0.3333333333333333
+	#color - 0.3333333333333333
+	• - 0.3333333333333333
+	Curb - 0.3333333333333333
+	Whizz - 0.3333333333333333
+	📍@cactusflorida - 0.3333333333333333
+	🌸 - 0.3333333333333333
+	Ink - 0.3333333333333333
+	Service - 0.3333333333333333
+	#tattoo - 0.3333333333333333
+	Tattoo - 0.3333333333333333
+	Custom - 0.3333333333333333
+	photographybycarolina - 0.3333333333333333
+	Counter - 0.3333333333333333
+	#nataliagdominguez… - 0.3333333333333333
+	https://t.co/MOMaCbsIah - 0.3333333333333333
+	https://t.co/tVQajzhrEp - 0.3333333333333333
+	Evolution - 0.3333333333333333
+	https://t.co/k4lwcbJBBk - 0.3333333333333333
+	Dizzy - 0.3333333333333333
+	#fkirons - 0.3333333333333333
+	#fashionblogger - 0.3333333333333333
 
 
 Cluster number: 62
-	#opd - 0.43358395989974935
-	#ocso - 0.40350877192982454
-	#orlpol - 0.6390977443609023
 
 
 Cluster number: 93
-	i'm - 0.9692101740294511
 
 
 Cluster number: 33
-	los - 0.2857142857142857
-	san - 0.3122923588039867
+	Ohio - 0.4864864864864865
 
 
 Cluster number: 126
-	stadium - 0.457002457002457
 
 
 Cluster number: 23
-	fl - 0.2647058823529412
-	i'm - 0.4
+	We're - 0.37398879900435594
+	#job - 0.4001244555071562
 
 
 Cluster number: 113
 
 
 Cluster number: 118
-	anyone - 0.8689655172413793
-	#job? - 0.7655172413793103
 
 
 Cluster number: 40
-	#jobs - 0.5802469135802469
-	alert: - 0.2515432098765432
-	#job - 0.470679012345679
 
 
 Cluster number: 6
+	Design - 0.6323529411764706
+	#t1d - 0.6176470588235294
+	Lifestyle - 1.2352941176470589
+	Design: - 0.6176470588235294
+	#type1diabetes - 0.6176470588235294
+	#diabetes - 0.6176470588235294
 
 
 Cluster number: 67
-	team! - 0.38335607094133695
-	#hiring! - 0.504774897680764
-	#job - 0.40109140518417463
-	opening - 0.5470668485675307
+	I'm - 0.975346687211094
 
 
 Cluster number: 69
-	&amp; - 0.3684210526315789
+
+
+Cluster number: 3
 
 
 Cluster number: 135
+
+
+Cluster number: 85
+	Los - 0.8842975206611571
+	Angeles, - 0.8016528925619835
+	CA) - 0.3140495867768595
+	CA - 0.5371900826446281
+	I'm - 0.5371900826446281
 
 
 Cluster number: 86
 
 
 Cluster number: 60
-	exit - 0.3235908141962422
-	station - 0.29018789144050106
-	construction - 0.40083507306889354
-	incident - 0.3924843423799583
 
 
-Cluster number: 58
-
-
-Cluster number: 85
-	i'm - 0.735873850197109
+Cluster number: 114
+	fit - 0.3990856755841517
+	#Hiring - 0.8098543853708093
+	you: - 0.33965458855401287
+	#CareerArc - 0.5088046054859465
+	#job - 0.9911953945140535
 
 
 Cluster number: 91
@@ -268,57 +392,82 @@ Cluster number: 91
 Cluster number: 136
 
 
-Cluster number: 87
-	#jobs - 0.4408866995073892
-	#hiring! - 0.6847290640394089
-	#job - 0.5566502463054187
+Cluster number: 58
+
+
+Cluster number: 123
+	Exit - 0.5030339805825242
 
 
 Cluster number: 26
+	#losangeles - 0.3
+
+
+Cluster number: 31
+	fit - 0.2972972972972973
+	#job - 0.35135135135135137
+
+
+Cluster number: 5
 
 
 Cluster number: 2
 
 
-Cluster number: 123
+Cluster number: 13
+	#Hiring - 0.5168970814132104
+	team! - 0.7772657450076805
+	#job - 0.6912442396313364
 
 
 Cluster number: 119
-	york, - 0.3534798534798535
-	ny - 0.6373626373626373
-	i'm - 0.6025641025641025
-
-
-Cluster number: 13
-	work - 0.631578947368421
 
 
 Cluster number: 96
 
 
 Cluster number: 137
-	nurse - 0.6320224719101124
-	health - 0.4157303370786517
-	#job - 0.3089887640449438
-	care - 0.35674157303370785
+	#Hiring - 0.653942821237826
+	anyone - 0.8502984605717876
+	#job? - 0.7747408105560791
 
 
 Cluster number: 52
+	House - 0.2749003984063745
 
 
 Cluster number: 81
-	view - 0.7818181818181819
-	opening: - 0.36363636363636365
-	#job - 0.34545454545454546
+
+
+Cluster number: 87
+	#stamford - 0.5
+	Cliffs - 0.5
+	#foodie - 0.5
+	#weekend - 0.5
+	#sandiego - 0.5
+	https://t.co/5xzrqLDwnz - 0.5
+	#poolparty - 0.5
+	#connecticut - 0.5
+	#ct - 0.5
+	La - 0.5
+	#luvtoeat - 0.5
+	guide. - 0.5
+	Jolla - 0.5
+	https://t.co/LG3csDQWRh - 0.5
+	#chicken… - 0.5
+	Tour - 0.5
 
 
 Cluster number: 16
-	tx) - 0.36
-	tx - 0.372
-	i'm - 0.384
+	#Hiring - 0.7217835578262889
+	you're - 0.7928471899674873
+	#CareerArc - 0.47050627032048303
+	professional - 0.7770552717138876
+	#job: - 0.8699489084997678
 
 
 Cluster number: 55
+	 - 0.2555418719211823
 
 
 Cluster number: 82
@@ -327,114 +476,151 @@ Cluster number: 82
 Cluster number: 28
 
 
+Cluster number: 29
+
+
 Cluster number: 107
 
 
 Cluster number: 121
-	tonight - 0.44680851063829785
 
 
 Cluster number: 98
 
 
 Cluster number: 79
-	beach - 0.2706552706552707
+
+
+Cluster number: 54
+	#coffee - 0.3333333333333333
 
 
 Cluster number: 30
-	 - 1.3111111111111111
-	tide - 0.4962962962962963
+	San - 0.6487341772151899
+	Francisco, - 0.26582278481012656
+	CA) - 0.3860759493670886
+	I'm - 0.4319620253164557
+	CA - 0.4620253164556962
 
 
 Cluster number: 127
 
 
 Cluster number: 50
-	vlone - 0.5222222222222223
-	collaboration - 0.5222222222222223
-	&amp; - 0.5222222222222223
-	bari - 0.5222222222222223
-	launch - 0.5222222222222223
-	a$ap - 1.0555555555555556
+	Ave - 0.3625
+	S - 0.325
+	#Orlando - 0.325
+	#HoldenParramore - 0.2875
+	Hughey - 0.275
 
 
 Cluster number: 36
-	fit - 0.9210526315789473
-	you: - 0.5855263157894737
-	#job - 0.8947368421052632
+	#Jobs - 0.26646706586826346
+	#Job - 0.6946107784431138
+
+
+Cluster number: 92
 
 
 Cluster number: 64
 
 
-Cluster number: 57
+Cluster number: 75
 
 
 Cluster number: 110
+	Favorite - 0.3388704318936877
+	Supplemental - 0.2956810631229236
+	Health - 0.9235880398671097
+	#Nursing - 0.42857142857142855
+	#Healthcare - 0.28903654485049834
+	#Jobs - 0.2956810631229236
+	RN - 0.5116279069767442
+	Registered - 0.6411960132890365
+	Care - 0.6744186046511628
+	Nurse - 0.7109634551495017
+
+
+Cluster number: 149
+	Health - 0.2558139534883721
+	Texas - 0.32558139534883723
+
+
+Cluster number: 57
+	Restaurant - 0.42857142857142855
 
 
 Cluster number: 51
-	utc - 0.31343283582089554
-
-
-Cluster number: 75
-	you're - 0.8115942028985508
-	check - 0.8115942028985508
-	professional - 0.7391304347826086
-	#job: - 0.8115942028985508
+	today - 0.2823834196891192
 
 
 Cluster number: 133
-	brewing - 0.524904214559387
-	company - 0.39846743295019155
-
-
-Cluster number: 45
 
 
 Cluster number: 106
 
 
+Cluster number: 132
+	New - 0.28846153846153844
+
+
+Cluster number: 45
+	#sale… - 0.375
+	#blm - 0.4375
+	#tshirt - 0.4375
+	#hellaklassy - 0.4375
+	#ph@ness - 0.4375
+	#customization - 0.4375
+	#BFC - 0.4375
+	#Murklenburgcounty - 0.4375
+
+
 Cluster number: 83
-	accident - 0.42066420664206644
+	photo - 0.4987599889776798
 
 
 Cluster number: 72
-	rain - 0.7328385899814471
-	mph - 0.5473098330241187
-	in, - 0.5083487940630798
-	today - 0.6252319109461967
-	temperature - 0.4842300556586271
-	humidity - 0.5139146567717996
-	barometer - 0.4842300556586271
-	wind - 0.575139146567718
 
 
 Cluster number: 70
-	doors - 0.36923076923076925
-	tonight - 0.4
-	atlanta: - 0.3384615384615385
-
-
-Cluster number: 149
 
 
 Cluster number: 9
-	cases - 0.26
+	https://t.co/clJAdX4DKn - 0.25
+	Baja - 0.25
+	Tres - 0.25
+	https://t.co/I9uBYySOSi - 0.25
+	selfies - 0.25
+	#FoodPorn - 0.25
+	Burrito - 0.25
+	Mexicali - 0.25
+	Supreme - 0.25
+	Amigos - 0.25
+	Lobster - 0.25
+	Rockin' - 0.25
+	Cantina - 1.0
+	https://t.co/ct8hBxtYS1 - 0.25
+	https://t.co/ZEsEnbPDLM - 0.25
+	Coastal - 0.25
+	Pappasito's - 0.25
+	Más - 0.25
 
 
 Cluster number: 49
+	IHOP - 0.6
 
 
 Cluster number: 108
-	baths - 0.4085603112840467
-	tx - 0.603112840466926
-	beds, - 0.41245136186770426
+	#Hiring - 0.2631578947368421
+	fit - 0.9298245614035088
+	you: - 0.6549707602339181
+	#job - 0.9298245614035088
+	#Hospitality - 0.3216374269005848
 
 
 Cluster number: 78
-	anyone - 0.8726415094339622
-	#job? - 0.7830188679245284
+	#california - 0.3333333333333333
+	#sanfrancisco - 0.25
 
 
 Cluster number: 144
@@ -446,36 +632,47 @@ Cluster number: 109
 Cluster number: 43
 
 
-Cluster number: 148
-
-
 Cluster number: 10
 
 
+Cluster number: 148
+
+
+Cluster number: 84
+	High - 0.3333333333333333
+	School - 0.32786885245901637
+
+
 Cluster number: 122
+	Airport - 0.3424962852897474
+	I'm - 0.3291233283803863
+	International - 0.33209509658246655
 
 
 Cluster number: 115
 
 
+Cluster number: 61
+	Country - 0.3125
+
+
 Cluster number: 56
-	tx - 0.6570247933884298
-	i'm - 0.8677685950413223
 
 
 Cluster number: 15
-
-
-Cluster number: 47
+	Minnesota - 0.3076923076923077
+	Minneapolis, - 0.3076923076923077
 
 
 Cluster number: 76
-	york - 0.4989059080962801
+	California - 0.41732283464566927
+
+
+Cluster number: 47
+	#job - 0.4351145038167939
 
 
 Cluster number: 97
-	los - 0.5213414634146342
-	california - 0.6097560975609756
 
 
 Cluster number: 95
@@ -484,74 +681,100 @@ Cluster number: 95
 Cluster number: 116
 
 
+Cluster number: 48
+
+
 Cluster number: 128
 
 
 Cluster number: 117
-	center - 0.33014354066985646
+	#job - 0.6802721088435374
 
 
 Cluster number: 73
-	ca! - 0.30180180180180183
-	#jobs - 0.45495495495495497
-	#hiring - 0.5495495495495496
-	#job - 0.5720720720720721
 
 
 Cluster number: 32
-	#hiring - 0.6178343949044586
-	#job - 0.8184713375796179
+	Anyone - 0.4
 
 
 Cluster number: 27
-	il - 0.30067567567567566
-	chicago, - 0.30067567567567566
-	i'm - 0.6824324324324325
+	#moneyco - 0.34615384615384615
+	�3D�B0�3D�CD - 0.34615384615384615
+	@ricobravousa - 0.34615384615384615
+	www.moneyco.co@moneycollc - 0.34615384615384615
 
 
 Cluster number: 0
 
 
 Cluster number: 42
-	#t1d - 0.40764331210191085
-	#type1diabetes - 0.5095541401273885
-	#diabetes - 0.5095541401273885
+	claudia@jacvanek.com! - 1.0
+	email - 1.0
 
 
 Cluster number: 102
+	Space - 0.46153846153846156
+	#art - 0.38461538461538464
+	Art - 0.6923076923076923
+	Pace - 0.46153846153846156
+	Digital - 0.46153846153846156
+	Future - 0.46153846153846156
+	Parks - 0.46153846153846156
+	Technology: - 0.46153846153846156
+	Teamlab - 0.46153846153846156
 
 
 Cluster number: 124
-	fit - 0.9963503649635036
-	you: - 0.6277372262773723
-	#job - 0.9963503649635036
+	I'm - 0.5454545454545454
 
 
 Cluster number: 141
+	#lasvegas - 0.3181818181818182
+	Virginia - 0.36363636363636365
 
 
 Cluster number: 143
+	CA? - 0.31666666666666665
+	opening: - 0.7833333333333333
+	#Job - 0.35
+	View - 0.8666666666666667
 
 
 Cluster number: 8
-	&amp; - 0.2972292191435768
-	i'm - 0.6775818639798489
+
+
+Cluster number: 7
+	Graffiti - 0.5344827586206896
+	Park, - 0.3793103448275862
+	Tracking: - 0.5344827586206896
+	Buena - 0.3793103448275862
+	CA - 0.7068965517241379
 
 
 Cluster number: 44
-	#careerarc - 0.412
-	you're - 0.528
-	#job - 0.432
-	check - 0.524
-	professional - 0.504
-	#job: - 0.524
 
 
 Cluster number: 88
+	New - 1.2359437751004017
+	York - 0.6365461847389559
+	York, - 0.40763052208835343
+
+
+Cluster number: 68
+	#noway - 1.0
+	😵😖👎🔫❌⁉️#disgustingpeople - 1.0
+	#amc30… - 1.0
+	seriously? - 1.0
+	https://t.co/xhROchiz0P - 1.0
+	#peoplearegross - 1.0
 
 
 Cluster number: 129
 
 
 Cluster number: 147
+	#CareerArc - 0.4525425899833483
+	#Jobs - 0.7168566670936339
+	#Job - 0.5790636608172153
 

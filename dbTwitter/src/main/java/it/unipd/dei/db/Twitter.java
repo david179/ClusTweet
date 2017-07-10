@@ -3,6 +3,14 @@ package it.unipd.dei.db;
 
 import java.io.Serializable;
 
+
+/**
+ * This class represents a tweet with all of its information 
+ * 
+ * @author Tommaso Agnolazza
+ * @author Alessandro Ciresola
+ * @author Davide Lucchi
+ */
 public class Twitter implements Serializable
 {
     private  String tweet_ID; 
@@ -25,7 +33,29 @@ public class Twitter implements Serializable
     	super();
     }
     
-    // costruttore della classe 
+    /**
+     * Class constructor
+     * 
+     * @param tweet_ID The ID of the tweet
+     * @param dateT The date the tweet was posted
+     * @param hour The hour at which the tweet was posted
+     * @param username The user who posted the tweet
+     * @param nickname The nickname of the user who posted the tweet
+     * @param biography The biography of the user
+     * @param tweet_content The text of the tweet
+     * @param favs The favorites of the user
+     * @param rts The rts of the user
+     * @param latitude the latitude from where it was posted
+     * @param longitude the longitute from where it was posted
+     * @param country The country from which it was posted
+     * @param place The city from which it was posted
+     * @param prof link to the profile picture of the user
+     * @param followers the number of followers of the user
+     * @param following the number of ofllowing of the user
+     * @param listed The listed number
+     * @param language the language of the tweet
+     * @param url the URL of the tweet
+     */
     public Twitter(String tweet_ID,String dateT,String hour,String username,String nickname, String biography, String tweet_content,String favs, String rts, String latitude, String longitude, String country, String place, String prof, int followers, int following, int listed,  String language, String url)
     { 
        this.tweet_ID = tweet_ID; 

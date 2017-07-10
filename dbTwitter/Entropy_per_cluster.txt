@@ -1,266 +1,300 @@
 
-Cluster number: 39,	entropy: 0.4808806792755111
+Cluster number: 39,	entropy: 0.2802516589580538
 
-Cluster number: 19,	entropy: 0.028203652133430734
+Cluster number: 19,	entropy: 0.1933672199910773
 
-Cluster number: 34,	entropy: 0.535679615239211
+Cluster number: 34,	entropy: 0.26601388058167885
 
-Cluster number: 101,	entropy: 1.5795314231865194
+Cluster number: 101,	entropy: 0.06225571317912645
 
-Cluster number: 4,	entropy: 0.7770060329310987
+Cluster number: 4,	entropy: 0.11200261859501748
 
-Cluster number: 71,	entropy: 0.7001871266937578
+Cluster number: 71,	entropy: 0.5221608388553395
 
-Cluster number: 134,	entropy: 0.2574863135767497
+Cluster number: 134,	entropy: 0.6110978467918795
 
-Cluster number: 130,	entropy: 0.12194532087282746
+Cluster number: 130,	entropy: 0.4013987695675585
 
-Cluster number: 66,	entropy: 0.35726083839549017
+Cluster number: 66,	entropy: 1.4942208490079338
 
-Cluster number: 80,	entropy: 0.1927918285514358
+Cluster number: 80,	entropy: 0.6644304300148882
 
-Cluster number: 105,	entropy: 1.1914892959328551
+Cluster number: 105,	entropy: 0.12540061035257707
 
-Cluster number: 125,	entropy: 1.0766049320088678
+Cluster number: 125,	entropy: 0.36625765220141177
 
-Cluster number: 138,	entropy: 0.5926834627379272
+Cluster number: 138,	entropy: 0.277987164150759
 
-Cluster number: 65,	entropy: 0.4432305722670394
+Cluster number: 65,	entropy: 0.12871168204139663
 
-Cluster number: 104,	entropy: 2.8667962651178396
+Cluster number: 11,	entropy: 0.4596256618445289
 
-Cluster number: 14,	entropy: 0.660874232558412
+Cluster number: 14,	entropy: 0.27740491417893703
 
-Cluster number: 11,	entropy: 0.3147006016768169
+Cluster number: 104,	entropy: 0.37336756074956967
 
-Cluster number: 24,	entropy: 0.6663561500852114
+Cluster number: 24,	entropy: 0.9392900437859782
 
-Cluster number: 111,	entropy: 0.3525133373808326
+Cluster number: 111,	entropy: 0.09913976937399671
 
-Cluster number: 35,	entropy: 0.3064156462277894
+Cluster number: 35,	entropy: 0.4102794232663671
 
-Cluster number: 37,	entropy: 0.3491299011435697
+Cluster number: 37,	entropy: 0.1546540160026551
 
-Cluster number: 146,	entropy: 0.3533965681059783
+Cluster number: 146,	entropy: 0.10653398109918967
 
-Cluster number: 140,	entropy: 1.6361154362423997
+Cluster number: 140,	entropy: 0.266140858951844
 
-Cluster number: 74,	entropy: 0.3253007190818688
+Cluster number: 1,	entropy: 0.5595432459331484
 
-Cluster number: 63,	entropy: 0.38267846331592736
+Cluster number: 74,	entropy: 0.281486612014698
 
-Cluster number: 90,	entropy: 0.5045926025752385
+Cluster number: 90,	entropy: 0.09736619226458085
 
-Cluster number: 17,	entropy: 0.40853983982597997
+Cluster number: 89,	entropy: 0.0698664920896002
 
-Cluster number: 20,	entropy: 1.1042139042898933
+Cluster number: 17,	entropy: 0.35492165875333437
 
-Cluster number: 12,	entropy: 0.24360824230174183
+Cluster number: 18,	entropy: 0.3779671837388648
 
-Cluster number: 38,	entropy: 0.13411542806545979
+Cluster number: 63,	entropy: 1.4663937951695847
 
-Cluster number: 18,	entropy: 0.24770907400195816
+Cluster number: 38,	entropy: 0.23764528068062546
 
-Cluster number: 103,	entropy: 0.21501241982976246
+Cluster number: 20,	entropy: 0.3946075934556211
 
-Cluster number: 94,	entropy: 0.2318683473451792
+Cluster number: 12,	entropy: 0.644911111968846
 
-Cluster number: 99,	entropy: 3.008787971075906
+Cluster number: 103,	entropy: 0.5744082885653434
 
-Cluster number: 145,	entropy: 1.9001388200073046
+Cluster number: 94,	entropy: 0.268653736072302
 
-Cluster number: 100,	entropy: 0.18340969451224606
+Cluster number: 99,	entropy: 0.1798482504760046
 
-Cluster number: 41,	entropy: 0.36580582961164587
+Cluster number: 145,	entropy: 0.32382535576671106
 
-Cluster number: 21,	entropy: 0.45585096744899845
+Cluster number: 100,	entropy: 0.14499876964691502
 
-Cluster number: 112,	entropy: 1.4940089697637127
+Cluster number: 41,	entropy: 0.33992006555711546
 
-Cluster number: 139,	entropy: 0.5135605004045661
+Cluster number: 21,	entropy: 0.16198140169256067
 
-Cluster number: 120,	entropy: 0.719315639780881
+Cluster number: 139,	entropy: 0.6371340092267489
 
-Cluster number: 77,	entropy: 0.36626761523479007
+Cluster number: 112,	entropy: 0.34657359027997264
 
-Cluster number: 53,	entropy: 1.3845802221849906
+Cluster number: 120,	entropy: 0.33313917056284253
 
-Cluster number: 131,	entropy: 0.5270182438308952
+Cluster number: 77,	entropy: 0.4589354529607691
 
-Cluster number: 59,	entropy: 0.6613876377273404
+Cluster number: 53,	entropy: 0.09624580202745779
 
-Cluster number: 46,	entropy: 0.22115162475848454
+Cluster number: 22,	entropy: 0.3669294028065792
 
-Cluster number: 142,	entropy: 0.2121497840767174
+Cluster number: 25,	entropy: 0.26616370928528416
 
-Cluster number: 62,	entropy: 0.4853079620518656
+Cluster number: 131,	entropy: 0.1011897381743285
 
-Cluster number: 93,	entropy: 2.8382187036856714
+Cluster number: 59,	entropy: 0.5360769025751344
 
-Cluster number: 33,	entropy: 1.3320973740294215
+Cluster number: 46,	entropy: 0.13152808655211215
 
-Cluster number: 126,	entropy: 0.32340281137280086
+Cluster number: 142,	entropy: 0.14050192969810527
 
-Cluster number: 23,	entropy: 1.6998281242039321
+Cluster number: 62,	entropy: 0.0
 
-Cluster number: 113,	entropy: 0.41028555827860147
+Cluster number: 93,	entropy: 0.1454994880097533
 
-Cluster number: 118,	entropy: 1.1438405630105635
+Cluster number: 33,	entropy: 0.34565755043029817
 
-Cluster number: 40,	entropy: 1.3060719200462056
+Cluster number: 126,	entropy: 0.2051903608893638
 
-Cluster number: 6,	entropy: 0.21785175688614686
+Cluster number: 23,	entropy: 1.0375113747760478
 
-Cluster number: 67,	entropy: 1.5464108327420663
+Cluster number: 113,	entropy: 0.09954219273489194
 
-Cluster number: 69,	entropy: 1.0516990566138675
+Cluster number: 118,	entropy: 0.09222198635284841
 
-Cluster number: 135,	entropy: 0.6240010474409968
+Cluster number: 40,	entropy: 0.15821500321372164
 
-Cluster number: 86,	entropy: 0.18378003666276038
+Cluster number: 6,	entropy: 0.3199460822811331
 
-Cluster number: 60,	entropy: 0.40814407851145157
+Cluster number: 67,	entropy: 0.7608076283471075
 
-Cluster number: 58,	entropy: 0.5348970093213947
+Cluster number: 69,	entropy: 0.5025181549607572
 
-Cluster number: 85,	entropy: 2.3684269675771343
+Cluster number: 3,	entropy: 0.12700824963794255
 
-Cluster number: 91,	entropy: 0.5736146760782926
+Cluster number: 135,	entropy: 0.03330787050292725
 
-Cluster number: 136,	entropy: 0.047276783365502846
+Cluster number: 85,	entropy: 1.4863319646692323
 
-Cluster number: 87,	entropy: 1.744463380246818
+Cluster number: 86,	entropy: 0.21004811461971531
 
-Cluster number: 26,	entropy: 0.2471918594882601
+Cluster number: 60,	entropy: 0.1685071964420926
 
-Cluster number: 2,	entropy: 0.4857265659278312
+Cluster number: 114,	entropy: 1.460204205740711
 
-Cluster number: 123,	entropy: 0.11282611485334246
+Cluster number: 91,	entropy: 0.33134627486317525
 
-Cluster number: 119,	entropy: 2.5081919464583384
+Cluster number: 136,	entropy: 0.11640666628904874
 
-Cluster number: 13,	entropy: 0.2966250489132318
+Cluster number: 58,	entropy: 0.19211603309217057
 
-Cluster number: 96,	entropy: 0.48262431860081423
+Cluster number: 123,	entropy: 0.27175649766292537
 
-Cluster number: 137,	entropy: 1.2391819411359157
+Cluster number: 26,	entropy: 0.19770936208511553
 
-Cluster number: 52,	entropy: 0.28572907539239917
+Cluster number: 31,	entropy: 1.087735611762263
 
-Cluster number: 81,	entropy: 2.0123204316856205
+Cluster number: 5,	entropy: 0.23764865195950574
 
-Cluster number: 16,	entropy: 1.9524996860838568
+Cluster number: 2,	entropy: 0.15069185749958672
 
-Cluster number: 55,	entropy: 0.3430219994675085
+Cluster number: 13,	entropy: 1.4192123501113845
 
-Cluster number: 82,	entropy: 0.2115937066794427
+Cluster number: 119,	entropy: 0.2448981736449579
 
-Cluster number: 28,	entropy: 0.34048972307132785
+Cluster number: 96,	entropy: 0.03679418177703828
 
-Cluster number: 107,	entropy: 0.21708832941463013
+Cluster number: 137,	entropy: 1.005779674503657
 
-Cluster number: 121,	entropy: 0.7640566784822937
+Cluster number: 52,	entropy: 0.2349167025417632
 
-Cluster number: 98,	entropy: 0.15933811147244473
+Cluster number: 81,	entropy: 0.3895778477671438
 
-Cluster number: 79,	entropy: 0.3156366915479394
+Cluster number: 87,	entropy: 0.17328679513998632
 
-Cluster number: 30,	entropy: 0.5977384596631571
+Cluster number: 16,	entropy: 0.26250071808037606
 
-Cluster number: 127,	entropy: 0.3903195439192498
+Cluster number: 55,	entropy: 0.45262105310691964
 
-Cluster number: 50,	entropy: 0.8554517761428296
+Cluster number: 82,	entropy: 0.1501147896312313
 
-Cluster number: 36,	entropy: 2.1129283941639896
+Cluster number: 28,	entropy: 0.2575767015167285
 
-Cluster number: 64,	entropy: 0.26518521253350646
+Cluster number: 29,	entropy: 0.1437391829244703
 
-Cluster number: 57,	entropy: 0.28313328613145505
+Cluster number: 107,	entropy: 0.3619048638966787
 
-Cluster number: 110,	entropy: 0.5938029264974314
+Cluster number: 121,	entropy: 0.28607385493555465
 
-Cluster number: 51,	entropy: 0.4860979051560864
+Cluster number: 98,	entropy: 0.482075644557317
 
-Cluster number: 75,	entropy: 1.0623328389313842
+Cluster number: 79,	entropy: 0.16378307162557892
 
-Cluster number: 133,	entropy: 0.6374534974066067
+Cluster number: 54,	entropy: 0.17328679513998632
 
-Cluster number: 45,	entropy: 0.18451246667427856
+Cluster number: 30,	entropy: 1.3230121838059496
 
-Cluster number: 106,	entropy: 0.10538541645267258
+Cluster number: 127,	entropy: 0.17912834697749558
 
-Cluster number: 83,	entropy: 0.27377829062626574
+Cluster number: 50,	entropy: 0.21816156224295832
 
-Cluster number: 72,	entropy: 0.4096495844886845
+Cluster number: 36,	entropy: 0.8973612176134965
 
-Cluster number: 70,	entropy: 0.6100783253218722
+Cluster number: 92,	entropy: 0.2174202339988936
 
-Cluster number: 149,	entropy: 0.6831692271561809
+Cluster number: 64,	entropy: 0.7850127208099269
 
-Cluster number: 9,	entropy: 0.16721790954433371
+Cluster number: 75,	entropy: 0.20379920303076393
 
-Cluster number: 49,	entropy: 1.0754896045614317
+Cluster number: 110,	entropy: 0.6830685641027059
 
-Cluster number: 108,	entropy: 0.35160802378396233
+Cluster number: 149,	entropy: 0.31032743925339334
 
-Cluster number: 78,	entropy: 1.1430823534746102
+Cluster number: 57,	entropy: 0.28630589351256364
 
-Cluster number: 144,	entropy: 0.41435463309111187
+Cluster number: 51,	entropy: 0.48865173995143546
 
-Cluster number: 109,	entropy: 0.3573957537710346
+Cluster number: 133,	entropy: 0.06976747735712245
 
-Cluster number: 43,	entropy: 0.2902538355297419
+Cluster number: 106,	entropy: 0.1887307759047073
 
-Cluster number: 148,	entropy: 0.4606746471526911
+Cluster number: 132,	entropy: 0.5904187008601098
 
-Cluster number: 10,	entropy: 0.04465760479943628
+Cluster number: 45,	entropy: 0.17945945863582338
 
-Cluster number: 122,	entropy: 0.5126697285846454
+Cluster number: 83,	entropy: 0.6651032035029848
 
-Cluster number: 115,	entropy: 0.8861711804649539
+Cluster number: 72,	entropy: 0.0
 
-Cluster number: 56,	entropy: 3.0450334877516396
+Cluster number: 70,	entropy: 0.1516245593574409
 
-Cluster number: 15,	entropy: 0.19204548792182388
+Cluster number: 9,	entropy: 0.3158529669721014
 
-Cluster number: 47,	entropy: 0.3418130065942407
+Cluster number: 49,	entropy: 0.2544316243440109
 
-Cluster number: 76,	entropy: 0.42061785240684185
+Cluster number: 108,	entropy: 1.4265002789250534
 
-Cluster number: 97,	entropy: 0.5994483962809786
+Cluster number: 78,	entropy: 0.19292371435394662
 
-Cluster number: 95,	entropy: 0.0
+Cluster number: 144,	entropy: 0.13340216130593707
 
-Cluster number: 116,	entropy: 0.35725278034332275
+Cluster number: 109,	entropy: 0.09586209912622647
 
-Cluster number: 128,	entropy: 0.08674531317715187
+Cluster number: 43,	entropy: 0.015840256142819604
 
-Cluster number: 117,	entropy: 1.0040406670820206
+Cluster number: 10,	entropy: 0.3796580459801245
 
-Cluster number: 73,	entropy: 1.7411029923778976
+Cluster number: 148,	entropy: 0.0
 
-Cluster number: 32,	entropy: 1.9524094230970486
+Cluster number: 84,	entropy: 0.2275197787954282
 
-Cluster number: 27,	entropy: 2.3700257567677747
+Cluster number: 122,	entropy: 0.6182576379922426
 
-Cluster number: 0,	entropy: 0.17345241431741543
+Cluster number: 115,	entropy: 0.12453276788034498
 
-Cluster number: 42,	entropy: 0.22661027420387622
+Cluster number: 61,	entropy: 0.3105698644496847
 
-Cluster number: 102,	entropy: 0.3323035340869814
+Cluster number: 56,	entropy: 0.03529744587578075
 
-Cluster number: 124,	entropy: 2.1009253878900007
+Cluster number: 15,	entropy: 0.23826934331748117
 
-Cluster number: 141,	entropy: 0.7258134776603196
+Cluster number: 76,	entropy: 0.8410092602348163
 
-Cluster number: 143,	entropy: 0.3375708875663875
+Cluster number: 47,	entropy: 0.9459452579498969
 
-Cluster number: 8,	entropy: 2.455900234314115
+Cluster number: 97,	entropy: 0.3221376895111892
 
-Cluster number: 44,	entropy: 1.5802354258006548
+Cluster number: 95,	entropy: 0.24246935088471916
 
-Cluster number: 88,	entropy: 0.27296138631077843
+Cluster number: 116,	entropy: 0.24317771246576808
 
-Cluster number: 129,	entropy: 0.557766871856831
+Cluster number: 48,	entropy: 0.15550524605983257
 
-Cluster number: 147,	entropy: 0.223219934979301
+Cluster number: 128,	entropy: 0.3060117125777714
+
+Cluster number: 117,	entropy: 1.223931486801281
+
+Cluster number: 73,	entropy: 0.24207274033905118
+
+Cluster number: 32,	entropy: 0.30325189149497606
+
+Cluster number: 27,	entropy: 0.17073023208971574
+
+Cluster number: 0,	entropy: 0.6066927576279119
+
+Cluster number: 42,	entropy: 0.34657359027997264
+
+Cluster number: 102,	entropy: 0.32628626594763555
+
+Cluster number: 124,	entropy: 0.5256890667173422
+
+Cluster number: 141,	entropy: 0.18955593943297283
+
+Cluster number: 143,	entropy: 0.5638950906775194
+
+Cluster number: 8,	entropy: 0.31048093197455273
+
+Cluster number: 7,	entropy: 0.32119805400999873
+
+Cluster number: 44,	entropy: 0.5248186207944505
+
+Cluster number: 88,	entropy: 0.9971879699368305
+
+Cluster number: 68,	entropy: 0.2986265782046758
+
+Cluster number: 129,	entropy: 0.13384634943616114
+
+Cluster number: 147,	entropy: 1.0123416498102986
