@@ -16,9 +16,7 @@ import java.util.regex.Pattern;
 
 /**
  * Collection of functions that allow to transform texts to sequence
- * of lemmas using lemmatization. An alternative process is
- * stemming. For a discussion of the difference between stemming and
- * lemmatization see this link: https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html
+ * of lemmas using lemmatization 
  */
 public class Lemmatizer {
 
@@ -45,6 +43,8 @@ public class Lemmatizer {
 
   /**
    * Transform a single document in the sequence of its lemmas.
+   * @param doc input document seen as an object of the String class 
+   * @return ArrayList<String> sequence of lemmas in which the input document has been divided 
    */
   public static ArrayList<String> lemmatize(String doc) {
     Document d = new Document(doc.toLowerCase());
@@ -71,16 +71,25 @@ public class Lemmatizer {
 
   /**
    * Transform an RDD of strings in the corresponding RDD of lemma
-   * sequences, with one sequence for each original document.
+   * sequences, with one sequence for each original document 
+   *
+   * @param docs javaRDD of documents seen as objects of the String class 
+   * @return JavaRDD<ArrayList<String>> containing lemmas associated at each input document  
    */
   public static JavaRDD<ArrayList<String>> lemmatize(JavaRDD<String> docs) {
     return docs.map((d) -> lemmatize(d));
   }
   
+  /**
+  * Break the tweet String into words and save each tweet as a List<Word>; 
+  * save all the tweets as a List of Lists
+  *
+  * @param itString list of the input tweets 
+  * @return List<List<Word>> list of all the input tweets each of them seen as a list of words 
+  */
   public static List<List<Word>> lemmatize2 (Iterable<String> itString){
       
-    // break the tweet String into word and save each tweet as a List<Word>
-  	// save all the tweets as a List of Lists
+   
   	Scanner s;
   	List<List<Word>> sentences = new ArrayList();
 	Iterator<String> it = itString.iterator();	

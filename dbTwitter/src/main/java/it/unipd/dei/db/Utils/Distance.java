@@ -8,6 +8,10 @@ public class Distance {
 	
   /**
    * Cosine distance between vectors where all the elements are positive.
+   * @param a first vector  
+   * @param b second vector 
+   * @return cosine distance between the vectors a and b 
+   * @throw IllegalArgumentException when vectors a and b are not in the same space 
    */
   public static double cosineDistance(Vector a, Vector b) {
     if (a.size() != b.size()) {

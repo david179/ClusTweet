@@ -26,6 +26,9 @@ public class DbFunctions {
 	   private static Statement newStm = null; 
 	  	
 	  
+	   /**
+	   * Create a new connection using the static variables driver, database, user and password. 
+	   */
 	   public static void openConn()
 	   {
 		   
@@ -78,6 +81,12 @@ public class DbFunctions {
 		 }
 		   
 	   }
+
+	   /**
+	   * Insert a new object of the TwitterClustered class into the clusters table. 
+	   * @param tweet the new object to insert into the clusters table 
+       *
+	   */
 	   
 	   public static void insertTweet(TwitterClustered tweet)
 	   {
@@ -123,6 +132,10 @@ public class DbFunctions {
 		   
 	   }
 	   
+	   /**
+	     * Close the connection releasing all the resources. 
+         *
+	   */
 	   public static void close()
 	   {
 		   try{
@@ -162,6 +175,12 @@ public class DbFunctions {
 		 		}
 	   }
 	   
+
+	   /**
+	     * @param spark new object of the SparkSession class 
+	     * @param table name of the database table 
+	     * @returns Dataset<Row> dataset generated after the lecture of the database table "table"
+	   */
 	   public static Dataset<Row> connectionDb(SparkSession spark, String table){
 		   //Registration of the driver that must be used 
 		    try{
