@@ -5,11 +5,14 @@ To do so, the tweets are loaded into a SQL database and then they are processed 
 To carry out the analysis The Stanford University Natural Language Processing Part of Speech Tagger has been used. For each tweet only the words tagged as noun are kept and the frequency of those words in their cluster is calculated. A set of most freqeunt noun is created for each cluster and for each of these frequent nouns the entropy is calculated in order to have an insight on the performance of the clustering algorithm. 
 
 
-This was the final project for the exam Database Management Systems at The UNiversity of Padova - 7/20/2017
+This was the final project for the exam Database Management Systems at The University of Padova - 7/20/2017
 
 Authors:
+
 Tommaso Agnolazza
+
 Alessandro Ciresola
+
 Davide Lucchi
 
 
