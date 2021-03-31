@@ -1,0 +1,705 @@
+
+Cluster number: 39
+
+
+Cluster number: 19
+
+
+Cluster number: 34
+
+
+Cluster number: 101
+	street - 0.4105263157894737
+
+
+Cluster number: 4
+	rain - 0.6301775147928994
+	mph - 0.5266272189349113
+	in, - 0.40532544378698226
+	today - 0.49556213017751477
+	temperature - 0.386094674556213
+	humidity - 0.4230769230769231
+	barometer - 0.386094674556213
+	wind - 0.47041420118343197
+
+
+Cluster number: 71
+	love - 0.5384615384615384
+
+
+Cluster number: 134
+	york - 0.34375
+
+
+Cluster number: 130
+
+
+Cluster number: 66
+	work - 0.3674698795180723
+
+
+Cluster number: 80
+
+
+Cluster number: 105
+
+
+Cluster number: 138
+
+
+Cluster number: 125
+	world - 0.27350427350427353
+	team - 0.29914529914529914
+
+
+Cluster number: 65
+
+
+Cluster number: 11
+	view - 0.9457700650759219
+	#jobs - 0.7939262472885033
+	opening: - 0.4316702819956616
+	#job - 0.6919739696312365
+
+
+Cluster number: 104
+	#menu - 0.7297297297297297
+
+
+Cluster number: 14
+	#video_poker_plus_hd - 1.0
+
+
+Cluster number: 35
+	shid - 1.0
+
+
+Cluster number: 24
+
+
+Cluster number: 111
+
+
+Cluster number: 37
+	с - 0.3333333333333333
+	ними, - 0.3333333333333333
+	говорит, - 0.3333333333333333
+	тоже - 0.3333333333333333
+	тебе - 0.3333333333333333
+	лол - 0.3333333333333333
+	sleepwalkinginclife… - 0.3333333333333333
+	хочу:( - 0.3333333333333333
+	:((((((( - 0.3333333333333333
+	bignappyvick - 0.3333333333333333
+	правду - 0.3333333333333333
+	я - 0.3333333333333333
+	никто - 0.3333333333333333
+	а - 0.3333333333333333
+	как - 0.3333333333333333
+	не - 0.3333333333333333
+
+
+Cluster number: 146
+
+
+Cluster number: 140
+	today - 0.34782608695652173
+
+
+Cluster number: 1
+	you're - 0.6363636363636364
+	check - 0.6363636363636364
+	ca, - 0.5454545454545454
+	professional - 0.36363636363636365
+	#job: - 0.6363636363636364
+
+
+Cluster number: 74
+	🙈 - 0.25
+	p.f.… - 0.25
+	pfchangs - 0.25
+	p.f. - 0.5
+	#mmmmm - 0.25
+	#viernesdelbien - 0.25
+	chang's - 0.75
+	#pfchangsrobinson - 0.25
+	#asidebonitocomo - 0.5
+
+
+Cluster number: 89
+	night - 0.2887323943661972
+	friday - 0.323943661971831
+
+
+Cluster number: 90
+	saturday - 0.3375
+
+
+Cluster number: 17
+	houston, - 0.4528301886792453
+	baths - 0.5283018867924528
+	tx - 0.6226415094339622
+	beds, - 0.5283018867924528
+
+
+Cluster number: 18
+	#butiyoga - 0.25
+	#butiyoganj - 0.25
+	#njmoms… - 0.25
+	#woodbridgenj - 0.25
+	#woodbridgenjmall - 0.25
+	#nj - 1.0
+
+
+Cluster number: 12
+
+
+Cluster number: 38
+	center - 0.8461538461538461
+
+
+Cluster number: 20
+	birthday - 0.8666666666666667
+
+
+Cluster number: 63
+	pier - 0.3333333333333333
+	monica - 0.2777777777777778
+	santa - 0.2777777777777778
+
+
+Cluster number: 103
+
+
+Cluster number: 94
+
+
+Cluster number: 145
+
+
+Cluster number: 99
+
+
+Cluster number: 100
+	#ourtownourteams - 0.5
+	#valencia - 0.5
+	#westtx - 0.5
+	longwells - 0.5
+	#stlblues - 0.5
+	#imczech… - 0.5
+
+
+Cluster number: 41
+	⠀⠀⠀⠀⠀⠀⠀⠀
+evening's - 0.25
+	|| - 0.25
+	#vivalasvegasrockabillyweekend - 0.25
+	#city… - 0.25
+	idalime - 0.25
+	center - 0.25
+	#vlv19 - 0.5
+	#meetandgreet - 0.5
+	15th, - 0.25
+	#pinup - 0.25
+	#pinupmodel - 0.25
+	#pinuppam… - 0.25
+
+
+Cluster number: 21
+	i'm - 0.9583333333333334
+
+
+Cluster number: 112
+	#job - 0.44272445820433437
+
+
+Cluster number: 139
+
+
+Cluster number: 120
+	team! - 0.3338557993730408
+	#hiring! - 0.5282131661442007
+	#job - 0.3667711598746082
+	opening - 0.5815047021943573
+
+
+Cluster number: 77
+	bar - 0.3917525773195876
+	&amp; - 0.3024054982817869
+	grill - 0.25945017182130586
+
+
+Cluster number: 53
+
+
+Cluster number: 22
+
+
+Cluster number: 25
+	eva, - 0.4
+	ok - 0.4
+
+
+Cluster number: 131
+
+
+Cluster number: 46
+	fit - 0.5110759493670886
+	you: - 0.2974683544303797
+	#job - 0.8908227848101266
+
+
+Cluster number: 59
+
+
+Cluster number: 142
+	#letsgopanthers - 1.0
+
+
+Cluster number: 62
+
+
+Cluster number: 93
+	trespass
+https://t.co/rwrsaythkv - 0.25
+
+
+Cluster number: 33
+
+
+Cluster number: 126
+	i'm - 0.49066666666666664
+
+
+Cluster number: 23
+	construction - 0.2651413189771198
+	incident - 0.253028263795424
+
+
+Cluster number: 113
+	#beermenus - 0.27225130890052357
+
+
+Cluster number: 118
+
+
+Cluster number: 40
+	san - 1.0555555555555556
+	i'm - 0.5
+	airport - 0.3333333333333333
+
+
+Cluster number: 6
+	prix - 0.2711864406779661
+	beach - 0.559322033898305
+	beach, - 0.3135593220338983
+
+
+Cluster number: 69
+	baths - 0.39080459770114945
+	tx - 0.6436781609195402
+	beds, - 0.39655172413793105
+
+
+Cluster number: 67
+	tx - 0.3503184713375796
+
+
+Cluster number: 3
+	i'm - 0.4334763948497854
+
+
+Cluster number: 135
+
+
+Cluster number: 86
+
+
+Cluster number: 58
+	&amp; - 0.3896353166986564
+
+
+Cluster number: 114
+
+
+Cluster number: 123
+	airport - 0.299625468164794
+
+
+Cluster number: 91
+	fl - 0.40404040404040403
+	i'm - 0.7070707070707071
+
+
+Cluster number: 136
+
+
+Cluster number: 85
+	#job - 0.26666666666666666
+	sales - 0.3333333333333333
+
+
+Cluster number: 60
+	time - 0.26744186046511625
+
+
+Cluster number: 87
+	#sale… - 0.45454545454545453
+	#blm - 0.5454545454545454
+	#tshirt - 0.45454545454545453
+	#hellaklassy - 0.5454545454545454
+	#bluebloods - 0.2727272727272727
+	#ph@ness - 0.5454545454545454
+	#customization - 0.5454545454545454
+	#bfc - 0.5454545454545454
+
+
+Cluster number: 26
+	domination - 0.48484848484848486
+	world - 0.48484848484848486
+	gardening - 0.48484848484848486
+	#t1d - 0.48484848484848486
+	design - 0.3484848484848485
+	#type1diabetes - 0.7272727272727273
+	lifestyle - 0.5
+	#diabetes - 0.7272727272727273
+
+
+Cluster number: 5
+
+
+Cluster number: 2
+	#jobs - 0.5518178729187904
+	#job - 0.5113829425756031
+
+
+Cluster number: 13
+
+
+Cluster number: 119
+
+
+Cluster number: 96
+	coachella - 0.41367521367521365
+	i'm - 0.4752136752136752
+
+
+Cluster number: 137
+
+
+Cluster number: 81
+
+
+Cluster number: 52
+	mode - 0.5
+	market - 0.5
+	
+÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷
+#knifeparty - 0.5
+	boss - 0.5
+	#day3… - 0.5
+	ha. - 1.0
+	ftw
+#mpls - 0.5
+	w/ - 0.5
+	oxendale's - 0.5
+
+
+Cluster number: 31
+	#gellyroll - 1.0
+	#comicart - 1.0
+	#gotham - 1.0
+	#sketch - 1.0
+	#sketchcard… - 1.0
+	#comicbookart - 1.0
+
+
+Cluster number: 16
+
+
+Cluster number: 55
+
+
+Cluster number: 82
+
+
+Cluster number: 54
+	things - 0.5
+	gps - 0.5
+
+
+Cluster number: 29
+	ca) - 0.315
+	i'm - 0.28
+
+
+Cluster number: 79
+
+
+Cluster number: 107
+	mph - 0.8829787234042553
+	weather - 0.8829787234042553
+	wind. - 0.6595744680851063
+	sky, - 0.6808510638297872
+
+
+Cluster number: 121
+
+
+Cluster number: 98
+
+
+Cluster number: 30
+	 - 0.5135135135135135
+	school - 0.5972972972972973
+
+
+Cluster number: 50
+
+
+Cluster number: 127
+	#job - 0.5307017543859649
+
+
+Cluster number: 36
+
+
+Cluster number: 92
+	cake - 0.5882352941176471
+
+
+Cluster number: 64
+	#orlpol - 0.2787878787878788
+
+
+Cluster number: 110
+	los - 0.5474308300395256
+	california - 0.40118577075098816
+
+
+Cluster number: 75
+
+
+Cluster number: 149
+
+
+Cluster number: 57
+	seafood - 0.3333333333333333
+	#alwaysbravo - 0.3333333333333333
+	#thisistheatl - 0.3333333333333333
+	#datenight - 0.3333333333333333
+	#chopnation - 0.3333333333333333
+	#thisisatlanta - 0.3333333333333333
+	#true2atlanta - 0.3333333333333333
+	#chopcity - 0.3333333333333333
+	#coolrayfield - 0.3333333333333333
+	bonny - 0.3333333333333333
+	&amp; - 0.3333333333333333
+	#dontstopthechop - 0.3333333333333333
+	#truetoatlanta - 0.3333333333333333
+	#fearthechop - 0.3333333333333333
+	#chopondamnit - 0.3333333333333333
+
+
+Cluster number: 51
+	#jobs - 0.6940298507462687
+	#hiring - 0.4701492537313433
+	#job - 0.5970149253731343
+
+
+Cluster number: 133
+
+
+Cluster number: 106
+
+
+Cluster number: 132
+	#jobs - 0.2773109243697479
+	#hiring - 0.2857142857142857
+	#job - 0.31092436974789917
+	i'm - 0.3697478991596639
+
+
+Cluster number: 45
+
+
+Cluster number: 83
+
+
+Cluster number: 72
+
+
+Cluster number: 28
+	#innerwild… - 0.5
+	💩💩😷😷😝😝🙊🙊 - 0.5
+	#ragnartrailatl - 0.5
+	#findyourinnerwild… - 0.5
+
+
+Cluster number: 70
+	book - 0.5227272727272727
+	jungle - 0.553030303030303
+
+
+Cluster number: 9
+	#lupus - 0.6666666666666666
+	#lupusfacts… - 0.5
+	#lupuslife - 0.5
+	#lupuschick - 0.5
+
+
+Cluster number: 49
+
+
+Cluster number: 108
+
+
+Cluster number: 78
+
+
+Cluster number: 144
+
+
+Cluster number: 109
+
+
+Cluster number: 10
+
+
+Cluster number: 148
+	stadium - 0.41256366723259763
+
+
+Cluster number: 43
+
+
+Cluster number: 122
+
+
+Cluster number: 115
+	you're - 0.771551724137931
+	check - 0.8146551724137931
+	professional - 0.7413793103448276
+	#job: - 0.7672413793103449
+
+
+Cluster number: 61
+
+
+Cluster number: 56
+	ny - 0.4641509433962264
+	i'm - 0.4176100628930818
+
+
+Cluster number: 84
+	work - 0.7272727272727273
+
+
+Cluster number: 47
+
+
+Cluster number: 76
+	e. - 0.25
+	chuck - 0.25
+
+
+Cluster number: 15
+	hancock - 1.0
+	herbie - 1.0
+	"rockit", - 1.0
+
+
+Cluster number: 97
+	#architecture - 0.75
+	#art - 0.75
+	#worldtradecenter… - 0.75
+	#pathstation - 0.75
+	#santiagocalatrava - 0.75
+
+
+Cluster number: 95
+
+
+Cluster number: 116
+	san - 0.6265060240963856
+	i'm - 0.25301204819277107
+
+
+Cluster number: 48
+
+
+Cluster number: 128
+	anyone - 0.9873417721518988
+	#job? - 0.8949367088607595
+
+
+Cluster number: 117
+
+
+Cluster number: 73
+	i'm - 0.40476190476190477
+
+
+Cluster number: 32
+	#photo - 0.28269126424308194
+
+
+Cluster number: 27
+
+
+Cluster number: 0
+
+
+Cluster number: 42
+	vlone - 0.5802469135802469
+	collaboration - 0.5802469135802469
+	&amp; - 0.5802469135802469
+	bari - 0.5802469135802469
+	launch - 0.5802469135802469
+	a$ap - 1.1604938271604939
+
+
+Cluster number: 102
+
+
+Cluster number: 124
+
+
+Cluster number: 141
+	il - 0.503030303030303
+	chicago, - 0.4909090909090909
+	i'm - 0.8242424242424242
+
+
+Cluster number: 143
+
+
+Cluster number: 8
+
+
+Cluster number: 7
+	#fishbowlfriday… - 0.5
+	#fishbowlfriday - 2.0
+	....blah - 0.5
+	blah - 1.0
+
+
+Cluster number: 44
+	room - 0.25
+
+
+Cluster number: 88
+	من - 0.42857142857142855
+	و - 0.2857142857142857
+
+
+Cluster number: 68
+	photo - 0.7534381139489195
+
+
+Cluster number: 129
+	o - 0.2857142857142857
+
+
+Cluster number: 147
+
